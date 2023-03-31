@@ -45,18 +45,18 @@ public class I_Recidentes extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
+        txtGenero = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHabitaciones = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        txtHabitacion = new javax.swing.JTextField();
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,15 +103,18 @@ public class I_Recidentes extends javax.swing.JPanel {
 
         jLabel6.setText("Descripcion de actividad");
 
-        jButton1.setText("Guardar");
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Modificar");
+        btnModificar.setText("Modificar");
 
-        jButton3.setText("Limpiar");
+        btnLimpiar.setText("Limpiar");
 
-        jButton4.setText("Eliminar");
-
-        jTextField3.setText("agregar con clip en haitacion");
+        btnEliminar.setText("Eliminar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,9 +122,9 @@ public class I_Recidentes extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jButton1)
+                .addComponent(btnGuardar)
                 .addGap(38, 38, 38)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -135,14 +138,13 @@ public class I_Recidentes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnEliminar)
                         .addGap(43, 43, 43)
-                        .addComponent(jButton3))
+                        .addComponent(btnLimpiar))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField4)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
+                        .addComponent(txtDescripcion)
+                        .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
                 .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,40 +155,38 @@ public class I_Recidentes extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 500, 280));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 500, 280));
 
         tblHabitaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Numero", "Capacidad"
+                "ID", "Capacidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -197,19 +197,23 @@ public class I_Recidentes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblHabitaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHabitacionesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblHabitaciones);
 
-        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 210, 230));
+        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 210, 230));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Recidentes");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 120, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Habitaciones");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 120, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 120, -1));
+        bg.add(txtHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, 96, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,6 +226,84 @@ public class I_Recidentes extends javax.swing.JPanel {
             .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+      
+        
+          // int id = Integer.parseInt(txtId.getText());
+       String nombre = txtNombre.getText();
+       String genero = txtGenero.getText();
+       String habitacion = txtHabitacion.getText(); 
+       String descripcion = txtDescripcion.getText(); 
+        
+        
+       
+       try{
+           
+            Connection con = Conexion.getConexion();
+           PreparedStatement ps = con.prepareStatement("INSERT INTO residentes(nombre,genero,habitacion,descri_de_actividad) VALUES (?,?,?,?)");
+           
+          
+           ps.setString(1,nombre);
+            ps.setString(2,genero);
+             ps.setString(3,habitacion);
+              ps.setString(4,descripcion);
+           
+              ps.executeUpdate();
+              
+              JOptionPane.showMessageDialog(null,"Registro Guardado");
+              //limpiar();
+              cargarTabla();
+              cargarTabla_dos ();
+              
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null,e.toString());
+       }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void tblHabitacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHabitacionesMouseClicked
+      
+           
+        try{
+            
+            int fila = tblHabitaciones.getSelectedRow();
+            int id = Integer.parseInt(tblHabitaciones.getValueAt(fila,0).toString());
+            PreparedStatement ps;
+            ResultSet rs;
+            
+            
+             Connection con = Conexion.getConexion();
+            
+             ps = con.prepareStatement("SELECT id FROM habitaciones WHERE id = ?");
+           
+          ps.setInt(1, id);
+           rs = ps.executeQuery();
+           
+           while(rs.next()){
+              //txtId.setText(String.valueOf(id));
+              
+              txtHabitacion.setText(rs.getString("id"));
+              
+//              txtgenero.setText(rs.getString("telefono"));
+//              txtDireccion.setText(rs.getString("direccion"));
+//              txtDescripcion.setText(rs.getString("descri_de_actividad"));
+              
+           }
+            
+        } catch(SQLException e){
+           JOptionPane.showMessageDialog(null,e.toString());
+       }
+        
+        
+        
+         
+        
+        
+    }//GEN-LAST:event_tblHabitacionesMouseClicked
 
     
     // tblRecidentes
@@ -300,7 +382,7 @@ public class I_Recidentes extends javax.swing.JPanel {
            
             Connection con = Conexion.getConexion();
             
-             ps = con.prepareStatement("SELECT numero,capacidad FROM habitaciones");
+             ps = con.prepareStatement("SELECT id,capacidad FROM habitaciones");
            
           
            rs = ps.executeQuery();
@@ -328,10 +410,10 @@ public class I_Recidentes extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -343,11 +425,11 @@ public class I_Recidentes extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tblHabitaciones;
     private javax.swing.JTable tblRecidentes;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtHabitacion;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
