@@ -21,7 +21,7 @@ public class I_Recidentes extends javax.swing.JPanel {
     public I_Recidentes() {
         initComponents();
         
-        
+        //prueba de esta onda
          cargarTabla();
          cargarTabla_dos ();
     }
