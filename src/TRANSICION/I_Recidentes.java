@@ -23,6 +23,7 @@ public class I_Recidentes extends javax.swing.JPanel {
         
         
          cargarTabla();
+         cargarTabla_dos ();
     }
 
     /**
@@ -36,7 +37,7 @@ public class I_Recidentes extends javax.swing.JPanel {
 
         bg = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRecidentes = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,23 +61,30 @@ public class I_Recidentes extends javax.swing.JPanel {
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRecidentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Fecha de nacimiento", "Genero", "Fecha de ingreso", "Habitacion", "Descripcion"
+                "ID", "Nombre", "Genero", "Habitacion", "Descripcion"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblRecidentes);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 990, 200));
 
@@ -215,6 +223,60 @@ public class I_Recidentes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    // tblRecidentes
+    
+     private void cargarTabla_dos (){
+        
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblRecidentes.getModel();
+        modeloTabla.setRowCount(0);
+        
+       PreparedStatement ps;
+       ResultSet rs;
+       ResultSetMetaData rsmd;
+       int columnas;
+       
+       int[] anchos = {30,50,50,150,150};
+       
+       for(int i= 0; i < tblRecidentes.getColumnCount(); i++){
+           
+           tblRecidentes.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+       }
+       
+       
+       
+       try{
+           
+            Connection con = Conexion.getConexion();
+            
+             ps = con.prepareStatement("SELECT id,nombre,genero,habitacion,descri_de_actividad FROM residentes");
+           
+          
+           rs = ps.executeQuery();
+           rsmd = rs.getMetaData();
+           columnas = rsmd.getColumnCount();
+           
+           while(rs.next()){
+            
+               Object[] fila = new Object[columnas];
+               for(int indice=0; indice<columnas; indice++){
+                   
+                   fila[indice] = rs.getObject(indice + 1);
+               }
+               modeloTabla.addRow(fila);
+           }
+           
+       } catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e.toString());
+           
+       }
+       
+    }
+    
+    
+    
+    
+    
  private void cargarTabla(){
         
         DefaultTableModel modeloTabla = (DefaultTableModel) tblHabitaciones.getModel();
@@ -281,11 +343,11 @@ public class I_Recidentes extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tblHabitaciones;
+    private javax.swing.JTable tblRecidentes;
     // End of variables declaration//GEN-END:variables
 }
