@@ -5,7 +5,10 @@
 package TRANSICION;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 
 public class G_Medicina_menu extends javax.swing.JPanel {
@@ -29,43 +32,70 @@ public class G_Medicina_menu extends javax.swing.JPanel {
         Jpanel = new javax.swing.JPanel();
         COmedicina = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Jpanel.setBackground(new java.awt.Color(102, 102, 102));
-        Jpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         COmedicina.setBackground(new java.awt.Color(255, 255, 255));
         COmedicina.setForeground(new java.awt.Color(255, 255, 255));
+        COmedicina.setPreferredSize(new java.awt.Dimension(1790, 925));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("MEDICINA");
+
+        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout COmedicinaLayout = new javax.swing.GroupLayout(COmedicina);
         COmedicina.setLayout(COmedicinaLayout);
         COmedicinaLayout.setHorizontalGroup(
             COmedicinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(COmedicinaLayout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addGroup(COmedicinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(COmedicinaLayout.createSequentialGroup()
+                        .addGap(420, 420, 420)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         COmedicinaLayout.setVerticalGroup(
             COmedicinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(COmedicinaLayout.createSequentialGroup()
-                .addGap(252, 252, 252)
+                .addGap(290, 290, 290)
                 .addComponent(jLabel1)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        Jpanel.add(COmedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1010, 540));
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -106,52 +136,47 @@ public class G_Medicina_menu extends javax.swing.JPanel {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(614, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Jpanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 50));
-
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
+        javax.swing.GroupLayout JpanelLayout = new javax.swing.GroupLayout(Jpanel);
+        Jpanel.setLayout(JpanelLayout);
+        JpanelLayout.setHorizontalGroup(
+            JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(COmedicina, javax.swing.GroupLayout.DEFAULT_SIZE, 1400, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
-        Jpanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 0, 10, 600));
-
-        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1010, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
+        JpanelLayout.setVerticalGroup(
+            JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(COmedicina, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE))
         );
 
-        Jpanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 1010, 10));
-
-        add(Jpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 710));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Jpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Jpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -177,20 +202,65 @@ public class G_Medicina_menu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
+    //-----------------------------------------
+        
+//    private void ShowPanel(JPanel p){
+//        p.setSize(1100, 597);
+//        p.setLocation(0, 0);
+//        
+//        COmedicina.removeAll();
+//        COmedicina.add(p, BorderLayout.CENTER);
+//        COmedicina.revalidate();
+//        COmedicina.repaint();
+//        
+//    
+//    
+//    }
+    
+    //-------------------------------------
+    
+    
+    
     
         
-    private void ShowPanel(JPanel p){
-        p.setSize(1100, 597);
+    //---------------------------------------------------------------------------- Nuevo generador de paneles con scrol 
+    
+    
+        private void ShowPanel(JPanel p){
+        //////ancho  ---  alto
+        p.setSize(1490, 725);
         p.setLocation(0, 0);
-        
         COmedicina.removeAll();
-        COmedicina.add(p, BorderLayout.CENTER);
+        
+        // Crear el JScrollPane
+        JScrollPane scrollPane = new JScrollPane(p);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        // Agregar el panel contenedor al JScrollPane
+        scrollPane.setViewportView(p);
+
+        // Agregar el JScrollPane al panel principal
+        COmedicina.setLayout(new BorderLayout());
+        COmedicina.add(scrollPane, BorderLayout.CENTER);
+        
         COmedicina.revalidate();
         COmedicina.repaint();
-        
-    
-    
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

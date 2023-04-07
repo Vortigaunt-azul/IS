@@ -1,6 +1,6 @@
 package JFRAME;
 
-import TRANSICION.A_Inicio;
+import TRANSICION.A_Inicio2;
 import TRANSICION.F_Residentes_menu;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,7 +27,7 @@ public class Menu_Medico extends javax.swing.JFrame {
 //       this.setMinimumSize(new Dimension(1200, 700));
        
        
-          A_Inicio p0 = new A_Inicio();
+          A_Inicio2 p0 = new A_Inicio2();
         ShowPanel(p0);
         
 //           A_Inicio p0 = new A_Inicio();
@@ -144,7 +144,7 @@ public class Menu_Medico extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
-          A_Inicio p0 = new A_Inicio();
+          A_Inicio2 p0 = new A_Inicio2();
         ShowPanel(p0); 
    
     }//GEN-LAST:event_jButton1ActionPerformed

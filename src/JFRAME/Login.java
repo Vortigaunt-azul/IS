@@ -21,11 +21,12 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login1
      */
     public Login() {
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel4, "C:\\Users\\rlope\\Documents\\NetBeansProjects\\IS\\src\\IMAGENES\\candado.jpg");
-        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel5, "C:\\Users\\rlope\\Documents\\NetBeansProjects\\IS\\src\\IMAGENES\\logo.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel4, "C:\\Users\\hecto\\OneDrive\\Escritorio\\PROYECTO IS ASILO\\Proyecto asilo JAVA\\version GITHUB\\PROYECTO_ASILO_IS\\src\\IMAGENES\\candado.jpg");
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel5, "C:\\Users\\hecto\\OneDrive\\Escritorio\\PROYECTO IS ASILO\\Proyecto asilo JAVA\\version GITHUB\\PROYECTO_ASILO_IS\\src\\IMAGENES\\logo.png");
     
     }
 
@@ -186,7 +187,7 @@ public class Login extends javax.swing.JFrame {
                    // Jframe medico 0 administrador
                  if(role.equals("medico")){
                      
-                   Menu_Medico ventanamedico= new Menu_Medico();   
+                   Menu_admin ventanamedico= new Menu_admin();   
                    ventanamedico.setVisible(true);
                    //---------------------
              dispose();
