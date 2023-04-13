@@ -4,10 +4,18 @@
  */
 package TRANSICION.Sub;
 
+import DATABASE.Conexion;
 import TRANSICION.J_Actividades;
 import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +28,9 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
      */
     public A_agregar_Actividad() {
         initComponents();
+             cargarTablaActividades();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,10 +58,10 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblActividades = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
 
-        NuevaActividad.setBackground(new java.awt.Color(0, 51, 255));
+        NuevaActividad.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,7 +165,7 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblActividades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -171,7 +181,7 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblActividades);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -218,6 +228,39 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+private void cargarTablaActividades() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblActividades.getModel();
+    modeloTabla.setRowCount(0);
+    
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+    
+    int[] anchos = {30, 150, 200, 100, 100, 50};
+    
+    for (int i = 0; i < tblActividades.getColumnCount(); i++) {
+        tblActividades.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    }
+    
+    try {
+        Connection con = Conexion.getConexion();
+        ps = con.prepareStatement("SELECT id, nombre, descripcion, fecha, hora, duracion FROM actividades");
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+        
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                fila[indice] = rs.getObject(indice + 1);
+            }
+            modeloTabla.addRow(fila);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
 
 
     
@@ -236,11 +279,11 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable tblActividades;
     // End of variables declaration//GEN-END:variables
 }

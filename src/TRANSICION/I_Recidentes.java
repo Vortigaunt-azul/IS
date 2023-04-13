@@ -78,7 +78,7 @@ public class I_Recidentes extends javax.swing.JPanel {
 
         bg = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblRecidentes = new javax.swing.JTable();
+        tblResidentes = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -109,7 +109,7 @@ public class I_Recidentes extends javax.swing.JPanel {
         bg.setMinimumSize(new java.awt.Dimension(1790, 925));
         bg.setPreferredSize(new java.awt.Dimension(1790, 925));
 
-        tblRecidentes.setModel(new javax.swing.table.DefaultTableModel(
+        tblResidentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -132,7 +132,12 @@ public class I_Recidentes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblRecidentes);
+        tblResidentes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblResidentesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblResidentes);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Recidentes");
@@ -441,8 +446,51 @@ public class I_Recidentes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+     limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void tblResidentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResidentesMouseClicked
+     
+        
+       try {
+           
+    int fila = tblResidentes.getSelectedRow();
+    int id = Integer.parseInt(tblResidentes.getValueAt(fila, 0).toString());
+    
+    
+    
+    
+    PreparedStatement ps;
+    ResultSet rs;
+
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT nombre, fecha_nacimiento, genero, fecha_ingreso, habitacion, descri_de_actividad FROM residentes WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    while (rs.next()) {
+        txtNombre.setText(rs.getString("nombre"));
+        
+        
+//        txtFecha_de_nacimiento.setText(rs.getString("fecha_nacimiento"));
+//       txtFecha_de_ingreso.setText(rs.getString("fecha_ingreso"));
+       
+       
+        txtGenero.setText(rs.getString("genero"));
+       txtHabitacion.setText(String.valueOf(rs.getInt("habitacion")));
+        txtDescripcion.setText(rs.getString("descri_de_actividad"));
+    }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+ 
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_tblResidentesMouseClicked
 
     
     // tblRecidentes
@@ -452,7 +500,17 @@ public class I_Recidentes extends javax.swing.JPanel {
         
      
     
-    
+        private void limpiar(){
+          
+      
+       
+        txtNombre.setText("");
+        
+        txtGenero.setText("");
+        
+        txtHabitacion.setText("");     
+        txtDescripcion.setText("");
+    }
    
     
     
@@ -461,7 +519,7 @@ public class I_Recidentes extends javax.swing.JPanel {
     
      private void cargarTabla_dos (){
         
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblRecidentes.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentes.getModel();
         modeloTabla.setRowCount(0);
         
        PreparedStatement ps;
@@ -471,9 +529,9 @@ public class I_Recidentes extends javax.swing.JPanel {
        
        int[] anchos = {30,50,50,50,50,150,150};
        
-       for(int i= 0; i < tblRecidentes.getColumnCount(); i++){
+       for(int i= 0; i < tblResidentes.getColumnCount(); i++){
            
-           tblRecidentes.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+           tblResidentes.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
        }
        
        
@@ -578,7 +636,7 @@ public class I_Recidentes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblHabitaciones;
-    private javax.swing.JTable tblRecidentes;
+    private javax.swing.JTable tblResidentes;
     private javax.swing.JTextField txtDescripcion;
     private com.toedter.calendar.JDateChooser txtFecha_de_ingreso;
     private com.toedter.calendar.JDateChooser txtFecha_de_nacimiento;

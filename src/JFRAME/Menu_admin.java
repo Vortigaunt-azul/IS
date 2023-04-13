@@ -16,6 +16,7 @@ import TRANSICION.D_Usuarios;
 import TRANSICION.E_Donaciones;
 import TRANSICION.F_Residentes_menu;
 import TRANSICION.G_Medicina_menu;
+import TRANSICION.Ñ_Reports;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Insets;
@@ -586,7 +587,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private void btn_reports2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reports2ActionPerformed
          
     
-        
+         ShowJPanel(new Ñ_Reports());
     }//GEN-LAST:event_btn_reports2ActionPerformed
 
     private void btn_reports3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reports3ActionPerformed

@@ -7,11 +7,21 @@ package TRANSICION;
 
 
 import DATABASE.Conexion;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,11 +57,12 @@ public class D_Usuarios extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JTextField();
-        txtRol = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -102,8 +113,6 @@ public class D_Usuarios extends javax.swing.JPanel {
 
         txtContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtRol.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         btnGuardar.setBackground(new java.awt.Color(0, 102, 255));
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,6 +153,21 @@ public class D_Usuarios extends javax.swing.JPanel {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","administrador", "medico", "desarrollador",}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -151,18 +175,20 @@ public class D_Usuarios extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(99, 99, 99)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRol)
                             .addComponent(txtContraseña)
-                            .addComponent(txtUsuario)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
+                            .addComponent(txtUsuario)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(btnModificar)
                         .addGap(18, 18, 18)
@@ -185,11 +211,13 @@ public class D_Usuarios extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +260,6 @@ public class D_Usuarios extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +274,10 @@ public class D_Usuarios extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                         .addGap(39, 39, 39)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(34, 34, 34)))
+                        .addGap(34, 34, 34))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -288,9 +318,11 @@ public class D_Usuarios extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
          // int id = Integer.parseInt(txtId.getText());
          
+         String role = seleccionComboBox;
+
        String username = txtUsuario.getText();
        String password = txtContraseña.getText();
-       String role = txtRol.getText(); 
+      // String role = txtRol.getText(); 
      
         
         
@@ -320,10 +352,11 @@ public class D_Usuarios extends javax.swing.JPanel {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
      
-        
+        String role = seleccionComboBox;
+
          String username = txtUsuario.getText();
        String password = txtContraseña.getText();
-       String role = txtRol.getText(); 
+      // String role = txtRol.getText(); 
        int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
         
        
@@ -411,7 +444,7 @@ public class D_Usuarios extends javax.swing.JPanel {
               //txtId.setText(String.valueOf(id));
               txtUsuario.setText(rs.getString("username"));
               txtContraseña.setText(rs.getString("password"));
-              txtRol.setText(rs.getString("role"));
+              //txtRol.setText(rs.getString("role"));
               
               
            }
@@ -429,10 +462,73 @@ public class D_Usuarios extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
+    private String seleccionComboBox;
+
+    
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+         seleccionComboBox = (String)jComboBox1.getSelectedItem();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        generarPDF();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    private void generarPDF() {
+    try {
+        // Creamos un documento y lo abrimos
+        Document document = new Document();
+        
+        // Pedimos al usuario la ubicación para guardar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+        
+        // Si el usuario selecciona una ubicación, guardamos el archivo allí
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File archivo = fileChooser.getSelectedFile();
+            PdfWriter.getInstance(document, new FileOutputStream(archivo+".pdf"));
+            document.open();
+            
+            // Creamos la tabla y le agregamos las columnas
+            PdfPTable table = new PdfPTable(4);
+            table.addCell("ID");
+            table.addCell("Nombre de Usuario");
+            table.addCell("Contraseña");
+            table.addCell("Rol");
+
+            // Cargamos los datos desde la tabla
+            DefaultTableModel modeloTabla = (DefaultTableModel) tblUsuarios.getModel();
+            int filas = modeloTabla.getRowCount();
+            int columnas = modeloTabla.getColumnCount();
+
+            for(int i = 0; i < filas; i++){
+                for(int j = 0; j < columnas; j++){
+                    table.addCell(modeloTabla.getValueAt(i, j).toString());
+                }
+            }
+
+            // Agregamos la tabla al documento y cerramos el documento
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "PDF generado exitosamente");
+        }
+        
+    } catch (DocumentException | FileNotFoundException ex) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+    
+    
         private void limpiar(){
         txtUsuario.setText("");
         txtContraseña.setText("");
-        txtRol.setText("");
+       // txtRol.setText("");
+        
+  
+
 
     }
         
@@ -497,6 +593,8 @@ public class D_Usuarios extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -510,7 +608,6 @@ public class D_Usuarios extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblUsuarios;
     private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtRol;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

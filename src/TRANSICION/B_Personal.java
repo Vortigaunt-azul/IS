@@ -2,12 +2,22 @@
 package TRANSICION;
 
 import DATABASE.Conexion;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,6 +58,7 @@ public class B_Personal extends javax.swing.JPanel {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -156,6 +167,14 @@ public class B_Personal extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,6 +207,10 @@ public class B_Personal extends javax.swing.JPanel {
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)))
                 .addGap(16, 16, 16))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +231,9 @@ public class B_Personal extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,6 +475,74 @@ public class B_Personal extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       generarPDF();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void generarPDF() {
+    try {
+        // Creamos un documento y lo abrimos
+        Document document = new Document();
+        
+        // Pedimos al usuario la ubicación para guardar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+        
+        // Si el usuario selecciona una ubicación, guardamos el archivo allí
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File archivo = fileChooser.getSelectedFile();
+            PdfWriter.getInstance(document, new FileOutputStream(archivo+".pdf"));
+            document.open();
+            
+            // Creamos la tabla y le agregamos las columnas
+            PdfPTable table = new PdfPTable(5);
+            table.addCell("ID");
+            table.addCell("Nombre");
+            table.addCell("Teléfono");
+            table.addCell("Dirección");
+            table.addCell("Actividad");
+
+            // Cargamos los datos desde la base de datos
+            PreparedStatement ps;
+            ResultSet rs;
+            ResultSetMetaData rsmd;
+            int columnas;
+
+            try {
+                Connection con = Conexion.getConexion();
+                ps = con.prepareStatement("SELECT id,nombre,telefono,direccion,descri_de_actividad FROM personal");
+                rs = ps.executeQuery();
+                rsmd = rs.getMetaData();
+                columnas = rsmd.getColumnCount();
+
+                while(rs.next()){
+                    // Agregamos las filas a la tabla
+                    for(int indice=0; indice<columnas; indice++){
+                        table.addCell(rs.getObject(indice + 1).toString());
+                    }
+                }
+            } catch(SQLException e){
+                JOptionPane.showMessageDialog(null,e.toString());
+            }
+
+            // Agregamos la tabla al documento y cerramos el documento
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "PDF generado exitosamente");
+        }
+        
+    } catch (DocumentException | FileNotFoundException ex) {
+      Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+
+    }
+}
+
+    
+    
+
+
+    
     
     private int getIdDelRegistroQueDeseasActualizar() {
     int filaSeleccionada = tblPersonal.getSelectedRow();
@@ -519,6 +612,7 @@ public class B_Personal extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
