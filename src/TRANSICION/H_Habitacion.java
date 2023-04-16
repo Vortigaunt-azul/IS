@@ -82,7 +82,7 @@ public class H_Habitacion extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblHabitacion);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 680, 433));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 680, 433));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

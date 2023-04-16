@@ -106,6 +106,24 @@ public class N_Familiares extends javax.swing.JPanel {
             }
         });
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+
+        txtRelacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRelacionActionPerformed(evt);
+            }
+        });
+
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -178,7 +196,7 @@ public class N_Familiares extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -270,14 +288,14 @@ public class N_Familiares extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49))
                     .addComponent(jScrollPane1)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(439, 439, 439))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(410, 410, 410)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(460, 460, 460))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,12 +308,12 @@ public class N_Familiares extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
+                        .addGap(47, 47, 47)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(userSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -338,7 +356,7 @@ public class N_Familiares extends javax.swing.JPanel {
         txtNombre.setText(rs.getString("nombre"));
         txtRelacion.setText(rs.getString("relacion"));
         txtTelefono.setText(rs.getString("telefono"));
-        //txtResidenteId.setText(String.valueOf(rs.getInt("residente_id")));
+        txtResidenteId.setText(String.valueOf(rs.getInt("residente_id")));
     }
 } catch (SQLException e) {
     JOptionPane.showMessageDialog(null, e.toString());
@@ -348,9 +366,7 @@ public class N_Familiares extends javax.swing.JPanel {
     }//GEN-LAST:event_tblFamiliaresMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        
-        
+     
     String nombre = txtNombre.getText();
     String relacion = txtRelacion.getText();
     String telefono = txtTelefono.getText();
@@ -368,29 +384,67 @@ public class N_Familiares extends javax.swing.JPanel {
         ps.executeUpdate();
 
         JOptionPane.showMessageDialog(null,"Registro Guardado");
-        //limpiar();
+        limpiar();
         cargarTabla();
     } catch(SQLException e){
         JOptionPane.showMessageDialog(null,e.toString());
     }
         
-        
-        
-        
-        
-        
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
+ 
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+     
+      String nombre = txtNombre.getText();
+      String relacion = txtRelacion.getText();
+      String telefono = txtTelefono.getText();
+     int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+
+   try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("UPDATE familiares SET nombre=?, relacion=?, telefono=? WHERE id=?");
+    
+    ps.setString(1, nombre);
+    ps.setString(2, relacion);
+    ps.setString(3, telefono);
+    ps.setInt(4, id);
+    
+    ps.executeUpdate();
+    
+    JOptionPane.showMessageDialog(null,"Registro Modificado");
+    limpiar();
+    cargarTabla();
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+     int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("DELETE FROM familiares WHERE id=?");
+    
+    ps.setInt(1, id);
+    
+    ps.executeUpdate();
+    
+    JOptionPane.showMessageDialog(null, "Registro Eliminado");
+    limpiar();
+    cargarTabla();
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -450,9 +504,35 @@ try {
         
     }//GEN-LAST:event_tblResidentesMouseClicked
 
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
-    
-    
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRelacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRelacionActionPerformed
+
+
+          private void limpiar(){
+        txtNombre.setText(""); 
+        txtRelacion.setText("");
+        txtTelefono.setText("");     
+        txtResidenteId.setText("");
+    }
+   
+          
+                        
+    private int getIdDelRegistroQueDeseasActualizar() {
+    int filaSeleccionada = tblFamiliares.getSelectedRow();
+    int id = Integer.parseInt(tblFamiliares.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
+      
+ 
     
     private void cargarTabla() {
     DefaultTableModel modeloTabla = (DefaultTableModel) tblFamiliares.getModel();

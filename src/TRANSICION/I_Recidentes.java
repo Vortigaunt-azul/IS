@@ -59,13 +59,7 @@ public class I_Recidentes extends javax.swing.JPanel {
     
     /////////------------------------------------------------------------
     
-    
-    
-    
-    
-    
-    
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -432,17 +426,68 @@ public class I_Recidentes extends javax.swing.JPanel {
         
         
         
-         
-        
-        
     }//GEN-LAST:event_tblHabitacionesMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+    
+       SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+
+            
+  
+
+       String nombre = txtNombre.getText();
+       String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
+       String genero = txtGenero.getText();
+       String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
+       int habitacion = Integer.parseInt(txtHabitacion.getText());
+       String descripcion = txtDescripcion.getText();
+       int id = getIdDelRegistroQueDeseasActualizar(); 
+        
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("UPDATE residentes SET nombre=?,fecha_nacimiento=?,genero=?,fecha_ingreso=?,habitacion=?,descri_de_actividad=? WHERE id=?");
+
+    ps.setString(1, nombre);
+    ps.setString(2, fecha_nacimiento);
+    ps.setString(3, genero);
+    ps.setString(4, fecha_ingreso);
+    ps.setInt(5, habitacion);
+    ps.setString(6, descripcion);
+    ps.setInt(7, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null,"Registro Modificado");
+    limpiar();
+    cargarTabla_dos();
+
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+    
+        int id = getIdDelRegistroQueDeseasEliminar(); // Aquí debes obtener el valor correcto de id
+        
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("DELETE FROM residentes WHERE id=?");
+
+    ps.setInt(1, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null,"Registro Eliminado");
+    limpiar();
+    cargarTabla();
+    cargarTabla_dos ();
+
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -485,29 +530,30 @@ public class I_Recidentes extends javax.swing.JPanel {
     JOptionPane.showMessageDialog(null, e.toString());
 }
  
-        
-        
-        
-        
+       
         
     }//GEN-LAST:event_tblResidentesMouseClicked
 
     
-    // tblRecidentes
+    // tblRecidentes   
     
-    
+            
+            private int getIdDelRegistroQueDeseasEliminar() {
+    int filaSeleccionada = tblResidentes.getSelectedRow();
+    int id = Integer.parseInt(tblResidentes.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
         
-        
+            private int getIdDelRegistroQueDeseasActualizar() {
+    int filaSeleccionada = tblResidentes.getSelectedRow();
+    int id = Integer.parseInt(tblResidentes.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
      
     
         private void limpiar(){
-          
-      
-       
-        txtNombre.setText("");
-        
+        txtNombre.setText(""); 
         txtGenero.setText("");
-        
         txtHabitacion.setText("");     
         txtDescripcion.setText("");
     }

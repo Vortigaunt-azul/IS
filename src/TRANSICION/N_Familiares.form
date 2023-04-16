@@ -77,15 +77,15 @@
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel7" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="439" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="410" max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLabel7" min="-2" pref="120" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="460" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,13 +100,13 @@
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="userSearch" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="searchButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -263,10 +263,19 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNombre">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtRelacion">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRelacionActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelefono">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelefonoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtResidenteId">
             </Component>
@@ -290,7 +299,7 @@
                     <Column editable="false" title="Nombre" type="java.lang.Integer"/>
                     <Column editable="false" title="Relacion" type="java.lang.Integer"/>
                     <Column editable="false" title="Telefono" type="java.lang.String"/>
-                    <Column editable="false" title="Residente ID" type="java.lang.Object"/>
+                    <Column editable="false" title="Residente ID" type="java.lang.Integer"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

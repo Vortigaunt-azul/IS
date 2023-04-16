@@ -274,16 +274,58 @@ public class J_Actividades extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-     
+     int residente_id = Integer.parseInt(txtResidentes.getText());
+int actividad_id = Integer.parseInt(txtActividades.getText());
+
+int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("UPDATE residentes_actividades SET residente_id=?, actividad_id=? WHERE id=?");
+
+    ps.setInt(1, residente_id);
+    ps.setInt(2, actividad_id);
+    ps.setInt(3, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null, "Registro Modificado");
+    limpiar();
+    cargarTabla_residentes_actividades();
+
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       
+       int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("DELETE FROM residentes_actividades WHERE id=?");
+
+    ps.setInt(1, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null, "Registro Eliminado");
+    limpiar();
+     cargarTabla_residentes_actividades();
+
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+ 
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        limpiar(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -364,6 +406,15 @@ try {
     }//GEN-LAST:event_tblResidentesActividadesMouseClicked
 
 
+            private int getIdDelRegistroQueDeseasActualizar() {
+    int filaSeleccionada = tblResidentesActividades.getSelectedRow();
+    int id = Integer.parseInt(tblResidentesActividades.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+    
+}
+    
+    
+    
     
     private void cargarTabla_residentes_actividades() {
     DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesActividades.getModel();
@@ -402,6 +453,12 @@ try {
     }
 }
 
+         private void limpiar(){
+             
+        txtResidentes.setText("");
+        txtActividades.setText("");   
+        
+    }
     
     
     

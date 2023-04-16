@@ -14,12 +14,11 @@ public class Conexion {
             
 public static Connection getConexion(){
 
-        String conexionUrl = "jdbc:sqlserver://localhost:1433;"
-                    + "database=asilo_ansianos;"
-                    + "user=sa;"
-                    + "password=12345;"
+       String conexionUrl = "jdbc:sqlserver://localhost:1433;"
+                    + "database=asilo_ancianos;"
+                    + "user=usersql;"
+                    + "password=root;"
                     + "loginTimeout=30;";
-
 
 
 

@@ -526,10 +526,7 @@ public class D_Usuarios extends javax.swing.JPanel {
         txtUsuario.setText("");
         txtContraseña.setText("");
        // txtRol.setText("");
-        
   
-
-
     }
         
         
