@@ -87,7 +87,6 @@ public class J_Actividades extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tblResidentes);
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Actividades");
 
         jButton5.setText("Nueva actividad");
@@ -121,7 +120,6 @@ public class J_Actividades extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblActividades);
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Recidentes");
 
         jButton1.setText("Modificar");

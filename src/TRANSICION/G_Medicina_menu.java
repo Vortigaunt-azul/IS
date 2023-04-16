@@ -114,6 +114,11 @@ public class G_Medicina_menu extends javax.swing.JPanel {
         });
 
         jButton4.setText("RECIDENTE MEDICAMENTOS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("MEDICAMENTOS");
         jButton2.setPreferredSize(new java.awt.Dimension(95, 22));
@@ -200,6 +205,13 @@ public class G_Medicina_menu extends javax.swing.JPanel {
         ShowPanel(p8);        
               
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+         O_Residentes_Med p9 = new      O_Residentes_Med();
+        ShowPanel(p9);    
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     //-----------------------------------------

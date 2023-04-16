@@ -211,7 +211,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_reports.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports.setBorderPainted(false);
         btn_reports.setContentAreaFilled(false);
-        btn_reports.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_reports.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_reports.setFocusPainted(false);
         btn_reports.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_reports.setIconTextGap(13);
@@ -234,7 +234,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_lends.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_lends.setBorderPainted(false);
         btn_lends.setContentAreaFilled(false);
-        btn_lends.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_lends.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_lends.setFocusPainted(false);
         btn_lends.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_lends.setIconTextGap(13);
@@ -257,7 +257,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_prin.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_prin.setBorderPainted(false);
         btn_prin.setContentAreaFilled(false);
-        btn_prin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_prin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_prin.setFocusPainted(false);
         btn_prin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_prin.setIconTextGap(13);
@@ -281,11 +281,11 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_returns.setBackground(new java.awt.Color(21, 101, 192));
         btn_returns.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_returns.setForeground(new java.awt.Color(255, 255, 255));
-        btn_returns.setText("Mediciona");
+        btn_returns.setText("Medicina");
         btn_returns.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_returns.setBorderPainted(false);
         btn_returns.setContentAreaFilled(false);
-        btn_returns.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_returns.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_returns.setFocusPainted(false);
         btn_returns.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_returns.setIconTextGap(13);
@@ -308,7 +308,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_users.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_users.setBorderPainted(false);
         btn_users.setContentAreaFilled(false);
-        btn_users.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_users.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_users.setFocusPainted(false);
         btn_users.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_users.setIconTextGap(13);
@@ -331,7 +331,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_books.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_books.setBorderPainted(false);
         btn_books.setContentAreaFilled(false);
-        btn_books.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_books.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_books.setFocusPainted(false);
         btn_books.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_books.setIconTextGap(13);
@@ -358,7 +358,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_reports3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports3.setBorderPainted(false);
         btn_reports3.setContentAreaFilled(false);
-        btn_reports3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_reports3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_reports3.setFocusPainted(false);
         btn_reports3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_reports3.setIconTextGap(13);
@@ -383,7 +383,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_reports1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports1.setBorderPainted(false);
         btn_reports1.setContentAreaFilled(false);
-        btn_reports1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_reports1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_reports1.setFocusPainted(false);
         btn_reports1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_reports1.setIconTextGap(13);
@@ -406,7 +406,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_reports2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports2.setBorderPainted(false);
         btn_reports2.setContentAreaFilled(false);
-        btn_reports2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_reports2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_reports2.setFocusPainted(false);
         btn_reports2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_reports2.setIconTextGap(13);
