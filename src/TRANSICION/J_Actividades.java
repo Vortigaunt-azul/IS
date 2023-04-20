@@ -274,12 +274,37 @@ public class J_Actividades extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-     int residente_id = Integer.parseInt(txtResidentes.getText());
-int actividad_id = Integer.parseInt(txtActividades.getText());
-
-int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+//     int residente_id = Integer.parseInt(txtResidentes.getText());
+//int actividad_id = Integer.parseInt(txtActividades.getText());
+//
+//int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+//
+//try {
+//    Connection con = Conexion.getConexion();
+//    PreparedStatement ps = con.prepareStatement("UPDATE residentes_actividades SET residente_id=?, actividad_id=? WHERE id=?");
+//
+//    ps.setInt(1, residente_id);
+//    ps.setInt(2, actividad_id);
+//    ps.setInt(3, id);
+//
+//    ps.executeUpdate();
+//
+//    JOptionPane.showMessageDialog(null, "Registro Modificado");
+//    limpiar();
+//    cargarTabla_residentes_actividades();
+//
+//} catch(SQLException e) {
+//    JOptionPane.showMessageDialog(null, e.toString());
+//}
+//
+//      
 
 try {
+    int residente_id = Integer.parseInt(txtResidentes.getText());
+    int actividad_id = Integer.parseInt(txtActividades.getText());
+
+    int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+
     Connection con = Conexion.getConexion();
     PreparedStatement ps = con.prepareStatement("UPDATE residentes_actividades SET residente_id=?, actividad_id=? WHERE id=?");
 
@@ -292,12 +317,15 @@ try {
     JOptionPane.showMessageDialog(null, "Registro Modificado");
     limpiar();
     cargarTabla_residentes_actividades();
-
-} catch(SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido en los campos de Residentes y Actividades.", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
 }
 
-        
+
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

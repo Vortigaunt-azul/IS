@@ -66,11 +66,13 @@ public class C_Almacen extends javax.swing.JPanel {
         txtCantidad = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtFecha_de_ingreso = new com.toedter.calendar.JDateChooser();
+        txtFechaIngreso = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        txtFecha_de_caducidad = new com.toedter.calendar.JDateChooser();
+        txtFechaCaducidad = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtProcedencia = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
 
@@ -92,20 +94,20 @@ public class C_Almacen extends javax.swing.JPanel {
 
         tblAlmacen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "producto", "cantidad", "fechas de ingreso", "fecha de caducidad", "descripcion"
+                "ID", "producto", "cantidad", "fechas de ingreso", "fecha de caducidad", "descripcion", "Procedencia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,6 +116,11 @@ public class C_Almacen extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlmacenMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblAlmacen);
@@ -181,39 +188,14 @@ public class C_Almacen extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setText("Procedencia");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel3)
-                        .addGap(94, 94, 94)
-                        .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel7)
-                        .addGap(88, 88, 88)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(49, 49, 49)
-                            .addComponent(jLabel6)
-                            .addGap(43, 43, 43)
-                            .addComponent(txtFecha_de_caducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(60, 60, 60)
-                                    .addComponent(txtFecha_de_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(103, 103, 103)
-                                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -223,51 +205,89 @@ public class C_Almacen extends javax.swing.JPanel {
                         .addComponent(BtnModificar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar)
-                        .addGap(21, 21, 21)
-                        .addComponent(BtnLimpiar)))
-                .addGap(47, 47, 47))
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnLimpiar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(85, 85, 85)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(txtProcedencia)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel6)
+                                .addGap(43, 43, 43)
+                                .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(103, 103, 103)
+                                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(62, 148, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel3))
-                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel4))
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel5))
-                    .addComponent(txtFecha_de_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel6))
-                    .addComponent(txtFecha_de_caducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel7))
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel4))
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel5))
+                            .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel6))
+                            .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel7))
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(txtProcedencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(116, 116, 116))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
@@ -309,9 +329,9 @@ public class C_Almacen extends javax.swing.JPanel {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
                         .addGap(41, 41, 41)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                         .addGap(79, 79, 79))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -331,7 +351,7 @@ public class C_Almacen extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)))
                 .addGap(57, 57, 57)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -343,11 +363,11 @@ public class C_Almacen extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1165, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1347, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -358,9 +378,10 @@ public class C_Almacen extends javax.swing.JPanel {
               // int id = Integer.parseInt(txtId.getText());
        String producto = txtProducto.getText();
        String cantidad = txtCantidad.getText();
-       String fecha_de_ingreso = dcn.format(txtFecha_de_ingreso.getDate());       
-       String fecha_de_caducidad = dcn.format(txtFecha_de_caducidad.getDate());
+       String fecha_de_ingreso = dcn.format(txtFechaIngreso.getDate());       
+       String fecha_de_caducidad = dcn.format(txtFechaCaducidad.getDate());
        String descripcion = txtDescripcion.getText(); 
+       String procedencia = txtProcedencia.getText(); 
         
      
              
@@ -369,7 +390,7 @@ public class C_Almacen extends javax.swing.JPanel {
        try{
            
             Connection con = Conexion.getConexion();
-           PreparedStatement ps = con.prepareStatement("INSERT INTO almacen(producto,cantidad,fecha_ingreso,fecha_caducidad,descripcion) VALUES (?,?,?,?,?)");
+           PreparedStatement ps = con.prepareStatement("INSERT INTO almacen(producto,cantidad,fecha_ingreso,fecha_caducidad,descripcion,procedencia) VALUES (?,?,?,?,?,?)");
            
           
            ps.setString(1,producto);
@@ -377,11 +398,12 @@ public class C_Almacen extends javax.swing.JPanel {
              ps.setString(3,fecha_de_ingreso);
               ps.setString(4,fecha_de_caducidad);
               ps.setString(5,descripcion);
+               ps.setString(6,procedencia);
            
               ps.executeUpdate();
               
               JOptionPane.showMessageDialog(null,"Registro Guardado");
-              //limpiar();
+              limpiar();
               cargarTabla();
               
        }catch(SQLException e){
@@ -392,66 +414,173 @@ public class C_Almacen extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+     
+       SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+
+String producto = txtProducto.getText();
+int cantidad = Integer.parseInt(txtCantidad.getText());
+String fecha_ingreso = dcn.format(txtFechaIngreso.getDate());
+String fecha_caducidad = dcn.format(txtFechaCaducidad.getDate());
+String descripcion = txtDescripcion.getText();
+String procedencia = txtProcedencia.getText();
+int id = getIdDelRegistroQueDeseasActualizar(); 
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("UPDATE almacen SET producto=?,cantidad=?,fecha_ingreso=?,fecha_caducidad=?,descripcion=?,procedencia=? WHERE id=?");
+
+    ps.setString(1, producto);
+    ps.setInt(2, cantidad);
+    ps.setString(3, fecha_ingreso);
+    ps.setString(4, fecha_caducidad);
+    ps.setString(5, descripcion);
+    ps.setString(6, procedencia);
+    ps.setInt(7, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null,"Registro Modificado");
+   // limpiar();
+    cargarTabla();
+
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+ 
+        
+        
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+     int id = getIdDelRegistroQueDeseasEliminar(); // Aquí debes obtener el valor correcto de id
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("DELETE FROM almacen WHERE id=?");
+
+    ps.setInt(1, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null,"Registro Eliminado");
+    limpiar();
+    cargarTabla();
+
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
-        // TODO add your handling code here:
+       limpiar();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         generarPDF();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tblAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlmacenMouseClicked
+      
+        try {
+           
+    int fila = tblAlmacen.getSelectedRow();
+    int id = Integer.parseInt(tblAlmacen.getValueAt(fila, 0).toString());
+
+    PreparedStatement ps;
+    ResultSet rs;
+
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT producto, cantidad, fecha_ingreso, fecha_caducidad, descripcion, procedencia FROM almacen WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    while (rs.next()) {
+        txtProducto.setText(rs.getString("producto"));
+        txtCantidad.setText(String.valueOf(rs.getInt("cantidad")));
+        txtFechaIngreso.setDate(rs.getDate("fecha_ingreso"));
+        txtFechaCaducidad.setDate(rs.getDate("fecha_caducidad"));
+        txtDescripcion.setText(rs.getString("descripcion"));
+        txtProcedencia.setText(rs.getString("procedencia"));
+    }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+        
+    }//GEN-LAST:event_tblAlmacenMouseClicked
+
     private void generarPDF() {
-    try {
-        // Creamos un documento y lo abrimos
-        Document document = new Document();
+try {
+    // Creamos un documento y lo abrimos
+    Document document = new Document();
 
-        // Pedimos al usuario la ubicación para guardar el archivo
-        JFileChooser fileChooser = new JFileChooser();
-        int seleccion = fileChooser.showSaveDialog(this);
+    // Pedimos al usuario la ubicación para guardar el archivo
+    JFileChooser fileChooser = new JFileChooser();
+    int seleccion = fileChooser.showSaveDialog(this);
 
-        // Si el usuario selecciona una ubicación, guardamos el archivo allí
-        if(seleccion == JFileChooser.APPROVE_OPTION){
-            File archivo = fileChooser.getSelectedFile();
-            PdfWriter.getInstance(document, new FileOutputStream(archivo+".pdf"));
-            document.open();
+    // Si el usuario selecciona una ubicación, guardamos el archivo allí
+    if (seleccion == JFileChooser.APPROVE_OPTION) {
+        File archivo = fileChooser.getSelectedFile();
+        PdfWriter.getInstance(document, new FileOutputStream(archivo + ".pdf"));
+        document.open();
 
-            // Creamos la tabla y le agregamos las columnas
-            PdfPTable table = new PdfPTable(6);
-            table.addCell("ID");
-            table.addCell("Producto");
-            table.addCell("Cantidad");
-            table.addCell("Fecha de ingreso");
-            table.addCell("Fecha de caducidad");
-            table.addCell("Descripción");
+        // Creamos la tabla y le agregamos las columnas
+        PdfPTable table = new PdfPTable(7);
+        table.addCell("ID");
+        table.addCell("Producto");
+        table.addCell("Cantidad");
+        table.addCell("Fecha de ingreso");
+        table.addCell("Fecha de caducidad");
+        table.addCell("Descripción");
+        table.addCell("Procedencia");
 
-            // Obtenemos los datos de la tabla y los agregamos a la tabla PDF
-            DefaultTableModel modeloTabla = (DefaultTableModel) tblAlmacen.getModel();
-            int filas = modeloTabla.getRowCount();
-            int columnas = modeloTabla.getColumnCount();
-            for(int fila = 0; fila < filas; fila++){
-                for(int columna = 0; columna < columnas; columna++){
-                    table.addCell(modeloTabla.getValueAt(fila, columna).toString());
-                }
+        // Obtenemos los datos de la tabla y los agregamos a la tabla PDF
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblAlmacen.getModel();
+        int filas = modeloTabla.getRowCount();
+        int columnas = modeloTabla.getColumnCount();
+        for (int fila = 0; fila < filas; fila++) {
+            for (int columna = 0; columna < columnas; columna++) {
+                String valor = modeloTabla.getValueAt(fila, columna) != null ? modeloTabla.getValueAt(fila, columna).toString() : "";
+                table.addCell(valor);
             }
-
-            // Agregamos la tabla al documento y cerramos el documento
-            document.add(table);
-            document.close();
-
-            JOptionPane.showMessageDialog(null, "PDF generado exitosamente");
         }
 
-    } catch (DocumentException | FileNotFoundException ex) {
-        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        // Agregamos la tabla al documento y cerramos el documento
+        document.add(table);
+        document.close();
+
+        JOptionPane.showMessageDialog(null, "PDF generado exitosamente");
     }
+} catch (DocumentException | FileNotFoundException ex) {
+    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
 }
+
+}
+
+    
+                private int getIdDelRegistroQueDeseasActualizar() {
+    int filaSeleccionada = tblAlmacen.getSelectedRow();
+    int id = Integer.parseInt(tblAlmacen.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
+     
+                      private int getIdDelRegistroQueDeseasEliminar() {
+    int filaSeleccionada = tblAlmacen.getSelectedRow();
+    int id = Integer.parseInt(tblAlmacen.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}      
+                
+                
+                private void limpiar(){
+        txtProducto.setText(""); 
+        txtCantidad.setText("");
+        txtFechaIngreso.setDate(null);     
+        txtFechaCaducidad.setDate(null);
+        txtDescripcion.setText("");
+        txtProcedencia.setText("");
+    }
 
         
  private void cargarTabla(){
@@ -464,7 +593,7 @@ public class C_Almacen extends javax.swing.JPanel {
        ResultSetMetaData rsmd;
        int columnas;
        
-       int[] anchos = {30,50,50,50,150,150};
+       int[] anchos = {20,50,20,50,50,150,100};
        
        for(int i= 0; i < tblAlmacen.getColumnCount(); i++){
            
@@ -477,7 +606,7 @@ public class C_Almacen extends javax.swing.JPanel {
            
             Connection con = Conexion.getConexion();
             
-             ps = con.prepareStatement("SELECT id,producto,cantidad,fecha_ingreso,fecha_caducidad,descripcion FROM almacen");
+             ps = con.prepareStatement("SELECT id,producto,cantidad,fecha_ingreso,fecha_caducidad,descripcion,procedencia FROM almacen");
            
           
            rs = ps.executeQuery();
@@ -518,6 +647,7 @@ public class C_Almacen extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -525,8 +655,9 @@ public class C_Almacen extends javax.swing.JPanel {
     private javax.swing.JTable tblAlmacen;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
-    private com.toedter.calendar.JDateChooser txtFecha_de_caducidad;
-    private com.toedter.calendar.JDateChooser txtFecha_de_ingreso;
+    private com.toedter.calendar.JDateChooser txtFechaCaducidad;
+    private com.toedter.calendar.JDateChooser txtFechaIngreso;
+    private javax.swing.JTextField txtProcedencia;
     private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,7 +10,7 @@ package JFRAME;
 import TRANSICION.B_Personal;
 import TRANSICION.C_Almacen;
 import TRANSICION.D_Usuarios;
-import TRANSICION.E_Donaciones;
+//import TRANSICION.E_Donaciones;
 import TRANSICION.F_Residentes_menu;
 import TRANSICION.G_Medicina_menu;
 import java.awt.BorderLayout;
@@ -302,8 +302,8 @@ public class M extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        E_Donaciones p4 = new E_Donaciones();
-        ShowPanel(p4);
+      //  E_Donaciones p4 = new E_Donaciones();
+      //  ShowPanel(p4);
        
     }//GEN-LAST:event_jButton2ActionPerformed
 

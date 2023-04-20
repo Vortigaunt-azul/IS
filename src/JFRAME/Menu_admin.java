@@ -13,7 +13,6 @@ import TRANSICION.A_Inicio2;
 import TRANSICION.B_Personal;
 import TRANSICION.C_Almacen;
 import TRANSICION.D_Usuarios;
-import TRANSICION.E_Donaciones;
 import TRANSICION.F_Residentes_menu;
 import TRANSICION.G_Medicina_menu;
 import TRANSICION.Ñ_Reports;
@@ -172,13 +171,10 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_users = new javax.swing.JButton();
         btn_6 = new javax.swing.JPanel();
         btn_books = new javax.swing.JButton();
-        btn_7 = new javax.swing.JPanel();
-        btn_9 = new javax.swing.JPanel();
-        btn_reports3 = new javax.swing.JButton();
-        btn_8 = new javax.swing.JPanel();
-        btn_reports1 = new javax.swing.JButton();
         btn_10 = new javax.swing.JPanel();
         btn_reports2 = new javax.swing.JButton();
+        btn_9 = new javax.swing.JPanel();
+        btn_reports3 = new javax.swing.JButton();
         header = new javax.swing.JPanel();
         navText = new javax.swing.JLabel();
         dateText = new javax.swing.JLabel();
@@ -202,7 +198,6 @@ public class Menu_admin extends javax.swing.JFrame {
 
         btn_1.setBackground(new java.awt.Color(21, 101, 192));
         btn_1.setPreferredSize(new java.awt.Dimension(55, 22));
-        btn_1.setLayout(new java.awt.BorderLayout());
 
         btn_reports.setBackground(new java.awt.Color(21, 101, 192));
         btn_reports.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -221,7 +216,21 @@ public class Menu_admin extends javax.swing.JFrame {
                 btn_reportsActionPerformed(evt);
             }
         });
-        btn_1.add(btn_reports, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout btn_1Layout = new javax.swing.GroupLayout(btn_1);
+        btn_1.setLayout(btn_1Layout);
+        btn_1Layout.setHorizontalGroup(
+            btn_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btn_1Layout.setVerticalGroup(
+            btn_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         btn_2.setBackground(new java.awt.Color(21, 101, 192));
         btn_2.setPreferredSize(new java.awt.Dimension(55, 22));
@@ -343,9 +352,28 @@ public class Menu_admin extends javax.swing.JFrame {
         });
         btn_6.add(btn_books, java.awt.BorderLayout.CENTER);
 
-        btn_7.setBackground(new java.awt.Color(21, 101, 192));
-        btn_7.setPreferredSize(new java.awt.Dimension(55, 22));
-        btn_7.setLayout(new java.awt.BorderLayout());
+        btn_10.setBackground(new java.awt.Color(21, 101, 192));
+        btn_10.setPreferredSize(new java.awt.Dimension(55, 22));
+        btn_10.setLayout(new java.awt.BorderLayout());
+
+        btn_reports2.setBackground(new java.awt.Color(21, 101, 192));
+        btn_reports2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_reports2.setForeground(new java.awt.Color(255, 255, 255));
+        btn_reports2.setText("Reportes");
+        btn_reports2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_reports2.setBorderPainted(false);
+        btn_reports2.setContentAreaFilled(false);
+        btn_reports2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_reports2.setFocusPainted(false);
+        btn_reports2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_reports2.setIconTextGap(13);
+        btn_reports2.setInheritsPopupMenu(true);
+        btn_reports2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reports2ActionPerformed(evt);
+            }
+        });
+        btn_10.add(btn_reports2, java.awt.BorderLayout.CENTER);
 
         btn_9.setBackground(new java.awt.Color(21, 101, 192));
         btn_9.setPreferredSize(new java.awt.Dimension(55, 22));
@@ -370,54 +398,6 @@ public class Menu_admin extends javax.swing.JFrame {
         });
         btn_9.add(btn_reports3, java.awt.BorderLayout.CENTER);
 
-        btn_7.add(btn_9, java.awt.BorderLayout.CENTER);
-
-        btn_8.setBackground(new java.awt.Color(21, 101, 192));
-        btn_8.setPreferredSize(new java.awt.Dimension(55, 22));
-        btn_8.setLayout(new java.awt.BorderLayout());
-
-        btn_reports1.setBackground(new java.awt.Color(21, 101, 192));
-        btn_reports1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_reports1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reports1.setText("Donaciones");
-        btn_reports1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btn_reports1.setBorderPainted(false);
-        btn_reports1.setContentAreaFilled(false);
-        btn_reports1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_reports1.setFocusPainted(false);
-        btn_reports1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_reports1.setIconTextGap(13);
-        btn_reports1.setInheritsPopupMenu(true);
-        btn_reports1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_reports1ActionPerformed(evt);
-            }
-        });
-        btn_8.add(btn_reports1, java.awt.BorderLayout.CENTER);
-
-        btn_10.setBackground(new java.awt.Color(21, 101, 192));
-        btn_10.setPreferredSize(new java.awt.Dimension(55, 22));
-        btn_10.setLayout(new java.awt.BorderLayout());
-
-        btn_reports2.setBackground(new java.awt.Color(21, 101, 192));
-        btn_reports2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_reports2.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reports2.setText("Reportes");
-        btn_reports2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btn_reports2.setBorderPainted(false);
-        btn_reports2.setContentAreaFilled(false);
-        btn_reports2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_reports2.setFocusPainted(false);
-        btn_reports2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_reports2.setIconTextGap(13);
-        btn_reports2.setInheritsPopupMenu(true);
-        btn_reports2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_reports2ActionPerformed(evt);
-            }
-        });
-        btn_10.add(btn_reports2, java.awt.BorderLayout.CENTER);
-
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -433,8 +413,7 @@ public class Menu_admin extends javax.swing.JFrame {
             .addComponent(btn_4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_5, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_6, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_8, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_10, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -456,13 +435,11 @@ public class Menu_admin extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(btn_7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addComponent(btn_1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addComponent(btn_1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         header.setBackground(new java.awt.Color(25, 118, 210));
@@ -534,7 +511,7 @@ public class Menu_admin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
         );
 
         pack();
@@ -573,12 +550,6 @@ public class Menu_admin extends javax.swing.JFrame {
          new Login().setVisible(true);
         dispose();   
     }//GEN-LAST:event_btn_reportsActionPerformed
-
-    private void btn_reports1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reports1ActionPerformed
-       
-        
-         ShowJPanel(new E_Donaciones());
-    }//GEN-LAST:event_btn_reports1ActionPerformed
 
     private void btn_prinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_prinKeyPressed
         // TODO add your handling code here:
@@ -624,14 +595,11 @@ public class Menu_admin extends javax.swing.JFrame {
     public javax.swing.JPanel btn_4;
     public javax.swing.JPanel btn_5;
     public javax.swing.JPanel btn_6;
-    public javax.swing.JPanel btn_7;
-    public javax.swing.JPanel btn_8;
     public javax.swing.JPanel btn_9;
     private javax.swing.JButton btn_books;
     private javax.swing.JButton btn_lends;
     private javax.swing.JButton btn_prin;
     private javax.swing.JButton btn_reports;
-    private javax.swing.JButton btn_reports1;
     private javax.swing.JButton btn_reports2;
     private javax.swing.JButton btn_reports3;
     private javax.swing.JButton btn_returns;
