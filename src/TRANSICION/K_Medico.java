@@ -59,7 +59,7 @@ public class K_Medico extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMedico = new javax.swing.JTable();
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 102));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

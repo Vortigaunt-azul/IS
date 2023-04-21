@@ -92,6 +92,9 @@ public class H_Habitacion extends javax.swing.JPanel {
 
         jLabel3.setText("Descripcion");
 
+        btnGuardar.setBackground(new java.awt.Color(0, 102, 255));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +102,9 @@ public class H_Habitacion extends javax.swing.JPanel {
             }
         });
 
+        btnModificar.setBackground(new java.awt.Color(0, 102, 255));
+        btnModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +112,9 @@ public class H_Habitacion extends javax.swing.JPanel {
             }
         });
 
+        btnEliminar.setBackground(new java.awt.Color(0, 102, 255));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +122,9 @@ public class H_Habitacion extends javax.swing.JPanel {
             }
         });
 
+        btnLimpiar.setBackground(new java.awt.Color(0, 102, 255));
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

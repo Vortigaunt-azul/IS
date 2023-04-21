@@ -12,7 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -53,10 +57,10 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
-        txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtDuracion = new javax.swing.JTextField();
+        txtFecha = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblActividades = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -64,6 +68,7 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
         NuevaActividad.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Nombre");
@@ -74,13 +79,45 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
 
         jLabel6.setText("Hora");
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
+        jButton3.setBackground(new java.awt.Color(0, 102, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Limpiar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
+        jButton4.setBackground(new java.awt.Color(0, 102, 255));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Eliminar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Duracion");
 
@@ -100,10 +137,12 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
@@ -137,9 +176,9 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addGap(10, 10, 10)
                         .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +210,11 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblActividadesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblActividades);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -183,7 +227,7 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
             NuevaActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NuevaActividadLayout.createSequentialGroup()
                 .addGap(121, 121, 121)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
                 .addGap(113, 113, 113)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(170, 170, 170))
@@ -218,6 +262,213 @@ public class A_agregar_Actividad extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+
+    
+String nombre = txtNombre.getText();
+String descripcion = txtDescripcion.getText();
+
+
+// Obtener la fecha
+Date fecha = txtFecha.getDate();
+
+// Obtener la hora
+Time hora = null;
+String horaStr = txtHora.getText();
+
+// Validar que la hora sea válida
+if (horaStr == null || horaStr.trim().isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Debe ingresar una hora.");
+    return;
+} else {
+    try {
+        hora = Time.valueOf(horaStr + ":00");
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, "Hora inválida. Ingrese una hora en formato hh:mm.");
+        return;
+    }
+}
+
+// Obtener la duración
+int duracion = 0;
+String duracionStr = txtDuracion.getText();
+
+// Validar que la duración sea un número entero
+if (duracionStr == null || duracionStr.trim().isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Debe ingresar la duración.");
+    return;
+} else {
+    try {
+        duracion = Integer.parseInt(duracionStr);
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Duración inválida. Ingrese un número entero.");
+        return;
+    }
+}
+
+// Validar que todos los campos estén llenos
+if (nombre.isEmpty() || descripcion.isEmpty() || fecha == null || duracion == 0) {
+    JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+    return;
+}
+
+// Si llega hasta aquí, es porque todo está bien
+// Realizar el proceso de guardado o actualización de la actividad
+
+
+    try {
+        // Establecer conexión con la base de datos
+        Connection con = Conexion.getConexion();
+
+        // Preparar la consulta SQL para insertar los datos
+        String sql = "INSERT INTO actividades (nombre, descripcion, fecha, hora, duracion) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        // Asignar los valores a los parámetros de la consulta
+        ps.setString(1, nombre);
+        ps.setString(2, descripcion);
+        ps.setDate(3, new java.sql.Date(fecha.getTime())); // Convertir la fecha a un objeto java.sql.Date
+        ps.setTime(4, hora);
+        ps.setInt(5, duracion);
+
+        // Ejecutar la consulta
+        ps.executeUpdate();
+
+        // Mostrar un mensaje de confirmación y limpiar los campos
+        JOptionPane.showMessageDialog(null, "Registro guardado");
+        limpiar();
+          cargarTablaActividades();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblActividadesMouseClicked
+     
+
+try {
+    int fila = tblActividades.getSelectedRow();
+    int id = Integer.parseInt(tblActividades.getValueAt(fila, 0).toString());
+    
+    PreparedStatement ps;
+    ResultSet rs;
+
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT nombre, descripcion, fecha, hora, duracion FROM actividades WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    while (rs.next()) {
+        txtNombre.setText(rs.getString("nombre"));
+        txtDescripcion.setText(rs.getString("descripcion"));
+        //txtFecha.setText(rs.getString("fecha"));
+         txtFecha.setDate(rs.getDate("fecha"));
+        // Formatear la hora
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        String horaFormateada = formatoHora.format(rs.getTime("hora"));
+        txtHora.setText(horaFormateada);
+
+        txtDuracion.setText(String.valueOf(rs.getInt("duracion")));
+    }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+    }//GEN-LAST:event_tblActividadesMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+        SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String nombre = txtNombre.getText();
+String descripcion = txtDescripcion.getText();
+//String fecha = txtFecha.getText();
+
+String fecha = dcn.format(txtFecha.getDate()); 
+
+String hora = txtHora.getText();
+int duracion = Integer.parseInt(txtDuracion.getText());
+int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("UPDATE actividades SET nombre=?, descripcion=?, fecha=?, hora=?, duracion=? WHERE id=?");
+
+    ps.setString(1, nombre);
+    ps.setString(2, descripcion);
+    ps.setString(3, fecha);
+    ps.setString(4, hora);
+    ps.setInt(5, duracion);
+    ps.setInt(6, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null, "Registro Modificado");
+    limpiar();
+   cargarTablaActividades();
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+     int id = getIdDelRegistroQueDeseasEliminar(); // Aquí debes obtener el valor correcto de id
+
+try {
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("DELETE FROM actividades WHERE id=?");
+
+    ps.setInt(1, id);
+
+    ps.executeUpdate();
+
+    JOptionPane.showMessageDialog(null,"Registro Eliminado");
+    
+      limpiar();
+    cargarTablaActividades();
+  
+} catch(SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    limpiar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+        private int getIdDelRegistroQueDeseasActualizar() {
+    int filaSeleccionada = tblActividades.getSelectedRow();
+    int id = Integer.parseInt(tblActividades.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
+    
+        
+                    private int getIdDelRegistroQueDeseasEliminar() {
+    int filaSeleccionada = tblActividades.getSelectedRow();
+    int id = Integer.parseInt(tblActividades.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
+    
+   
+      private void limpiar(){
+        txtNombre.setText(""); 
+        txtDescripcion.setText("");
+        txtFecha.setDate(null);  
+        txtHora.setText("");
+        txtDescripcion.setText("");
+        txtDuracion.setText("");
+    }
+   
+                    
+                    
+    
 private void cargarTablaActividades() {
     DefaultTableModel modeloTabla = (DefaultTableModel) tblActividades.getModel();
     modeloTabla.setRowCount(0);
@@ -272,7 +523,7 @@ private void cargarTablaActividades() {
     private javax.swing.JTable tblActividades;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDuracion;
-    private javax.swing.JTextField txtFecha;
+    private com.toedter.calendar.JDateChooser txtFecha;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

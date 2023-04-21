@@ -12,10 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author rlope
- */
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -185,12 +182,15 @@ public class Login extends javax.swing.JFrame {
                    
                    // Jframe medico 0 administrador
                  if(role.equals("medico")){
+       
                      
-                   Menu_admin ventanamedico= new Menu_admin();   
+                   Menu_Medico_v2 ventanamedico= new Menu_Medico_v2();   
                    ventanamedico.setVisible(true);
                    //---------------------
              dispose();
                     //---------------------
+                    
+       
                  }else if(role.equals("administrador")||role.equals("desarrollador")){
                      
                     Menu_admin ventanaadd= new Menu_admin();
@@ -198,9 +198,13 @@ public class Login extends javax.swing.JFrame {
                    //---------------------  
             dispose();
                    //---------------------
-                 }
+                 } else if(role.equals("usuario")){
                    
-               }else{
+                   Menu_Usuario ventanaaddusuarios= new Menu_Usuario();
+                   ventanaaddusuarios.setVisible(true);
+                    
+                      dispose();
+                 }  } else {
                    JOptionPane.showMessageDialog(null,"Contraseña incorrecta");
                }
                        

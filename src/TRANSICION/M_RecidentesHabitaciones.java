@@ -25,7 +25,7 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

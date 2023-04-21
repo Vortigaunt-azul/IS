@@ -180,6 +180,7 @@ public class Menu_admin extends javax.swing.JFrame {
         dateText = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
         mensaje = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 660));
@@ -239,6 +240,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_lends.setBackground(new java.awt.Color(21, 101, 192));
         btn_lends.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_lends.setForeground(new java.awt.Color(255, 255, 255));
+        btn_lends.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/recidente x1.png"))); // NOI18N
         btn_lends.setText("Residentes");
         btn_lends.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_lends.setBorderPainted(false);
@@ -262,6 +264,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_prin.setBackground(new java.awt.Color(21, 101, 192));
         btn_prin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_prin.setForeground(new java.awt.Color(255, 255, 255));
+        btn_prin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/home-outline.png"))); // NOI18N
         btn_prin.setText("Principal");
         btn_prin.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_prin.setBorderPainted(false);
@@ -290,6 +293,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_returns.setBackground(new java.awt.Color(21, 101, 192));
         btn_returns.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_returns.setForeground(new java.awt.Color(255, 255, 255));
+        btn_returns.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/medicina.png"))); // NOI18N
         btn_returns.setText("Medicina");
         btn_returns.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_returns.setBorderPainted(false);
@@ -313,6 +317,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_users.setBackground(new java.awt.Color(21, 101, 192));
         btn_users.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_users.setForeground(new java.awt.Color(255, 255, 255));
+        btn_users.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/account-multiple.png"))); // NOI18N
         btn_users.setText("Personal");
         btn_users.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_users.setBorderPainted(false);
@@ -336,6 +341,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_books.setBackground(new java.awt.Color(21, 101, 192));
         btn_books.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_books.setForeground(new java.awt.Color(255, 255, 255));
+        btn_books.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/almacen .png"))); // NOI18N
         btn_books.setText("Almacen");
         btn_books.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_books.setBorderPainted(false);
@@ -359,6 +365,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_reports2.setBackground(new java.awt.Color(21, 101, 192));
         btn_reports2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reports2.setForeground(new java.awt.Color(255, 255, 255));
+        btn_reports2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/file-chart.png"))); // NOI18N
         btn_reports2.setText("Reportes");
         btn_reports2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports2.setBorderPainted(false);
@@ -382,6 +389,7 @@ public class Menu_admin extends javax.swing.JFrame {
         btn_reports3.setBackground(new java.awt.Color(21, 101, 192));
         btn_reports3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reports3.setForeground(new java.awt.Color(255, 255, 255));
+        btn_reports3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/usuario icono.png"))); // NOI18N
         btn_reports3.setText("Usuarios");
         btn_reports3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reports3.setBorderPainted(false);
@@ -475,6 +483,10 @@ public class Menu_admin extends javax.swing.JFrame {
 
         mensaje.setText("\"Un refugio de amor para quienes más lo necesitan.\"");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Administrador / Desarrollador ");
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -484,7 +496,9 @@ public class Menu_admin extends javax.swing.JFrame {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
                     .addComponent(header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1197, Short.MAX_VALUE)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -494,8 +508,12 @@ public class Menu_admin extends javax.swing.JFrame {
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)))
                 .addGap(7, 7, 7)
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -607,6 +625,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private static javax.swing.JPanel content;
     private javax.swing.JLabel dateText;
     private javax.swing.JPanel header;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel mensaje;
     private javax.swing.JPanel menu;

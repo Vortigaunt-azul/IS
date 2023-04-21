@@ -26,6 +26,7 @@ public class N_Familiares extends javax.swing.JPanel {
         initComponents();
         
         cargarTabla();
+        cargarTabla_dos ();
     }
 
     /**
@@ -548,6 +549,56 @@ try {
 }
       
  
+       private void cargarTabla_dos (){
+        
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentes.getModel();
+        modeloTabla.setRowCount(0);
+        
+       PreparedStatement ps;
+       ResultSet rs;
+       ResultSetMetaData rsmd;
+       int columnas;
+       
+       int[] anchos = {30,50,50,50,50,150};
+       
+       for(int i= 0; i < tblResidentes.getColumnCount(); i++){
+           
+           tblResidentes.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+       }
+       
+       
+       
+       try{
+           
+            Connection con = Conexion.getConexion();
+            
+             ps = con.prepareStatement("SELECT id,nombre,fecha_nacimiento,genero,fecha_ingreso,habitacion FROM residentes");
+           
+          
+           rs = ps.executeQuery();
+           rsmd = rs.getMetaData();
+           columnas = rsmd.getColumnCount();
+           
+           while(rs.next()){
+            
+               Object[] fila = new Object[columnas];
+               for(int indice=0; indice<columnas; indice++){
+                   
+                   fila[indice] = rs.getObject(indice + 1);
+               }
+               modeloTabla.addRow(fila);
+           }
+           
+       } catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e.toString());
+           
+       }
+       
+    }
+    
+    
+    
+    
     
     private void cargarTabla() {
     DefaultTableModel modeloTabla = (DefaultTableModel) tblFamiliares.getModel();

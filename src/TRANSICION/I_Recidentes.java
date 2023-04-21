@@ -211,7 +211,7 @@ public class I_Recidentes extends javax.swing.JPanel {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                        .addGap(143, 143, 143)
+                        .addGap(137, 137, 137)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFecha_de_ingreso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHabitacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,11 +221,11 @@ public class I_Recidentes extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(143, 143, 143)
+                        .addGap(137, 137, 137)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGenero, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                             .addComponent(txtNombre)
-                            .addComponent(txtFecha_de_nacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtFecha_de_nacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                            .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
@@ -452,15 +452,101 @@ dialog.setVisible(true);
     
 
 
+//SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+
+
+
+//String nombre = txtNombre.getText().isEmpty() ? "" : txtNombre.getText();
+//String fecha_nacimiento = txtFecha_de_nacimiento.getDate() == null ? "" : dcn.format(txtFecha_de_nacimiento.getDate());
+//String genero = txtGenero.getText().isEmpty() ? "" : txtGenero.getText();
+//String fecha_ingreso = txtFecha_de_ingreso.getDate() == null ? "" : dcn.format(txtFecha_de_ingreso.getDate());
+//int habitacion = txtHabitacion.getText().isEmpty() ? 0 : Integer.parseInt(txtHabitacion.getText());
+//String descripcion = txtDescripcion.getText().isEmpty() ? "" : txtDescripcion.getText();
+//
+//
+//String nombre = txtNombre.getText();
+//String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
+//String genero = txtGenero.getText();
+//String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
+//int habitacion = Integer.parseInt(txtHabitacion.getText());
+//String descripcion = txtDescripcion.getText();
+//
+//
+//
+//int id = getIdDelRegistroQueDeseasActualizar();
+//
+//if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || txtHabitacion.getText().isEmpty() || descripcion.isEmpty()) {
+//    JOptionPane.showMessageDialog(null, "Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar.");
+//    return;
+//}
+//
+//try {
+//    Connection con = Conexion.getConexion();
+//    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS num_residentes FROM residentes WHERE habitacion = ?");
+//    ps.setInt(1, habitacion);
+//    ResultSet rs = ps.executeQuery();
+//    int numResidentes = 0;
+//    int capacidadTotal = 0;
+//    if (rs.next()) {
+//        numResidentes = rs.getInt("num_residentes");
+//        PreparedStatement ps2 = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
+//        ps2.setInt(1, habitacion);
+//        ResultSet rs2 = ps2.executeQuery();
+//        if (rs2.next()) {
+//            capacidadTotal = rs2.getInt("capacidad");
+//        }
+//    }
+//    if (numResidentes < capacidadTotal) {
+//        PreparedStatement ps3 = con.prepareStatement("UPDATE residentes SET nombre=?,fecha_nacimiento=?,genero=?,fecha_ingreso=?,habitacion=?,descri_de_actividad=? WHERE id=?");
+//        ps3.setString(1, nombre);
+//        ps3.setString(2, fecha_nacimiento);
+//        ps3.setString(3, genero);
+//        ps3.setString(4, fecha_ingreso);
+//        ps3.setInt(5, habitacion);
+//        ps3.setString(6, descripcion);
+//        ps3.setInt(7, id);
+//        ps3.executeUpdate();
+//        JOptionPane.showMessageDialog(null,"Registro Modificado");
+//        limpiar();
+//        cargarTabla_dos();
+//    } else {
+//        
+//        
+//        JOptionPane optionPane = new JOptionPane("La capacidad máxima de las habitaciones se ha superado.", JOptionPane.WARNING_MESSAGE);
+//JDialog dialog = optionPane.createDialog("Advertencia");
+//dialog.setAlwaysOnTop(true);
+//dialog.setVisible(true);
+//        
+//        
+//        //JOptionPane.showMessageDialog(null, "La capacidad máxima de las habitaciones se ha superado.");
+//   
+//    }
+//} catch(SQLException e) {
+//    JOptionPane.showMessageDialog(null, e.toString());
+//}
+
+if (tblResidentes.getSelectedRow() == -1) {
+    JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
+    return;
+}
+
+
 SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
 
 String nombre = txtNombre.getText();
 String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
 String genero = txtGenero.getText();
 String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
-int habitacion = Integer.parseInt(txtHabitacion.getText());
+String habitacion_texto = txtHabitacion.getText();
 String descripcion = txtDescripcion.getText();
 int id = getIdDelRegistroQueDeseasActualizar();
+
+if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || habitacion_texto.isEmpty() || descripcion.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar.");
+    return;
+}
+
+int habitacion = Integer.parseInt(habitacion_texto);
 
 try {
     Connection con = Conexion.getConexion();
@@ -491,24 +577,15 @@ try {
         JOptionPane.showMessageDialog(null,"Registro Modificado");
         limpiar();
         cargarTabla_dos();
-    } else {
-        
-        
+    } else {     
         JOptionPane optionPane = new JOptionPane("La capacidad máxima de las habitaciones se ha superado.", JOptionPane.WARNING_MESSAGE);
-JDialog dialog = optionPane.createDialog("Advertencia");
-dialog.setAlwaysOnTop(true);
-dialog.setVisible(true);
-        
-        
-        //JOptionPane.showMessageDialog(null, "La capacidad máxima de las habitaciones se ha superado.");
-   
+        JDialog dialog = optionPane.createDialog("Advertencia");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);  
     }
 } catch(SQLException e) {
     JOptionPane.showMessageDialog(null, e.toString());
 }
-
-
-
 
 
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -562,14 +639,10 @@ try {
 
     while (rs.next()) {
         txtNombre.setText(rs.getString("nombre"));
-        
-        
-//        txtFecha_de_nacimiento.setText(rs.getString("fecha_nacimiento"));
-//       txtFecha_de_ingreso.setText(rs.getString("fecha_ingreso"));
-       
-       
+        txtFecha_de_nacimiento.setDate(rs.getDate("fecha_nacimiento"));
         txtGenero.setText(rs.getString("genero"));
-       txtHabitacion.setText(String.valueOf(rs.getInt("habitacion")));
+        txtFecha_de_ingreso.setDate(rs.getDate("fecha_ingreso"));
+        txtHabitacion.setText(String.valueOf(rs.getInt("habitacion")));
         txtDescripcion.setText(rs.getString("descri_de_actividad"));
     }
 } catch (SQLException e) {
@@ -599,7 +672,9 @@ try {
     
         private void limpiar(){
         txtNombre.setText(""); 
+        txtFecha_de_nacimiento.setDate(null);  
         txtGenero.setText("");
+        txtFecha_de_ingreso.setDate(null);  
         txtHabitacion.setText("");     
         txtDescripcion.setText("");
     }

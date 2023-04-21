@@ -36,6 +36,7 @@ public class F_Residentes_menu extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         cont = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -66,21 +67,30 @@ public class F_Residentes_menu extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("RESIDENTES");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/recidente menu icono .png"))); // NOI18N
+
         javax.swing.GroupLayout contLayout = new javax.swing.GroupLayout(cont);
         cont.setLayout(contLayout);
         contLayout.setHorizontalGroup(
             contLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contLayout.createSequentialGroup()
-                .addGap(452, 452, 452)
+                .addGap(250, 250, 250)
+                .addComponent(jLabel2)
+                .addGap(106, 106, 106)
                 .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 649, Short.MAX_VALUE))
         );
         contLayout.setVerticalGroup(
             contLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contLayout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addGroup(contLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contLayout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(contLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(153, 153, 153));
@@ -280,6 +290,7 @@ public class F_Residentes_menu extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
