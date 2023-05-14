@@ -4,6 +4,15 @@
  */
 package TRANSICION;
 
+import DATABASE.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class M_RecidentesHabitaciones extends javax.swing.JPanel {
 
@@ -12,6 +21,7 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
      */
     public M_RecidentesHabitaciones() {
         initComponents();
+        cargarTabla();
     }
 
     /**
@@ -24,18 +34,181 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtNumeroHabitacion = new javax.swing.JTextField();
+        txtCapacidadHabitacion = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblResidentesHab = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel2MouseMoved(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Medicamento: ");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Cantidad: ");
+
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtNumeroHabitacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtCapacidadHabitacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        btnGuardar.setBackground(new java.awt.Color(51, 255, 51));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("Asignar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setBackground(new java.awt.Color(0, 102, 255));
+        btnModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("Editar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setBackground(new java.awt.Color(255, 51, 51));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setBackground(new java.awt.Color(102, 255, 255));
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setText("Linpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Nombre: ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(79, 79, 79))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNumeroHabitacion)
+                    .addComponent(txtCapacidadHabitacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre))
+                .addGap(16, 16, 16))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNumeroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCapacidadHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
+        );
+
+        tblResidentesHab.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre del Residente", "Numero habitación", "Capacidad de Habitación"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblResidentesHab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblResidentesHabMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblResidentesHab);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1293, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 721, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(269, 269, 269))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(253, 253, 253))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -50,8 +223,230 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+/*
+        String nombre = txtNombre.getText();
+        String medicamento = txtNumeroHabitacion.getText();
+        String cantidad = txtCapacidadHabitacion.getText();
 
+        // Verificar que los campos estén llenos
+        if (nombre.isEmpty() || medicamento.isEmpty() || cantidad.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+            return;
+        }
+        // Verificar si el residente existe
+        if (!existeResidente(nombre)) {
+            JOptionPane.showMessageDialog(null, "El residente especificado no existe");
+            return;
+        }
+
+        // Verificar si el medicamento existe
+        if (!existeMedicamento(medicamento)) {
+            JOptionPane.showMessageDialog(null, "El medicamento especificado no existe");
+            return;
+        }
+        // Verificar si el registro ya existe antes de insertarlo
+        if (existeRegistro(nombre, medicamento)) {
+            JOptionPane.showMessageDialog(null, "El registro para este residente y medicamento ya existe.");
+            return;
+        }
+
+        try {
+            Connection con = Conexion.getConexion();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO residentes_medicamentos(residente_id, medicamento_id, cantidad) VALUES (?, ?, ?)");
+
+            // Obtener los IDs correspondientes a partir de los nombres
+            int residenteId = obtenerIdResidente(nombre);
+            int medicamentoId = obtenerIdMedicamento(medicamento);
+
+            // Asignar los valores a los parámetros
+            ps.setInt(1, residenteId);
+            ps.setInt(2, medicamentoId);
+            ps.setString(3, cantidad);
+
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Registro Guardado");
+
+            // Limpiar los campos o realizar otras acciones necesarias
+            limpiar();
+            cargarTabla();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+*/
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+/*
+        int fila = tblResidentesHab.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+            return;
+        }
+
+        int id = Integer.parseInt(tblResidentesHab.getValueAt(fila, 0).toString());
+        String nombre = txtNombre.getText();
+        String medicamento = txtNumeroHabitacion.getText();
+        String cantidad = txtCapacidadHabitacion.getText();
+
+        modificarRegistro(id, nombre, medicamento, cantidad);
+*/
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+/*
+        int fila = tblResidentesHab.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+            return;
+        }
+
+        int id = Integer.parseInt(tblResidentesHab.getValueAt(fila, 0).toString());
+
+        eliminarRegistro(id);
+*/
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        //limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void jPanel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2MouseMoved
+
+    private void tblResidentesHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResidentesHabMouseClicked
+        // TODO add your handling code here:
+      try {
+    int fila = tblResidentesHab.getSelectedRow();
+    int id = Integer.parseInt(tblResidentesHab.getValueAt(fila, 0).toString());
+    PreparedStatement ps;
+    ResultSet rs;
+
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT residente_id, habitacion_id FROM residentes WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    if (rs.next()) {
+        int residenteId = rs.getInt("residente_id");
+        String nombreResidente = obtenerNombreResidente(residenteId); // Obtener el nombre del residente
+        txtNombre.setText(nombreResidente);
+
+        int habitacionId = rs.getInt("habitacion_id");
+        int numeroHabitacion = obtenerNumeroHabitacion(habitacionId); // Obtener el número de habitación
+        int capacidadHabitacion = obtenerCapacidadHabitacion(habitacionId); // Obtener la capacidad de la habitación
+        txtNumeroHabitacion.setText(String.valueOf(numeroHabitacion));
+        txtCapacidadHabitacion.setText(String.valueOf(capacidadHabitacion));
+    }
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+    }//GEN-LAST:event_tblResidentesHabMouseClicked
+
+private void cargarTabla() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesHab.getModel();
+    modeloTabla.setRowCount(0);
+
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+
+    int[] anchos = {30, 50, 50, 150};
+
+    for (int i = 0; i < tblResidentesHab.getColumnCount(); i++) {
+        tblResidentesHab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+        ps = con.prepareStatement("SELECT id, id, id FROM residentes");
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                if (indice == 1) { // Columna del residente_id
+                    int residenteId = rs.getInt(indice + 1);
+                    String nombreResidente = obtenerNombreResidente(residenteId); // Obtener el nombre del residente
+                    fila[indice] = nombreResidente;
+                } else if (indice == 2) { // Columna del habitacion_id
+                    int habitacionId = rs.getInt(indice + 1);
+                    int numeroHabitacion = obtenerNumeroHabitacion(habitacionId); // Obtener el número de habitación
+                    int capacidadHabitacion = obtenerCapacidadHabitacion(habitacionId); // Obtener la capacidad de la habitación
+                    fila[indice] = "Número: " + numeroHabitacion + ", Capacidad: " + capacidadHabitacion;
+                } else {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+            }
+            modeloTabla.addRow(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+
+private String obtenerNombreResidente(int residenteId) throws SQLException {
+    String nombreResidente = "";
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("SELECT nombre FROM residentes WHERE id = ?");
+    ps.setInt(1, residenteId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        nombreResidente = rs.getString("nombre");
+    }
+    return nombreResidente;
+}
+
+private int obtenerNumeroHabitacion(int habitacionId) throws SQLException {
+    int numeroHabitacion = 0;
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("SELECT numero FROM habitaciones WHERE id = ?");
+    ps.setInt(1, habitacionId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        numeroHabitacion = rs.getInt("numero");
+    }
+    return numeroHabitacion;
+}
+
+private int obtenerCapacidadHabitacion(int habitacionId) throws SQLException {
+    int capacidadHabitacion = 0;
+    Connection con = Conexion.getConexion();
+    PreparedStatement ps = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
+    ps.setInt(1, habitacionId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        capacidadHabitacion = rs.getInt("capacidad");
+    }
+    return capacidadHabitacion;
+}
+
+
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblResidentesHab;
+    private javax.swing.JTextField txtCapacidadHabitacion;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNumeroHabitacion;
     // End of variables declaration//GEN-END:variables
 }
