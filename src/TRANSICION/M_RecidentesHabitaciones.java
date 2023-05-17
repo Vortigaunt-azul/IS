@@ -44,7 +44,7 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
 
             },
             new String [] {
-                "nombre", "habitacion", "capacidad"
+                "Nombre", "Habitación", "Capacidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {

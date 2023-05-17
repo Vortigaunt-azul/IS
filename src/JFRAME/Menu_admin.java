@@ -41,7 +41,7 @@ public class Menu_admin extends javax.swing.JFrame {
         InitStyles();
         SetDate();
         InitContent();
-        
+        //setLocationRelativeTo(null);
         //this.setResizable(false);
            //////ancho  ---  alto
 //        setSize(1290, 790);

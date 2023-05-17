@@ -6,11 +6,23 @@ package JFRAME;
 
 import DATABASE.Conexion;
 import java.awt.Color;
+//import java.net.PasswordAuthentication;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Session;
+import javax.mail.Message;
+import javax.mail.Transport;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.PasswordAuthentication;
+
 import javax.swing.JOptionPane;
+
 
 
 public class Login extends javax.swing.JFrame {
@@ -48,6 +60,7 @@ public class Login extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnRecuperar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -122,9 +135,18 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 6, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Roboto Black", 1, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Bienvenidos");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 354, -1));
+
+        btnRecuperar.setBackground(new java.awt.Color(0, 102, 255));
+        btnRecuperar.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        btnRecuperar.setText("¿Olvidaste tu Contraseña?");
+        btnRecuperar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecuperarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRecuperar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, 30));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 580, 650));
 
@@ -151,74 +173,78 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+private int intentosFallidos = 0;
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
-        String user = txtUser.getText();
-            String pass = txtClave.getText();
-            
-            // select username, password, role from login where username='admin1';
-            
-            String url = "select username, password, role "
-                    + "from login where username='"+user+"'";
-         try {
-                 Connection con = Conexion.getConexion();
-                 PreparedStatement ps = con.prepareStatement(url);
-                 ResultSet rs = ps.executeQuery();
-                 
-                 
-           if (rs.next()){
-               
-               // si existe el usuario
-               
-               //String u = rs.getString("username");
-               
-               String p =  rs.getString("password");      
-               String role = rs.getString("role");
-           
-              
-               if(pass.equals(p)){
-                 
-                   
-                   // Jframe medico 0 administrador
-                 if(role.equals("medico")){
-       
-                     
-                   Menu_Medico_v2 ventanamedico= new Menu_Medico_v2();   
-                   ventanamedico.setVisible(true);
-                   //---------------------
-             dispose();
-                    //---------------------
-                    
-       
-                 }else if(role.equals("administrador")||role.equals("desarrollador")){
-                     
-                    Menu_admin ventanaadd= new Menu_admin();
+    String user = txtUser.getText();
+    String pass = txtClave.getText();
+
+    // select username, password, role from login where username='admin1';
+
+    String url = "select username, password, role "
+            + "from login where username='" + user + "'";
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement(url);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Si el usuario existe
+            String p = rs.getString("password");
+            String role = rs.getString("role");
+
+            if (pass.equals(p)) {
+                // Contraseña correcta
+
+                if (role.equals("medico")) {
+                    // Acceso como médico
+                    Menu_Medico_v2 ventanamedico = new Menu_Medico_v2();
+                    ventanamedico.setVisible(true);
+                    dispose();
+                } else if (role.equals("administrador") || role.equals("desarrollador")) {
+                    // Acceso como administrador o desarrollador
+                    Menu_admin ventanaadd = new Menu_admin();
                     ventanaadd.setVisible(true);
-                   //---------------------  
-            dispose();
-                   //---------------------
-                 } else if(role.equals("usuario")){
-                   
-                   Menu_Usuario ventanaaddusuarios= new Menu_Usuario();
-                   ventanaaddusuarios.setVisible(true);
-                    
-                      dispose();
-                 }  } else {
-                   JOptionPane.showMessageDialog(null,"Contraseña incorrecta");
-               }
-                       
-           }else{
-               // el usuario no existe
-               JOptionPane.showMessageDialog(null,"El Usuario No Existe");
-           }
-                 
-                 
-                 
-        } catch (SQLException ex) {
-                
-            System.out.println(ex.toString());
+                    dispose();
+                } else if (role.equals("usuario")) {
+                    // Acceso como usuario
+                    Menu_Usuario ventanaaddusuarios = new Menu_Usuario();
+                    ventanaaddusuarios.setVisible(true);
+                    dispose();
+                }
+            } else {
+                // Contraseña incorrecta
+                String mensaje = "<html><body style='width: 200px; text-align: center;'>" +
+                 "<h2 style='color: #ff0000;'>Cotraseña Incorrecta</h2>" +
+                 "<p>Por favor, verifica la contraseña e intenta nuevamente.</p>" +
+                 "</body></html>";
+
+                    JOptionPane.showMessageDialog(null, mensaje);
+            }
+        } else {
+            // El usuario no existe
+            String mensaje = "<html><body style='width: 200px; text-align: center;'>" +
+                 "<h2 style='color: #ff0000;'>El Usuario no Existe</h2>" +
+                 "<p>Por favor, verifica el nombre de usuario e intenta nuevamente.</p>" +
+                 "</body></html>";
+
+                    JOptionPane.showMessageDialog(null, mensaje);
         }
+
+        // Envío de correo electrónico de recuperación de contraseña
+        String newPassword = generarNuevaContraseña();
+        enviarCorreoElectronico(user, newPassword);
+
+        // Actualización de la contraseña en la base de datos
+        String updateQuery = "UPDATE login SET password = ? WHERE username = ?";
+        PreparedStatement updateStatement = con.prepareStatement(updateQuery);
+        updateStatement.setString(1, newPassword);
+        updateStatement.setString(2, user);
+        updateStatement.executeUpdate();
+
+    } catch (SQLException ex) {
+        System.out.println(ex.toString());
+    }
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -267,6 +293,138 @@ public class Login extends javax.swing.JFrame {
         btnConectar.setBackground(new Color(102,204,255));
     }//GEN-LAST:event_btnConectarMouseExited
 
+    private void btnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarActionPerformed
+        // TODO add your handling code here:
+        String mensaje1 = "<html><body style='width: 250px; text-align: center;'>" +
+                 "<h2 style='color: #0000ff;'>¿Deseas recuperar tu contraseña?</h2>" +
+                 "<p style='color: #808080;'>Haz clic en 'Sí' para recibir una nueva contraseña a tu correo registrado.</p>" +
+                 "</body></html>";
+
+                int respuesta = JOptionPane.showConfirmDialog(null, mensaje1, "Recuperación de Contraseña", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                // El usuario ha seleccionado "Sí", realizar la lógica para recuperar la contraseña
+                // Aquí puedes llamar al método correspondiente para recuperar la contraseña
+                RecuperarContraseña();
+                } else {
+            // El usuario ha seleccionado "No" o ha cerrado el cuadro de diálogo
+                }
+        
+    }//GEN-LAST:event_btnRecuperarActionPerformed
+
+//Recuperar Contrasena
+    private void RecuperarContraseña() {
+    Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        
+        String user = txtUser.getText();
+
+    // Verificar si el usuario existe en la base de datos
+    String url = "SELECT username, email FROM login WHERE username=?";
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement(url);
+        ps.setString(1, user);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // El usuario existe, solicitar dirección de correo electrónico para enviar la nueva contraseña
+            String email = rs.getString("email");
+
+            // Generar una nueva contraseña aleatoria
+            String newPassword = generarNuevaContraseña();
+
+            // Actualizar la contraseña en la base de datos
+            String updateQuery = "UPDATE login SET password=? WHERE username=?";
+            PreparedStatement updatePs = con.prepareStatement(updateQuery);
+            updatePs.setString(1, newPassword);
+            updatePs.setString(2, user);
+            updatePs.executeUpdate();
+
+            // envia la nueva contraseña al correo electrónico del usuario
+            enviarCorreoElectronico(email, newPassword);
+
+            String mensaje = "<html><body style='width: 200px; text-align: center;'>" +
+                 "<h2 style='color: #008000;'>¡Contraseña enviada!</h2>" +
+                 "<p>Se ha enviado una nueva contraseña al correo electrónico asociado a tu cuenta.</p>" +
+                 "<p>Por favor, verifica tu bandeja de entrada.</p>" +
+                 "</body></html>";
+
+                            JOptionPane.showMessageDialog(null, mensaje);
+
+        } else {
+            String mensaje = "<html><body style='width: 200px; text-align: center;'>" +
+                 "<h2 style='color: #ff0000;'>El nombre de usuario no existe</h2>" +
+                 "<p>Por favor, verifica el nombre de usuario e intenta nuevamente.</p>" +
+                 "</body></html>";
+
+                    JOptionPane.showMessageDialog(null, mensaje);
+
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.toString());
+    }
+    }
+
+// Generar una nueva contraseña aleatoria
+private String generarNuevaContraseña() {
+    // Define los caracteres válidos para la contraseña
+    String caracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    // Define la longitud deseada de la contraseña
+    int longitud = 8;
+
+    StringBuilder nuevaContraseña = new StringBuilder();
+
+    // Genera la contraseña aleatoria seleccionando caracteres al azar del conjunto de caracteres válidos
+    Random random = new Random();
+    for (int i = 0; i < longitud; i++) {
+        int index = random.nextInt(caracteresValidos.length());
+        nuevaContraseña.append(caracteresValidos.charAt(index));
+    }
+
+    return nuevaContraseña.toString();
+}
+
+// Envia la nueva contraseña por correo electrónico
+private void enviarCorreoElectronico(String email, String newPassword) {
+    final String username = "rlopezl1994@gmail.com";
+    final String password = "kaiqykrsfidtiagc";
+
+    Properties props = new Properties();
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.port", "587");
+
+    Session session = Session.getInstance(props,
+            new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+    try {
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(username));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+        message.setSubject("Recuperación de contraseña");
+        message.setText("Tu nueva contraseña es: " + newPassword);
+
+        Transport.send(message);
+
+        System.out.println("Correo electrónico enviado correctamente a: " + email);
+    } catch (MessagingException e) {
+        e.printStackTrace();
+    }
+}
+
+
+    
     /**
      * @param args the command line arguments
      */
@@ -306,6 +464,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConectar;
+    private javax.swing.JButton btnRecuperar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

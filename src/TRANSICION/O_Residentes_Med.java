@@ -179,7 +179,7 @@ public class O_Residentes_Med extends javax.swing.JPanel {
                     .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 26, Short.MAX_VALUE)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNombre))
                 .addGap(16, 16, 16))
@@ -214,10 +214,10 @@ public class O_Residentes_Med extends javax.swing.JPanel {
             ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContentLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
         );
         ContentLayout.setVerticalGroup(
             ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,23 +255,38 @@ public class O_Residentes_Med extends javax.swing.JPanel {
     
     // Verificar que los campos estén llenos
     if (nombre.isEmpty() || medicamento.isEmpty() || cantidad.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
     // Verificar si el residente existe
     if (!existeResidente(nombre)) {
-        JOptionPane.showMessageDialog(null, "El residente especificado no existe");
+        //JOptionPane.showMessageDialog(null, "El residente especificado no existe");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>El residente especificado no existe.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
     // Verificar si el medicamento existe
     if (!existeMedicamento(medicamento)) {
-        JOptionPane.showMessageDialog(null, "El medicamento especificado no existe");
+        //JOptionPane.showMessageDialog(null, "El medicamento especificado no existe");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>El medicamento especificado no existe.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
     // Verificar si el registro ya existe antes de insertarlo
     if (existeRegistro(nombre, medicamento)) {
-        JOptionPane.showMessageDialog(null, "El registro para este residente y medicamento ya existe.");
+        //JOptionPane.showMessageDialog(null, "El registro para este residente y medicamento ya existe.");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>El registro para este residente y medicamento ya existe.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
@@ -290,7 +305,11 @@ public class O_Residentes_Med extends javax.swing.JPanel {
 
         ps.executeUpdate();
 
-        JOptionPane.showMessageDialog(null, "Registro Guardado");
+        //JOptionPane.showMessageDialog(null, "Registro Guardado");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro guardado correctamente.</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         // Limpiar los campos o realizar otras acciones necesarias
         limpiar();
@@ -408,7 +427,11 @@ private int obtenerIdMedicamento(String medicamento) throws SQLException {
        
        int fila = tblResidentesMed.getSelectedRow();
     if (fila == -1) {
-        JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+        //JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Seleccione una fila de la tabla.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
     
@@ -436,7 +459,11 @@ private void modificarRegistro(int id, String nombre, String medicamento, String
 
         ps.executeUpdate();
 
-        JOptionPane.showMessageDialog(null, "Registro Modificado");
+        //JOptionPane.showMessageDialog(null, "Registro Modificado");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro modificado correctamente.</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         // Limpiar los campos o realizar otras acciones necesarias
         limpiar();
@@ -451,7 +478,11 @@ private void modificarRegistro(int id, String nombre, String medicamento, String
 
 int fila = tblResidentesMed.getSelectedRow();
     if (fila == -1) {
-        JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+        //JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Seleccione una fila de la tabla.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
     
@@ -466,7 +497,11 @@ private void eliminarRegistro(int id) {
         ps.setInt(1, id);
         ps.executeUpdate();
 
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        //JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro eliminado correctamente.</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         // Limpiar los campos o realizar otras acciones necesarias
         // limpiar();
