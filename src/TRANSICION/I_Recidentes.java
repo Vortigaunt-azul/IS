@@ -221,7 +221,7 @@ public class I_Recidentes extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(137, 137, 137)
+                        .addGap(143, 143, 143)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre)
                             .addComponent(txtFecha_de_nacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
@@ -355,7 +355,26 @@ public class I_Recidentes extends javax.swing.JPanel {
     String descripcion = txtDescripcion.getText();
     String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate());       
     String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
-             
+    
+         // Verificar que los campos estén llenos
+        if (nombre.isEmpty() || genero.isEmpty() || habitacion.isEmpty() || descripcion.isEmpty() || fecha_nacimiento.isEmpty() || fecha_ingreso.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+            "<h2 style='color: #FF0000;'>Error</h2>" +
+            "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
+            "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            // Verificar si el médico ya existe
+            if (existeResidente(nombre, genero, habitacion, descripcion, fecha_nacimiento, fecha_ingreso)) {
+             JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+            "<h2 style='color: #FF0000;'>Error</h2>" +
+            "<p style='color: #808080;'>El Residente ya existe en la base de datos.</p>" +
+            "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+
+    
     try {
         Connection con = Conexion.getConexion();
         PreparedStatement ps = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
@@ -386,7 +405,10 @@ public class I_Recidentes extends javax.swing.JPanel {
             ps.setString(5, habitacion);
             ps.setString(6, descripcion);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro guardado exitosamente.");
+            JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro guardado exitosamente</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             limpiar();
             cargarTabla();
             cargarTabla_dos();
@@ -402,15 +424,40 @@ dialog.setVisible(true);
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e.toString());
     }
-
-
-
-
-
-
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    
+    private boolean existeResidente(String nombre, String genero, String habitacion, String descripcion, String fecha_nacimiento, String fecha_ingreso) {
+    boolean existe = false;
+
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM residentes WHERE nombre = ? AND genero = ? AND habitacion = ? AND descri_de_actividad = ? AND fecha_nacimiento = ? AND fecha_ingreso = ?");
+        ps.setString(1, nombre);
+        ps.setString(2, genero);
+        ps.setString(3, habitacion);
+        ps.setString(4, descripcion);
+        ps.setString(5, fecha_nacimiento);
+        ps.setString(6, fecha_ingreso);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            existe = count > 0;
+        }
+
+        rs.close();
+        ps.close();
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return existe;
+}
+
+    
     private void tblHabitacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHabitacionesMouseClicked
       
            
@@ -449,84 +496,13 @@ dialog.setVisible(true);
     }//GEN-LAST:event_tblHabitacionesMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-    
-
-
-//SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
-
-
-
-//String nombre = txtNombre.getText().isEmpty() ? "" : txtNombre.getText();
-//String fecha_nacimiento = txtFecha_de_nacimiento.getDate() == null ? "" : dcn.format(txtFecha_de_nacimiento.getDate());
-//String genero = txtGenero.getText().isEmpty() ? "" : txtGenero.getText();
-//String fecha_ingreso = txtFecha_de_ingreso.getDate() == null ? "" : dcn.format(txtFecha_de_ingreso.getDate());
-//int habitacion = txtHabitacion.getText().isEmpty() ? 0 : Integer.parseInt(txtHabitacion.getText());
-//String descripcion = txtDescripcion.getText().isEmpty() ? "" : txtDescripcion.getText();
-//
-//
-//String nombre = txtNombre.getText();
-//String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
-//String genero = txtGenero.getText();
-//String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
-//int habitacion = Integer.parseInt(txtHabitacion.getText());
-//String descripcion = txtDescripcion.getText();
-//
-//
-//
-//int id = getIdDelRegistroQueDeseasActualizar();
-//
-//if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || txtHabitacion.getText().isEmpty() || descripcion.isEmpty()) {
-//    JOptionPane.showMessageDialog(null, "Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar.");
-//    return;
-//}
-//
-//try {
-//    Connection con = Conexion.getConexion();
-//    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS num_residentes FROM residentes WHERE habitacion = ?");
-//    ps.setInt(1, habitacion);
-//    ResultSet rs = ps.executeQuery();
-//    int numResidentes = 0;
-//    int capacidadTotal = 0;
-//    if (rs.next()) {
-//        numResidentes = rs.getInt("num_residentes");
-//        PreparedStatement ps2 = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
-//        ps2.setInt(1, habitacion);
-//        ResultSet rs2 = ps2.executeQuery();
-//        if (rs2.next()) {
-//            capacidadTotal = rs2.getInt("capacidad");
-//        }
-//    }
-//    if (numResidentes < capacidadTotal) {
-//        PreparedStatement ps3 = con.prepareStatement("UPDATE residentes SET nombre=?,fecha_nacimiento=?,genero=?,fecha_ingreso=?,habitacion=?,descri_de_actividad=? WHERE id=?");
-//        ps3.setString(1, nombre);
-//        ps3.setString(2, fecha_nacimiento);
-//        ps3.setString(3, genero);
-//        ps3.setString(4, fecha_ingreso);
-//        ps3.setInt(5, habitacion);
-//        ps3.setString(6, descripcion);
-//        ps3.setInt(7, id);
-//        ps3.executeUpdate();
-//        JOptionPane.showMessageDialog(null,"Registro Modificado");
-//        limpiar();
-//        cargarTabla_dos();
-//    } else {
-//        
-//        
-//        JOptionPane optionPane = new JOptionPane("La capacidad máxima de las habitaciones se ha superado.", JOptionPane.WARNING_MESSAGE);
-//JDialog dialog = optionPane.createDialog("Advertencia");
-//dialog.setAlwaysOnTop(true);
-//dialog.setVisible(true);
-//        
-//        
-//        //JOptionPane.showMessageDialog(null, "La capacidad máxima de las habitaciones se ha superado.");
-//   
-//    }
-//} catch(SQLException e) {
-//    JOptionPane.showMessageDialog(null, e.toString());
-//}
-
+int fila = tblResidentes.getSelectedRow();
 if (tblResidentes.getSelectedRow() == -1) {
-    JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
+    //JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
+    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Seleccione un registro para modificar</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
     return;
 }
 
@@ -542,7 +518,11 @@ String descripcion = txtDescripcion.getText();
 int id = getIdDelRegistroQueDeseasActualizar();
 
 if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || habitacion_texto.isEmpty() || descripcion.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar.");
+    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+  
     return;
 }
 
@@ -574,7 +554,10 @@ try {
         ps3.setString(6, descripcion);
         ps3.setInt(7, id);
         ps3.executeUpdate();
-        JOptionPane.showMessageDialog(null,"Registro Modificado");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro Modificado</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
         cargarTabla_dos();
     } else {     
@@ -591,7 +574,17 @@ try {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-    
+        
+        int fila = tblResidentes.getSelectedRow();
+    if (fila == -1) {
+        //JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Seleccione una fila de la tabla.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        
         int id = getIdDelRegistroQueDeseasEliminar(); // Aquí debes obtener el valor correcto de id
         
 try {
@@ -602,13 +595,20 @@ try {
 
     ps.executeUpdate();
 
-    JOptionPane.showMessageDialog(null,"Registro Eliminado");
+    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro eliminado correctamente</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     limpiar();
     cargarTabla();
     cargarTabla_dos ();
 
 } catch(SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
+   // JOptionPane.showMessageDialog(null, e.toString());
+    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Ha ocurrido un error al borrar el registro:<br>" + e.toString() + "</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
 }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
