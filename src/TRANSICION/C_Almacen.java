@@ -35,10 +35,8 @@ public class C_Almacen extends javax.swing.JPanel {
     public C_Almacen() {
         initComponents();
          cargarTabla(); 
-        
-        
-       
-        
+         cargarTabla2();
+         
     }
 
     /**
@@ -75,6 +73,8 @@ public class C_Almacen extends javax.swing.JPanel {
         txtProcedencia = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAlmacen2 = new javax.swing.JTable();
 
         setMaximumSize(new java.awt.Dimension(1100, 550));
         setMinimumSize(new java.awt.Dimension(1100, 550));
@@ -124,6 +124,13 @@ public class C_Almacen extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblAlmacen);
+        if (tblAlmacen.getColumnModel().getColumnCount() > 0) {
+            tblAlmacen.getColumnModel().getColumn(0).setHeaderValue("ID");
+            tblAlmacen.getColumnModel().getColumn(3).setHeaderValue("fechas de ingreso");
+            tblAlmacen.getColumnModel().getColumn(4).setHeaderValue("fecha de caducidad");
+            tblAlmacen.getColumnModel().getColumn(5).setHeaderValue("descripcion");
+            tblAlmacen.getColumnModel().getColumn(6).setHeaderValue("Procedencia");
+        }
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -314,6 +321,37 @@ public class C_Almacen extends javax.swing.JPanel {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
+        tblAlmacen2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "producto", "cantidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAlmacen2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlmacen2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblAlmacen2);
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -321,15 +359,20 @@ public class C_Almacen extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, Short.MAX_VALUE)
                         .addGap(79, 79, 79))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -337,18 +380,18 @@ public class C_Almacen extends javax.swing.JPanel {
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61)
+                        .addGap(25, 25, 25)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(73, 73, 73)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
                 .addGap(57, 57, 57)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -381,32 +424,45 @@ public class C_Almacen extends javax.swing.JPanel {
        String descripcion = txtDescripcion.getText(); 
        String procedencia = txtProcedencia.getText(); 
         
-     
-             
-        
-       
-       try{
-           
-            Connection con = Conexion.getConexion();
-           PreparedStatement ps = con.prepareStatement("INSERT INTO almacen(producto,cantidad,fecha_ingreso,fecha_caducidad,descripcion,procedencia) VALUES (?,?,?,?,?,?)");
-           
-          
-           ps.setString(1,producto);
-            ps.setString(2,cantidad);
-             ps.setString(3,fecha_de_ingreso);
-              ps.setString(4,fecha_de_caducidad);
-              ps.setString(5,descripcion);
-               ps.setString(6,procedencia);
-           
-              ps.executeUpdate();
-              
-              JOptionPane.showMessageDialog(null,"Registro Guardado");
-              limpiar();
-              cargarTabla();
-              
-       }catch(SQLException e){
-           JOptionPane.showMessageDialog(null,e.toString());
-       }
+     // Verificar si la cantidad es un valor numérico
+    try {
+        int cantidadInt = Integer.parseInt(cantidad);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La cantidad debe ser un valor entero", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+  
+       try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement psSelect = con.prepareStatement("SELECT cantidad FROM almacen WHERE producto = ?");
+        psSelect.setString(1, producto);
+        ResultSet rs = psSelect.executeQuery();
+
+        if (rs.next()) {
+            int cantidadExistente = rs.getInt("cantidad");
+            cantidadExistente += Integer.parseInt(cantidad);
+
+            PreparedStatement psUpdate = con.prepareStatement("UPDATE almacen SET cantidad = ? WHERE producto = ?");
+            psUpdate.setInt(1, cantidadExistente);
+            psUpdate.setString(2, producto);
+            psUpdate.executeUpdate();
+        } else {
+            PreparedStatement psInsert = con.prepareStatement("INSERT INTO almacen (producto, cantidad, fecha_ingreso, fecha_caducidad, descripcion, procedencia) VALUES (?, ?, ?, ?, ?, ?)");
+            psInsert.setString(1, producto);
+            psInsert.setString(2, cantidad);
+            psInsert.setString(3, fecha_de_ingreso);
+            psInsert.setString(4, fecha_de_caducidad);
+            psInsert.setString(5, descripcion);
+            psInsert.setString(6, procedencia);
+            psInsert.executeUpdate();
+        }
+
+        JOptionPane.showMessageDialog(null, "Registro Guardado");
+        limpiar();
+        cargarTabla();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }   
         
         
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -509,6 +565,12 @@ try {
         
     }//GEN-LAST:event_tblAlmacenMouseClicked
 
+    private void tblAlmacen2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlmacen2MouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_tblAlmacen2MouseClicked
+
     private void generarPDF() {
 try {
     // Creamos un documento y lo abrimos
@@ -580,6 +642,44 @@ try {
         txtProcedencia.setText("");
     }
 
+ private void cargarTabla2() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblAlmacen2.getModel();
+    modeloTabla.setRowCount(0);
+
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+
+    int[] anchos = {50, 20};
+
+    for (int i = 0; i < tblAlmacen2.getColumnCount(); i++) {
+        tblAlmacen2.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+
+        ps = con.prepareStatement("SELECT producto, cantidad FROM almacen");
+
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                fila[indice] = rs.getObject(indice + 1);
+            }
+            modeloTabla.addRow(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+               
+ 
         
  private void cargarTabla(){
         
@@ -650,7 +750,9 @@ try {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblAlmacen;
+    private javax.swing.JTable tblAlmacen2;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
     private com.toedter.calendar.JDateChooser txtFechaCaducidad;
