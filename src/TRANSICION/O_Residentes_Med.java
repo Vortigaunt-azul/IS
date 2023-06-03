@@ -38,6 +38,8 @@ public class O_Residentes_Med extends javax.swing.JPanel {
     public O_Residentes_Med() {
         initComponents();
         cargarTabla();
+        cargarTabla2();
+        cargarTabla3();
     }
 
     /**
@@ -182,20 +184,20 @@ public class O_Residentes_Med extends javax.swing.JPanel {
 
         tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Descripcion", "Cantidad", "Medico_id"
+                "ID", "Nombre", "Descripcion", "Cantidad", "Medico_id", "Ingreso", "Vencimiento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -204,6 +206,11 @@ public class O_Residentes_Med extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMedicamentosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblMedicamentos);
@@ -249,11 +256,9 @@ public class O_Residentes_Med extends javax.swing.JPanel {
         });
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Medicamento");
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Recidente");
 
         javax.swing.GroupLayout ContentLayout = new javax.swing.GroupLayout(Content);
@@ -275,8 +280,9 @@ public class O_Residentes_Med extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)))
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(71, Short.MAX_VALUE))
@@ -595,49 +601,158 @@ private void eliminarRegistro(int id) {
 
     private void tblResidentesMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResidentesMedMouseClicked
         // TODO add your handling code here:
-     try {
-        int fila = tblResidentesMed.getSelectedRow();
-        int id = Integer.parseInt(tblResidentesMed.getValueAt(fila, 0).toString());
-        PreparedStatement ps;
-        ResultSet rs;
+  /*   try {
+    int fila = tblResidentesMed.getSelectedRow();
+    int id = Integer.parseInt(tblResidentesMed.getValueAt(fila, 0).toString());
+    PreparedStatement ps;
+    ResultSet rs;
 
-        Connection con = Conexion.getConexion();
+    Connection con = Conexion.getConexion();
 
-        ps = con.prepareStatement("SELECT residente_id, medicamento_id, cantidad FROM residentes_medicamentos WHERE id = ?");
-        ps.setInt(1, id);
-        rs = ps.executeQuery();
+    ps = con.prepareStatement("SELECT residente_id FROM residentes_medicamentos WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
 
-       // DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        while (rs.next()) {
-            int residenteId = rs.getInt("residente_id");
-            String nombreResidente = obtenerNombreResidente(residenteId); // Obtener el nombre del residente
-            txtNombre.setText(nombreResidente);
-
-            int medicamentoId = rs.getInt("medicamento_id");
-            String nombreMedicamento = obtenerNombreMedicamento(medicamentoId); // Obtener el nombre del medicamento
-            txtMedicamento.setText(nombreMedicamento);
-
-            int cantidad = rs.getInt("cantidad");
-            txtCantidad.setText(String.valueOf(cantidad));
-
-            
-        }
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.toString());
+    if (rs.next()) {
+        int residenteId = rs.getInt("residente_id");
+        String nombreResidente = obtenerNombreResidente(residenteId); // Obtener el nombre del residente
+        txtNombre.setText(nombreResidente);
     }
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+*/
 
     }//GEN-LAST:event_tblResidentesMedMouseClicked
 
     private void tblResidentesHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResidentesHabMouseClicked
 
+    try {
+    int fila = tblResidentesHab.getSelectedRow();
+    int id = Integer.parseInt(tblResidentesHab.getValueAt(fila, 0).toString());
+    PreparedStatement ps;
+    ResultSet rs;
+
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT nombre FROM residentes WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    if (rs.next()) {
+        String nombreResidente = rs.getString("nombre");
+        txtNombre.setText(nombreResidente);
+    }
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+  
     }//GEN-LAST:event_tblResidentesHabMouseClicked
 
     private void jPanel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel2MouseMoved
-private void cargarTabla() {
+
+    private void tblMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicamentosMouseClicked
+        // TODO add your handling code here:
+        
+        try {
+    int fila = tblMedicamentos.getSelectedRow();
+    int id = Integer.parseInt(tblMedicamentos.getValueAt(fila, 0).toString());
+    PreparedStatement ps;
+    ResultSet rs;
+
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT nombre FROM medicamentos WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    if (rs.next()) {
+        String nombreMedicamento = rs.getString("nombre");
+        txtMedicamento.setText(nombreMedicamento);
+    }
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+    }//GEN-LAST:event_tblMedicamentosMouseClicked
+
+    private void cargarTabla3() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblMedicamentos.getModel();
+    modeloTabla.setRowCount(0);
+
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+
+    int[] anchos = {30, 100, 200, 50, 50, 100, 100};
+
+    for (int i = 0; i < tblMedicamentos.getColumnCount(); i++) {
+        tblMedicamentos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+        ps = con.prepareStatement("SELECT id, nombre, descripcion, cantidad, medico_id, fecha_ingreso, fecha_vencimiento FROM medicamentos");
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                fila[indice] = rs.getObject(indice + 1);
+            }
+            modeloTabla.addRow(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+
+    private void cargarTabla2() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesHab.getModel();
+    modeloTabla.setRowCount(0);
+
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+
+    int[] anchos = {30, 100, 100, 100, 100, 100, 200};
+
+    for (int i = 0; i < tblResidentesHab.getColumnCount(); i++) {
+        tblResidentesHab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+        ps = con.prepareStatement("SELECT id, nombre, fecha_nacimiento, genero, fecha_ingreso, habitacion, descri_de_actividad FROM residentes");
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                fila[indice] = rs.getObject(indice + 1);
+            }
+            modeloTabla.addRow(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+
+    
+    private void cargarTabla() {
     DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesMed.getModel();
     modeloTabla.setRowCount(0);
 
