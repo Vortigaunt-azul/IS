@@ -492,55 +492,45 @@ dialog.setVisible(true);
     }//GEN-LAST:event_tblHabitacionesMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+
+
+
+
+
 int fila = tblResidentes.getSelectedRow();
-if (tblResidentes.getSelectedRow() == -1) {
-    //JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
-    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #FF0000;'>Error</h2>" +
-                "<p style='color: #808080;'>Seleccione un registro para modificar</p>" +
-                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-
-
-SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
-
-String nombre = txtNombre.getText();
-String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
-String genero = txtGenero.getText();
-String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
-String habitacion_texto = txtHabitacion.getText();
-String descripcion = txtDescripcion.getText();
-int id = getIdDelRegistroQueDeseasActualizar();
-
-if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || habitacion_texto.isEmpty() || descripcion.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #FF0000;'>Error</h2>" +
-                "<p style='color: #808080;'>Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar</p>" +
-                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-  
-    return;
-}
-
-int habitacion = Integer.parseInt(habitacion_texto);
-
-try {
-    Connection con = Conexion.getConexion();
-    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS num_residentes FROM residentes WHERE habitacion = ?");
-    ps.setInt(1, habitacion);
-    ResultSet rs = ps.executeQuery();
-    int numResidentes = 0;
-    int capacidadTotal = 0;
-    if (rs.next()) {
-        numResidentes = rs.getInt("num_residentes");
-        PreparedStatement ps2 = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
-        ps2.setInt(1, habitacion);
-        ResultSet rs2 = ps2.executeQuery();
-        if (rs2.next()) {
-            capacidadTotal = rs2.getInt("capacidad");
-        }
+    if (tblResidentes.getSelectedRow() == -1) {
+        //JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>Seleccione un registro para modificar</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
-    if (numResidentes < capacidadTotal) {
+
+    SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+
+    String nombre = txtNombre.getText();
+    String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
+    String genero = txtGenero.getText();
+    String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
+    String habitacion_texto = txtHabitacion.getText();
+    String descripcion = txtDescripcion.getText();
+    int id = getIdDelRegistroQueDeseasActualizar();
+
+    if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || habitacion_texto.isEmpty() || descripcion.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+
+        return;
+    }
+
+    int habitacion = Integer.parseInt(habitacion_texto);
+
+    try {
+        Connection con = Conexion.getConexion();
         PreparedStatement ps3 = con.prepareStatement("UPDATE residentes SET nombre=?,fecha_nacimiento=?,genero=?,fecha_ingreso=?,habitacion=?,descri_de_actividad=? WHERE id=?");
         ps3.setString(1, nombre);
         ps3.setString(2, fecha_nacimiento);
@@ -551,21 +541,114 @@ try {
         ps3.setInt(7, id);
         ps3.executeUpdate();
         JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #00FF00;'>Éxito</h2>" +
-                "<p style='color: #808080;'>Registro Modificado</p>" +
-                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                    "<p style='color: #808080;'>Registro Modificado</p>" +
+                    "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
         cargarTabla_dos();
-    } else {     
-        JOptionPane optionPane = new JOptionPane("La capacidad máxima de las habitaciones se ha superado.", JOptionPane.WARNING_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Advertencia");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);  
+    } catch(SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
     }
-} catch(SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//int fila = tblResidentes.getSelectedRow();
+//if (tblResidentes.getSelectedRow() == -1) {
+//    //JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
+//    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                "<h2 style='color: #FF0000;'>Error</h2>" +
+//                "<p style='color: #808080;'>Seleccione un registro para modificar</p>" +
+//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+//    return;
+//}
+//
+//
+//SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+//
+//String nombre = txtNombre.getText();
+//String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
+//String genero = txtGenero.getText();
+//String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
+//String habitacion_texto = txtHabitacion.getText();
+//String descripcion = txtDescripcion.getText();
+//int id = getIdDelRegistroQueDeseasActualizar();
+//
+//if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || habitacion_texto.isEmpty() || descripcion.isEmpty()) {
+//    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                "<h2 style='color: #FF0000;'>Error</h2>" +
+//                "<p style='color: #808080;'>Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar</p>" +
+//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+//  
+//    return;
+//}
+//
+//int habitacion = Integer.parseInt(habitacion_texto);
+//
+//try {
+//    Connection con = Conexion.getConexion();
+//    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS num_residentes FROM residentes WHERE habitacion = ?");
+//    ps.setInt(1, habitacion);
+//    ResultSet rs = ps.executeQuery();
+//    int numResidentes = 0;
+//    int capacidadTotal = 0;
+//    if (rs.next()) {
+//        numResidentes = rs.getInt("num_residentes");
+//        PreparedStatement ps2 = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
+//        ps2.setInt(1, habitacion);
+//        ResultSet rs2 = ps2.executeQuery();
+//        if (rs2.next()) {
+//            capacidadTotal = rs2.getInt("capacidad");
+//        }
+//    }
+//    if (numResidentes < capacidadTotal) {
+//        PreparedStatement ps3 = con.prepareStatement("UPDATE residentes SET nombre=?,fecha_nacimiento=?,genero=?,fecha_ingreso=?,habitacion=?,descri_de_actividad=? WHERE id=?");
+//        ps3.setString(1, nombre);
+//        ps3.setString(2, fecha_nacimiento);
+//        ps3.setString(3, genero);
+//        ps3.setString(4, fecha_ingreso);
+//        ps3.setInt(5, habitacion);
+//        ps3.setString(6, descripcion);
+//        ps3.setInt(7, id);
+//        ps3.executeUpdate();
+//        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+//                "<p style='color: #808080;'>Registro Modificado</p>" +
+//                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+//        limpiar();
+//        cargarTabla_dos();
+//    } else {     
+//        JOptionPane optionPane = new JOptionPane("La capacidad máxima de las habitaciones se ha superado.", JOptionPane.WARNING_MESSAGE);
+//        JDialog dialog = optionPane.createDialog("Advertencia");
+//        dialog.setAlwaysOnTop(true);
+//        dialog.setVisible(true);  
+//    }
+//} catch(SQLException e) {
+//    JOptionPane.showMessageDialog(null, e.toString());
+//}
+//
 
     }//GEN-LAST:event_btnModificarActionPerformed
 

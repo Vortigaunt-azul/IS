@@ -288,31 +288,7 @@ public class J_Actividades extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-//     int residente_id = Integer.parseInt(txtResidentes.getText());
-//int actividad_id = Integer.parseInt(txtActividades.getText());
-//
-//int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
-//
-//try {
-//    Connection con = Conexion.getConexion();
-//    PreparedStatement ps = con.prepareStatement("UPDATE residentes_actividades SET residente_id=?, actividad_id=? WHERE id=?");
-//
-//    ps.setInt(1, residente_id);
-//    ps.setInt(2, actividad_id);
-//    ps.setInt(3, id);
-//
-//    ps.executeUpdate();
-//
-//    JOptionPane.showMessageDialog(null, "Registro Modificado");
-//    limpiar();
-//    cargarTabla_residentes_actividades();
-//
-//} catch(SQLException e) {
-//    JOptionPane.showMessageDialog(null, e.toString());
-//}
-//
-//      
+   
 
 try {
     int residente_id = Integer.parseInt(txtResidentes.getText());
@@ -321,24 +297,34 @@ try {
     int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
 
     Connection con = Conexion.getConexion();
-    PreparedStatement ps = con.prepareStatement("UPDATE residentes_actividades SET residente_id=?, actividad_id=? WHERE id=?");
 
-    ps.setInt(1, residente_id);
-    ps.setInt(2, actividad_id);
-    ps.setInt(3, id);
+    // Verificar si el residente ya está asignado a la actividad
+    PreparedStatement psVerificar = con.prepareStatement("SELECT * FROM residentes_actividades WHERE residente_id = ? AND actividad_id = ?");
+    psVerificar.setInt(1, residente_id);
+    psVerificar.setInt(2, actividad_id);
+    ResultSet rs = psVerificar.executeQuery();
 
-    ps.executeUpdate();
+    if (rs.next()) {
+        // El residente ya está asignado a la actividad
+        JOptionPane.showMessageDialog(null, "El residente ya está asignado a esta actividad");
+    } else {
+        // Actualizar los datos en la tabla "residentes_actividades"
+        PreparedStatement psActualizar = con.prepareStatement("UPDATE residentes_actividades SET residente_id=?, actividad_id=? WHERE id=?");
+        psActualizar.setInt(1, residente_id);
+        psActualizar.setInt(2, actividad_id);
+        psActualizar.setInt(3, id);
 
-    JOptionPane.showMessageDialog(null, "Registro Modificado");
-    limpiar();
-    cargarTabla_residentes_actividades();
+        psActualizar.executeUpdate();
+
+        JOptionPane.showMessageDialog(null, "Registro Modificado");
+        limpiar();
+        cargarTabla_residentes_actividades();
+    }
 } catch (NumberFormatException e) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido en los campos de Residentes y Actividades.", "Error", JOptionPane.ERROR_MESSAGE);
 } catch (SQLException e) {
     JOptionPane.showMessageDialog(null, e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
 }
-
-
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -376,28 +362,42 @@ try {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-  // Obtener los IDs de residentes y actividades de los text fields
-int residenteId = Integer.parseInt(txtResidentes.getText());
-int actividadId = Integer.parseInt(txtActividades.getText());
+ 
+        
+        // Obtener los IDs de residentes y actividades de los text fields
+    int residenteId = Integer.parseInt(txtResidentes.getText());
+    int actividadId = Integer.parseInt(txtActividades.getText());
 
-try {
-    // Establecer la conexión con la base de datos
-    Connection con = Conexion.getConexion();
+    try {
+        // Establecer la conexión con la base de datos
+        Connection con = Conexion.getConexion();
 
-    // Insertar los datos en la tabla "residentes_actividades"
-    PreparedStatement ps = con.prepareStatement("INSERT INTO residentes_actividades(residente_id, actividad_id) VALUES (?, ?)");
-    ps.setInt(1, residenteId);
-    ps.setInt(2, actividadId);
-    ps.executeUpdate();
+        // Verificar si el residente ya está asignado a la actividad
+        PreparedStatement psVerificar = con.prepareStatement("SELECT * FROM residentes_actividades WHERE residente_id = ? AND actividad_id = ?");
+        psVerificar.setInt(1, residenteId);
+        psVerificar.setInt(2, actividadId);
+        ResultSet rs = psVerificar.executeQuery();
 
-    JOptionPane.showMessageDialog(null, "Registro guardado correctamente");
-} catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
-}
+        if (rs.next()) {
+            // El residente ya está asignado a la actividad
+            JOptionPane.showMessageDialog(null, "El residente ya está asignado a esta actividad");
+        } else {
+            // Insertar los datos en la tabla "residentes_actividades"
+            PreparedStatement psInsertar = con.prepareStatement("INSERT INTO residentes_actividades(residente_id, actividad_id) VALUES (?, ?)");
+            psInsertar.setInt(1, residenteId);
+            psInsertar.setInt(2, actividadId);
+            psInsertar.executeUpdate();
 
-       
-       cargarTabla_residentes_actividades();
+            JOptionPane.showMessageDialog(null, "Registro guardado correctamente");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
 
+    cargarTabla_residentes_actividades(); 
+        
+        
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tblResidentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResidentesMouseClicked

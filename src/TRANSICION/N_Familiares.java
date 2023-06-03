@@ -381,59 +381,91 @@ public class N_Familiares extends javax.swing.JPanel {
     }//GEN-LAST:event_tblFamiliaresMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
     String nombre = txtNombre.getText();
     String relacion = txtRelacion.getText();
     String telefono = txtTelefono.getText();
     int residente_id = Integer.parseInt(txtResidenteId.getText());
-        
-    try{
-        Connection con = Conexion.getConexion();
-        PreparedStatement ps = con.prepareStatement("INSERT INTO familiares(nombre,relacion,telefono,residente_id) VALUES (?,?,?,?)");
 
-        ps.setString(1,nombre);
-        ps.setString(2,relacion);
-        ps.setString(3,telefono);
-        ps.setInt(4,residente_id);
+    // Validar que el número de teléfono tenga exactamente 8 dígitos y solo contenga números
+    if (telefono.length() == 8 && telefono.matches("[0-9]+")) {
+        try {
+            Connection con = Conexion.getConexion();
 
-        ps.executeUpdate();
+            // Verificar si el número de teléfono ya está en uso
+            PreparedStatement psVerificar = con.prepareStatement("SELECT COUNT(*) FROM familiares WHERE telefono=?");
+            psVerificar.setString(1, telefono);
+            ResultSet rs = psVerificar.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
 
-        JOptionPane.showMessageDialog(null,"Registro Guardado");
-        limpiar();
-        cargarTabla();
-    } catch(SQLException e){
-        JOptionPane.showMessageDialog(null,e.toString());
+            if (count > 0) {
+                JOptionPane.showMessageDialog(null, "El número de teléfono ya está en uso");
+            } else {
+                PreparedStatement ps = con.prepareStatement("INSERT INTO familiares(nombre,relacion,telefono,residente_id) VALUES (?,?,?,?)");
+
+                ps.setString(1, nombre);
+                ps.setString(2, relacion);
+                ps.setString(3, telefono);
+                ps.setInt(4, residente_id);
+
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Registro Guardado");
+                limpiar();
+                cargarTabla();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "El número de teléfono debe tener 8 dígitos y contener solo números");
     }
-        
-     
     }//GEN-LAST:event_jButton1ActionPerformed
 
  
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      
-      String nombre = txtNombre.getText();
-      String relacion = txtRelacion.getText();
-      String telefono = txtTelefono.getText();
-     int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+    String nombre = txtNombre.getText();
+    String relacion = txtRelacion.getText();
+    String telefono = txtTelefono.getText();
+    int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
 
-   try {
-    Connection con = Conexion.getConexion();
-    PreparedStatement ps = con.prepareStatement("UPDATE familiares SET nombre=?, relacion=?, telefono=? WHERE id=?");
-    
-    ps.setString(1, nombre);
-    ps.setString(2, relacion);
-    ps.setString(3, telefono);
-    ps.setInt(4, id);
-    
-    ps.executeUpdate();
-    
-    JOptionPane.showMessageDialog(null,"Registro Modificado");
-    limpiar();
-    cargarTabla();
-} catch(SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
-}
+    // Validar que el número de teléfono tenga exactamente 8 dígitos y solo contenga números
+    if (telefono.length() == 8 && telefono.matches("[0-9]+")) {
+        try {
+            Connection con = Conexion.getConexion();
+
+            // Verificar si el número de teléfono ya está en uso
+            PreparedStatement psVerificar = con.prepareStatement("SELECT COUNT(*) FROM familiares WHERE telefono=? AND id<>?");
+            psVerificar.setString(1, telefono);
+            psVerificar.setInt(2, id);
+            ResultSet rs = psVerificar.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+
+            if (count > 0) {
+                JOptionPane.showMessageDialog(null, "El número de teléfono ya está en uso");
+            } else {
+                PreparedStatement ps = con.prepareStatement("UPDATE familiares SET nombre=?, relacion=?, telefono=? WHERE id=?");
+
+                ps.setString(1, nombre);
+                ps.setString(2, relacion);
+                ps.setString(3, telefono);
+                ps.setInt(4, id);
+
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+                limpiar();
+                cargarTabla();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "El número de teléfono debe tener 8 dígitos y contener solo números");
+    }
 
     
     }//GEN-LAST:event_jButton2ActionPerformed

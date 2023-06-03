@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -190,38 +191,31 @@ public class H_Habitacion extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
              
-       // int id = Integer.parseInt(txtId.getText());
-       
-       // int numero = Integer.parseInt(txtNumero.getText());
-        int capacidad = Integer.parseInt(txtCapacidad.getText());
-        String descripcion = txtDescripcion.getText();
+     int capacidad = Integer.parseInt(txtCapacidad.getText());
+    String descripcion = txtDescripcion.getText();
 
-       
-        
-        
-       
-       try{
-           
-            Connection con = Conexion.getConexion();
-           PreparedStatement ps = con.prepareStatement("INSERT INTO habitaciones (numero,capacidad,descripcion) VALUES (?,?,?)");
-           
-          
-           //ps.setInt(1, numero);
-            ps.setInt(2,capacidad);
-             ps.setString(3,descripcion);
-              
-           
-              ps.executeUpdate();
-              
-              JOptionPane.showMessageDialog(null,"Registro Guardado");
-              limpiar();
-              cargarTabla();
-              
-       }catch(SQLException e){
-           JOptionPane.showMessageDialog(null,e.toString());
-       }
-        
-        
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement("INSERT INTO habitaciones (capacidad, descripcion) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+
+        ps.setInt(1, capacidad);
+        ps.setString(2, descripcion);
+
+        ps.executeUpdate();
+
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id = generatedKeys.getInt(1); // Obtén el ID generado automáticamente
+            JOptionPane.showMessageDialog(null, "Registro Guardado. ID generado: " + id);
+        } else {
+            JOptionPane.showMessageDialog(null, "Registro Guardado");
+        }
+
+        limpiar();
+        cargarTabla();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
         
         
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -247,7 +241,7 @@ public class H_Habitacion extends javax.swing.JPanel {
        try{
            
             Connection con = Conexion.getConexion();
-           PreparedStatement ps = con.prepareStatement("UPDATE habitaciones SET numero=?,capacidad=?,descripcion=? WHERE id=? ");
+           PreparedStatement ps = con.prepareStatement("UPDATE habitaciones SET capacidad=?,descripcion=? WHERE id=? ");
            
           
          //  ps.setInt(1, numero);
@@ -281,7 +275,7 @@ public class H_Habitacion extends javax.swing.JPanel {
 
             Connection con = Conexion.getConexion();
 
-            ps = con.prepareStatement("SELECT numero,capacidad,descripcion FROM habitaciones WHERE id = ?");
+            ps = con.prepareStatement("SELECT capacidad,descripcion FROM habitaciones WHERE id = ?");
 
             ps.setInt(1, id);
             rs = ps.executeQuery();
