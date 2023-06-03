@@ -49,8 +49,8 @@ public class C_Almacen extends javax.swing.JPanel {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAlmacen = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -75,6 +75,7 @@ public class C_Almacen extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAlmacen2 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1100, 550));
         setMinimumSize(new java.awt.Dimension(1100, 550));
@@ -86,11 +87,12 @@ public class C_Almacen extends javax.swing.JPanel {
         bg.setMinimumSize(new java.awt.Dimension(1100, 550));
         bg.setPreferredSize(new java.awt.Dimension(1355, 701));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel2.setText("Almacen");
-        jLabel2.setPreferredSize(new java.awt.Dimension(193, 64));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/almacen image 3.png"))); // NOI18N
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("stock");
+        jLabel2.setPreferredSize(new java.awt.Dimension(193, 64));
 
         tblAlmacen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,13 +126,6 @@ public class C_Almacen extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblAlmacen);
-        if (tblAlmacen.getColumnModel().getColumnCount() > 0) {
-            tblAlmacen.getColumnModel().getColumn(0).setHeaderValue("ID");
-            tblAlmacen.getColumnModel().getColumn(3).setHeaderValue("fechas de ingreso");
-            tblAlmacen.getColumnModel().getColumn(4).setHeaderValue("fecha de caducidad");
-            tblAlmacen.getColumnModel().getColumn(5).setHeaderValue("descripcion");
-            tblAlmacen.getColumnModel().getColumn(6).setHeaderValue("Procedencia");
-        }
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -284,7 +279,7 @@ public class C_Almacen extends javax.swing.JPanel {
                         .addGap(39, 39, 39)
                         .addComponent(jLabel8))
                     .addComponent(txtProcedencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,50 +347,69 @@ public class C_Almacen extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblAlmacen2);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel9.setText("Almacen");
+        jLabel9.setPreferredSize(new java.awt.Dimension(193, 64));
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41))
+                                .addGap(29, 29, 29)
+                                .addComponent(jScrollPane1))
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(311, 311, 311)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, Short.MAX_VALUE)
-                        .addGap(79, 79, 79))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addGap(29, 29, 29))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bgLayout.createSequentialGroup()
+                    .addGap(53, 53, 53)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                    .addGap(1107, 1107, 1107)))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
-                .addGap(57, 57, 57)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bgLayout.createSequentialGroup()
+                    .addGap(169, 169, 169)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 54, Short.MAX_VALUE)
+                    .addGap(396, 396, 396)))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -404,67 +418,125 @@ public class C_Almacen extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1375, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
       
-        SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
         
-              // int id = Integer.parseInt(txtId.getText());
-       String producto = txtProducto.getText();
-       String cantidad = txtCantidad.getText();
-       String fecha_de_ingreso = dcn.format(txtFechaIngreso.getDate());       
-       String fecha_de_caducidad = dcn.format(txtFechaCaducidad.getDate());
-       String descripcion = txtDescripcion.getText(); 
-       String procedencia = txtProcedencia.getText(); 
         
-     // Verificar si la cantidad es un valor numérico
+                                               
+    SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+
+    String producto = txtProducto.getText();
+    String cantidad = txtCantidad.getText();
+    String fecha_de_ingreso = dcn.format(txtFechaIngreso.getDate());       
+    String fecha_de_caducidad = dcn.format(txtFechaCaducidad.getDate());
+    String descripcion = txtDescripcion.getText(); 
+    String procedencia = txtProcedencia.getText(); 
+
+    // Verificar si la cantidad es un valor numérico
     try {
         int cantidadInt = Integer.parseInt(cantidad);
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "La cantidad debe ser un valor entero", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
-  
-       try {
+
+    try {
         Connection con = Conexion.getConexion();
-        PreparedStatement psSelect = con.prepareStatement("SELECT cantidad FROM almacen WHERE producto = ?");
-        psSelect.setString(1, producto);
-        ResultSet rs = psSelect.executeQuery();
-
-        if (rs.next()) {
-            int cantidadExistente = rs.getInt("cantidad");
-            cantidadExistente += Integer.parseInt(cantidad);
-
-            PreparedStatement psUpdate = con.prepareStatement("UPDATE almacen SET cantidad = ? WHERE producto = ?");
-            psUpdate.setInt(1, cantidadExistente);
-            psUpdate.setString(2, producto);
-            psUpdate.executeUpdate();
-        } else {
-            PreparedStatement psInsert = con.prepareStatement("INSERT INTO almacen (producto, cantidad, fecha_ingreso, fecha_caducidad, descripcion, procedencia) VALUES (?, ?, ?, ?, ?, ?)");
-            psInsert.setString(1, producto);
-            psInsert.setString(2, cantidad);
-            psInsert.setString(3, fecha_de_ingreso);
-            psInsert.setString(4, fecha_de_caducidad);
-            psInsert.setString(5, descripcion);
-            psInsert.setString(6, procedencia);
-            psInsert.executeUpdate();
-        }
+        PreparedStatement psInsert = con.prepareStatement("INSERT INTO almacen (producto, cantidad, fecha_ingreso, fecha_caducidad, descripcion, procedencia) VALUES (?, ?, ?, ?, ?, ?)");
+        psInsert.setString(1, producto);
+        psInsert.setString(2, cantidad);
+        psInsert.setString(3, fecha_de_ingreso);
+        psInsert.setString(4, fecha_de_caducidad);
+        psInsert.setString(5, descripcion);
+        psInsert.setString(6, procedencia);
+        psInsert.executeUpdate();
 
         JOptionPane.showMessageDialog(null, "Registro Guardado");
         limpiar();
         cargarTabla();
+        cargarTabla2();
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e.toString());
     }   
+
+
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+//        
+//              // int id = Integer.parseInt(txtId.getText());
+//       String producto = txtProducto.getText();
+//       String cantidad = txtCantidad.getText();
+//       String fecha_de_ingreso = dcn.format(txtFechaIngreso.getDate());       
+//       String fecha_de_caducidad = dcn.format(txtFechaCaducidad.getDate());
+//       String descripcion = txtDescripcion.getText(); 
+//       String procedencia = txtProcedencia.getText(); 
+//        
+//     // Verificar si la cantidad es un valor numérico
+//    try {
+//        int cantidadInt = Integer.parseInt(cantidad);
+//    } catch (NumberFormatException e) {
+//        JOptionPane.showMessageDialog(null, "La cantidad debe ser un valor entero", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//  
+//       try {
+//        Connection con = Conexion.getConexion();
+//        PreparedStatement psSelect = con.prepareStatement("SELECT cantidad FROM almacen WHERE producto = ?");
+//        psSelect.setString(1, producto);
+//        ResultSet rs = psSelect.executeQuery();
+//
+//        if (rs.next()) {
+//            int cantidadExistente = rs.getInt("cantidad");
+//            cantidadExistente += Integer.parseInt(cantidad);
+//
+//            PreparedStatement psUpdate = con.prepareStatement("UPDATE almacen SET cantidad = ? WHERE producto = ?");
+//            psUpdate.setInt(1, cantidadExistente);
+//            psUpdate.setString(2, producto);
+//            psUpdate.executeUpdate();
+//        } else {
+//            PreparedStatement psInsert = con.prepareStatement("INSERT INTO almacen (producto, cantidad, fecha_ingreso, fecha_caducidad, descripcion, procedencia) VALUES (?, ?, ?, ?, ?, ?)");
+//            psInsert.setString(1, producto);
+//            psInsert.setString(2, cantidad);
+//            psInsert.setString(3, fecha_de_ingreso);
+//            psInsert.setString(4, fecha_de_caducidad);
+//            psInsert.setString(5, descripcion);
+//            psInsert.setString(6, procedencia);
+//            psInsert.executeUpdate();
+//        }
+//
+//        JOptionPane.showMessageDialog(null, "Registro Guardado");
+//        limpiar();
+//        cargarTabla();
+//        cargarTabla2();
+//    } catch (SQLException e) {
+//        JOptionPane.showMessageDialog(null, e.toString());
+//    }   
+//        
+//        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
@@ -496,6 +568,7 @@ try {
     JOptionPane.showMessageDialog(null,"Registro Modificado");
    // limpiar();
     cargarTabla();
+    cargarTabla2();
 
 } catch(SQLException e) {
     JOptionPane.showMessageDialog(null, e.toString());
@@ -519,6 +592,7 @@ try {
     JOptionPane.showMessageDialog(null,"Registro Eliminado");
     limpiar();
     cargarTabla();
+    cargarTabla2();
 
 } catch(SQLException e) {
     JOptionPane.showMessageDialog(null, e.toString());
@@ -643,6 +717,11 @@ try {
     }
 
  private void cargarTabla2() {
+     
+     
+     
+     
+    
     DefaultTableModel modeloTabla = (DefaultTableModel) tblAlmacen2.getModel();
     modeloTabla.setRowCount(0);
 
@@ -660,7 +739,7 @@ try {
     try {
         Connection con = Conexion.getConexion();
 
-        ps = con.prepareStatement("SELECT producto, cantidad FROM almacen");
+        ps = con.prepareStatement("SELECT producto, SUM(cantidad) FROM almacen GROUP BY producto");
 
         rs = ps.executeQuery();
         rsmd = rs.getMetaData();
@@ -677,56 +756,54 @@ try {
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e.toString());
     }
+
+
 }
                
  
         
  private void cargarTabla(){
-        
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblAlmacen.getModel();
-        modeloTabla.setRowCount(0);
-        
-       PreparedStatement ps;
-       ResultSet rs;
-       ResultSetMetaData rsmd;
-       int columnas;
-       
-       int[] anchos = {20,50,20,50,50,150,100};
-       
-       for(int i= 0; i < tblAlmacen.getColumnCount(); i++){
-           
-           tblAlmacen.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-       }
-       
-       
-       
-       try{
-           
-            Connection con = Conexion.getConexion();
-            
-             ps = con.prepareStatement("SELECT id,producto,cantidad,fecha_ingreso,fecha_caducidad,descripcion,procedencia FROM almacen");
-           
-          
-           rs = ps.executeQuery();
-           rsmd = rs.getMetaData();
-           columnas = rsmd.getColumnCount();
-           
-           while(rs.next()){
-            
-               Object[] fila = new Object[columnas];
-               for(int indice=0; indice<columnas; indice++){
-                   
-                   fila[indice] = rs.getObject(indice + 1);
-               }
-               modeloTabla.addRow(fila);
-           }
-           
-       } catch(SQLException e){
-            JOptionPane.showMessageDialog(null,e.toString());
-           
-       }
+
+
+     DefaultTableModel modeloTabla = (DefaultTableModel) tblAlmacen.getModel();
+modeloTabla.setRowCount(0);
+
+PreparedStatement ps;
+ResultSet rs;
+ResultSetMetaData rsmd;
+int columnas;
+
+int[] anchos = {20, 50, 20, 50, 50, 150, 100};
+
+for (int i = 0; i < tblAlmacen.getColumnCount(); i++) {
+    tblAlmacen.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+}
+
+try {
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT id, producto, cantidad, fecha_ingreso, fecha_caducidad, descripcion, procedencia FROM almacen");
+
+    rs = ps.executeQuery();
+    rsmd = rs.getMetaData();
+    columnas = rsmd.getColumnCount();
+
+    while (rs.next()) {
+        Object[] fila = new Object[columnas];
+        for (int indice = 0; indice < columnas; indice++) {
+            fila[indice] = rs.getObject(indice + 1);
+        }
+        modeloTabla.addRow(fila);
+    }
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
        
     }
+       
+    
     
     
     
@@ -746,6 +823,7 @@ try {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

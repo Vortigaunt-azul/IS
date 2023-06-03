@@ -37,10 +37,8 @@ public class H_Habitacion extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHabitacion = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNumero = new javax.swing.JTextField();
         txtCapacidad = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
@@ -57,14 +55,14 @@ public class H_Habitacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Numero", "Capacidad", "Descripcion"
+                "ID", "Capacidad", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -85,8 +83,6 @@ public class H_Habitacion extends javax.swing.JPanel {
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 680, 433));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setText("Numero ");
 
         jLabel2.setText("Capacidad");
 
@@ -150,24 +146,18 @@ public class H_Habitacion extends javax.swing.JPanel {
                         .addComponent(btnLimpiar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(103, 103, 103)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(43, 43, 43)
+                .addContainerGap(147, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,7 +192,7 @@ public class H_Habitacion extends javax.swing.JPanel {
              
        // int id = Integer.parseInt(txtId.getText());
        
-        int numero = Integer.parseInt(txtNumero.getText());
+       // int numero = Integer.parseInt(txtNumero.getText());
         int capacidad = Integer.parseInt(txtCapacidad.getText());
         String descripcion = txtDescripcion.getText();
 
@@ -216,7 +206,7 @@ public class H_Habitacion extends javax.swing.JPanel {
            PreparedStatement ps = con.prepareStatement("INSERT INTO habitaciones (numero,capacidad,descripcion) VALUES (?,?,?)");
            
           
-           ps.setInt(1, numero);
+           //ps.setInt(1, numero);
             ps.setInt(2,capacidad);
              ps.setString(3,descripcion);
               
@@ -246,7 +236,7 @@ public class H_Habitacion extends javax.swing.JPanel {
          // int id = Integer.parseInt(txtId.getText());
          // int id = Integer.parseInt(txtId.getText());
          
-        int numero = Integer.parseInt(txtNumero.getText());
+      //  int numero = Integer.parseInt(txtNumero.getText());
         int capacidad = Integer.parseInt(txtCapacidad.getText());
         String descripcion = txtDescripcion.getText();
          
@@ -260,10 +250,10 @@ public class H_Habitacion extends javax.swing.JPanel {
            PreparedStatement ps = con.prepareStatement("UPDATE habitaciones SET numero=?,capacidad=?,descripcion=? WHERE id=? ");
            
           
-           ps.setInt(1, numero);
-            ps.setInt(2,capacidad);
-             ps.setString(3,descripcion);
-               ps.setInt(4,id);
+         //  ps.setInt(1, numero);
+            ps.setInt(1,capacidad);
+             ps.setString(2,descripcion);
+               ps.setInt(3,id);
            
               ps.executeUpdate();
               
@@ -298,7 +288,7 @@ public class H_Habitacion extends javax.swing.JPanel {
 
             while(rs.next()){
 
-                txtNumero.setText(rs.getString("numero"));
+               // txtNumero.setText(rs.getString("numero"));
                 txtCapacidad.setText(rs.getString("capacidad"));
                 txtDescripcion.setText(rs.getString("descripcion"));
 
@@ -342,7 +332,7 @@ public class H_Habitacion extends javax.swing.JPanel {
         
         
      private void limpiar(){
-        txtNumero.setText("");
+       //txtNumero.setText("");
         txtCapacidad.setText("");
         txtDescripcion.setText("");
         
@@ -373,7 +363,7 @@ public class H_Habitacion extends javax.swing.JPanel {
            
             Connection con = Conexion.getConexion();
             
-             ps = con.prepareStatement("SELECT id,numero,capacidad,descripcion FROM habitaciones");
+             ps = con.prepareStatement("SELECT id,capacidad,descripcion FROM habitaciones");
            
           
            rs = ps.executeQuery();
@@ -411,7 +401,6 @@ public class H_Habitacion extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -419,6 +408,5 @@ public class H_Habitacion extends javax.swing.JPanel {
     private javax.swing.JTable tblHabitacion;
     private javax.swing.JTextField txtCapacidad;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }

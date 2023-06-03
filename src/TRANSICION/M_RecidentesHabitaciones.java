@@ -21,7 +21,7 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
      */
     public M_RecidentesHabitaciones() {
         initComponents();
-        cargarTabla();
+        cargarTabla_tblResidentesHab();
     }
 
     /**
@@ -45,11 +45,11 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombre", "Habitación", "Capacidad"
+                "Id", "Nombre", "fecha de nacimiento", "genero ", "fecha de ingreso", "Habitación", "adctividad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -96,48 +96,93 @@ public class M_RecidentesHabitaciones extends javax.swing.JPanel {
  
     }//GEN-LAST:event_tblResidentesHabMouseClicked
 
-    
-    
-private void cargarTabla() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesHab.getModel();
-    modeloTabla.setRowCount(0);
-
-    PreparedStatement ps;
-    ResultSet rs;
-    ResultSetMetaData rsmd;
-    int columnas;
-
-    int[] anchos = {150, 100, 100};
-
-    try {
-        Connection con = Conexion.getConexion();
-        ps = con.prepareStatement("SELECT r.nombre, h.numero, h.capacidad FROM residentes r JOIN habitaciones h ON r.habitacion = h.id");
-        rs = ps.executeQuery();
-        rsmd = rs.getMetaData();
-        columnas = rsmd.getColumnCount();
-
-        while (rs.next()) {
-            Object[] fila = new Object[columnas];
-            for (int indice = 0; indice < columnas; indice++) {
-                if (indice == 0) { // Columna del nombre
-                    fila[indice] = rs.getObject(indice + 1);
-                } else if (indice == 1) { // Columna del número de habitación
-                    fila[indice] = rs.getObject(indice + 1);
-                } else if (indice == 2) { // Columna de la capacidad
-                    fila[indice] = rs.getObject(indice + 1);
-                }
-            }
-            modeloTabla.addRow(fila);
-        }
-
-        for (int i = 0; i < tblResidentesHab.getColumnCount(); i++) {
-            tblResidentesHab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-        }
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.toString());
+         private void cargarTabla_tblResidentesHab (){
+        
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesHab.getModel();
+        modeloTabla.setRowCount(0);
+        
+       PreparedStatement ps;
+       ResultSet rs;
+       ResultSetMetaData rsmd;
+       int columnas;
+       
+       int[] anchos = {30,50,50,50,50,150,150};
+       
+       for(int i= 0; i < tblResidentesHab.getColumnCount(); i++){
+           
+           tblResidentesHab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+       }
+       
+       
+       
+       try{
+           
+            Connection con = Conexion.getConexion();
+            
+             ps = con.prepareStatement("SELECT id,nombre,fecha_nacimiento,genero,fecha_ingreso,habitacion,descri_de_actividad FROM residentes");
+           
+          
+           rs = ps.executeQuery();
+           rsmd = rs.getMetaData();
+           columnas = rsmd.getColumnCount();
+           
+           while(rs.next()){
+            
+               Object[] fila = new Object[columnas];
+               for(int indice=0; indice<columnas; indice++){
+                   
+                   fila[indice] = rs.getObject(indice + 1);
+               }
+               modeloTabla.addRow(fila);
+           }
+           
+       } catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e.toString());
+           
+       }
+       
     }
-}
+    
+//private void cargarTabla() {
+//    DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesHab.getModel();
+//    modeloTabla.setRowCount(0);
+//
+//    PreparedStatement ps;
+//    ResultSet rs;
+//    ResultSetMetaData rsmd;
+//    int columnas;
+//
+//    int[] anchos = {150, 100, 100};
+//
+//    try {
+//        Connection con = Conexion.getConexion();
+//        ps = con.prepareStatement("SELECT r.nombre, h.capacidad FROM residentes r JOIN habitaciones h ON r.habitacion = h.id");
+//        rs = ps.executeQuery();
+//        rsmd = rs.getMetaData();
+//        columnas = rsmd.getColumnCount();
+//
+//        while (rs.next()) {
+//            Object[] fila = new Object[columnas];
+//            for (int indice = 0; indice < columnas; indice++) {
+//                if (indice == 0) { // Columna del nombre
+//                    fila[indice] = rs.getObject(indice + 1);
+//                } else if (indice == 1) { // Columna del número de habitación
+//                    fila[indice] = rs.getObject(indice + 1);
+//                } else if (indice == 2) { // Columna de la capacidad
+//                    fila[indice] = rs.getObject(indice + 1);
+//                }
+//            }
+//            modeloTabla.addRow(fila);
+//        }
+//
+//        for (int i = 0; i < tblResidentesHab.getColumnCount(); i++) {
+//            tblResidentesHab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//        }
+//
+//    } catch (SQLException e) {
+//        JOptionPane.showMessageDialog(null, e.toString());
+//    }
+//}
 
     
 

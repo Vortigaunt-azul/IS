@@ -321,34 +321,91 @@ public class B_Personal extends javax.swing.JPanel {
     
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
       
-      // int id = Integer.parseInt(txtId.getText());
-       String nombre = txtNombre.getText();
-       String telefono = txtTelefono.getText();
-       String direccion = txtDireccion.getText(); 
-       String descripcion = txtDescripcion.getText(); 
+   
         
         
-       
-       try{
-           
-            Connection con = Conexion.getConexion();
-           PreparedStatement ps = con.prepareStatement("INSERT INTO personal(nombre,telefono,direccion,descri_de_actividad) VALUES (?,?,?,?)");
-           
-          
-           ps.setString(1,nombre);
-            ps.setString(2,telefono);
-             ps.setString(3,direccion);
-              ps.setString(4,descripcion);
-           
-              ps.executeUpdate();
-              
-              JOptionPane.showMessageDialog(null,"Registro Guardado");
-              limpiar();
-              cargarTabla();
-              
-       }catch(SQLException e){
-           JOptionPane.showMessageDialog(null,e.toString());
-       }
+
+      
+    String nombre = txtNombre.getText();
+    String telefono = txtTelefono.getText();
+    String direccion = txtDireccion.getText();
+    String descripcion = txtDescripcion.getText();
+
+    try {
+        Connection con = Conexion.getConexion();
+
+        // Verificar si el número de teléfono tiene 8 dígitos
+        if (telefono.length() != 8) {
+            JOptionPane.showMessageDialog(null, "El número de teléfono debe tener exactamente 8 dígitos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Consulta para verificar si ya existe un registro con el mismo número de teléfono
+        PreparedStatement consulta = con.prepareStatement("SELECT COUNT(*) FROM personal WHERE telefono = ?");
+        consulta.setString(1, telefono);
+        ResultSet resultado = consulta.executeQuery();
+        resultado.next();
+        int registrosExistentes = resultado.getInt(1);
+
+        if (registrosExistentes > 0) {
+            // El registro ya existe, mostrar un mensaje de error
+            JOptionPane.showMessageDialog(null, "Ya existe un registro con el mismo número de teléfono.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // El registro no existe, insertarlo en la base de datos
+            PreparedStatement ps = con.prepareStatement("INSERT INTO personal(nombre, telefono, direccion, descri_de_actividad) VALUES (?,?,?,?)");
+
+            ps.setString(1, nombre);
+            ps.setString(2, telefono);
+            ps.setString(3, direccion);
+            ps.setString(4, descripcion);
+
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Registro Guardado");
+            limpiar();
+            cargarTabla();
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El campo de teléfono debe contener solo números.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+
+
+
+        
+
+        
+                                              
+    
+//    String nombre = txtNombre.getText();
+//    String telefono = txtTelefono.getText();
+//    String direccion = txtDireccion.getText(); 
+//    String descripcion = txtDescripcion.getText(); 
+//        
+//    try {
+//     
+//        Connection con = Conexion.getConexion();
+//        PreparedStatement ps = con.prepareStatement("INSERT INTO personal(nombre, telefono, direccion, descri_de_actividad) VALUES (?,?,?,?)");
+//          
+//        ps.setString(1, nombre);
+//        ps.setString(2, telefono);
+//        ps.setString(3, direccion);
+//        ps.setString(4, descripcion);
+//          
+//        ps.executeUpdate();
+//        
+//        JOptionPane.showMessageDialog(null, "Registro Guardado");
+//        limpiar();
+//        cargarTabla();
+//    } catch (NumberFormatException e) {
+//        JOptionPane.showMessageDialog(null, "El campo de teléfono debe contener solo números.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+//    } catch (SQLException e) {
+//        JOptionPane.showMessageDialog(null, e.toString());
+//    }
+//
+
+      
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 

@@ -271,7 +271,7 @@ public class I_Recidentes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Numero", "Capacidad"
+                "Codigo", "Capacidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -346,7 +346,7 @@ public class I_Recidentes extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
       
         
-
+        
  SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
 
     String nombre = txtNombre.getText();
@@ -460,38 +460,34 @@ dialog.setVisible(true);
     
     private void tblHabitacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHabitacionesMouseClicked
       
-           
-        try{
+   try {
+        int fila = tblHabitaciones.getSelectedRow();
+        int id = Integer.parseInt(tblHabitaciones.getValueAt(fila, 0).toString()); // Obtener el id de la habitación
+        PreparedStatement ps;
+        ResultSet rs;
+
+        Connection con = Conexion.getConexion();
+
+        ps = con.prepareStatement("SELECT * FROM habitaciones WHERE id = ?"); // Consultar por el id de la habitación
+
+        ps.setInt(1, id);
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int capacidad = rs.getInt("capacidad");
             
-            int fila = tblHabitaciones.getSelectedRow();
-            int id = Integer.parseInt(tblHabitaciones.getValueAt(fila,0).toString());
-            PreparedStatement ps;
-            ResultSet rs;
+            // Mostrar el ID de la habitación en el campo de texto
+            txtHabitacion.setText(String.valueOf(id));
             
-            
-             Connection con = Conexion.getConexion();
-            
-             ps = con.prepareStatement("SELECT id FROM habitaciones WHERE id = ?");
-           
-          ps.setInt(1, id);
-           rs = ps.executeQuery();
-           
-           while(rs.next()){
-              //txtId.setText(String.valueOf(id));
-              
-              txtHabitacion.setText(rs.getString("id"));
-              
-//              txtgenero.setText(rs.getString("telefono"));
-//              txtDireccion.setText(rs.getString("direccion"));
-//              txtDescripcion.setText(rs.getString("descri_de_actividad"));
-              
-           }
-            
-        } catch(SQLException e){
-           JOptionPane.showMessageDialog(null,e.toString());
-       }
-        
-        
+            // Realizar las acciones necesarias con los datos obtenidos
+            // Por ejemplo, mostrar la capacidad en otro campo de texto
+            // txtCapacidad.setText(String.valueOf(capacidad));
+            // ...
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }  
+     
         
     }//GEN-LAST:event_tblHabitacionesMouseClicked
 
@@ -734,7 +730,7 @@ try {
     
     private void cargarTabla() {
         
-        
+ 
     // Obtener la capacidad total de las habitaciones
     int capacidadTotal = 0;
     try {
@@ -757,7 +753,7 @@ try {
     ResultSetMetaData rsmd;
     int columnas;
 
-    int[] anchos = {50, 50};
+    int[] anchos = {50, 50}; // Anchos para las columnas "id" y "capacidad"
 
     for (int i = 0; i < tblHabitaciones.getColumnCount(); i++) {
         tblHabitaciones.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
@@ -766,17 +762,15 @@ try {
     try {
         Connection con = Conexion.getConexion();
 
-        ps = con.prepareStatement("SELECT id, capacidad FROM habitaciones");
+        ps = con.prepareStatement("SELECT id, capacidad FROM habitaciones"); // Seleccionar solo "id" y "capacidad"
 
         rs = ps.executeQuery();
         rsmd = rs.getMetaData();
         columnas = rsmd.getColumnCount();
 
         while (rs.next()) {
-
             Object[] fila = new Object[columnas];
             for (int indice = 0; indice < columnas; indice++) {
-
                 fila[indice] = rs.getObject(indice + 1);
             }
             modeloTabla.addRow(fila);
@@ -802,7 +796,8 @@ try {
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e.toString());
     }
-    
+
+
     
 }
 
