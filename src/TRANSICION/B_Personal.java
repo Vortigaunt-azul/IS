@@ -58,9 +58,9 @@ public class B_Personal extends javax.swing.JPanel {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setMaximumSize(new java.awt.Dimension(1100, 550));
@@ -167,14 +167,6 @@ public class B_Personal extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/pdf.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,10 +201,6 @@ public class B_Personal extends javax.swing.JPanel {
                             .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(16, 16, 16))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,15 +221,13 @@ public class B_Personal extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(91, 91, 91))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
@@ -259,17 +245,30 @@ public class B_Personal extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/personal asilo.png"))); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/pdf.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(112, 112, 112))
@@ -281,9 +280,14 @@ public class B_Personal extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 578, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 578, Short.MAX_VALUE)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(46, 46, 46)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -458,41 +462,68 @@ public class B_Personal extends javax.swing.JPanel {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         
-        
-       // int id = Integer.parseInt(txtId.getText());
-        
-         // int id = Integer.parseInt(txtId.getText());
        String nombre = txtNombre.getText();
-       String telefono = txtTelefono.getText();
-       String direccion = txtDireccion.getText(); 
-       String descripcion = txtDescripcion.getText(); 
-       int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
-        
-       
-       try{
-           
-            Connection con = Conexion.getConexion();
-           PreparedStatement ps = con.prepareStatement("UPDATE personal SET nombre=?,telefono=?,direccion=?,descri_de_actividad=? WHERE id=? ");
-           
-          
-           ps.setString(1,nombre);
-            ps.setString(2,telefono);
-             ps.setString(3,direccion);
-              ps.setString(4,descripcion);
-               ps.setInt(5,id);
-           
-              ps.executeUpdate();
-              
-              JOptionPane.showMessageDialog(null,"Registro Modeficado");
-              limpiar();
-              cargarTabla();
-              
-       }catch(SQLException e){
-           JOptionPane.showMessageDialog(null,e.toString());
-       }
-        
-        
-          
+    String telefono = txtTelefono.getText();
+    String direccion = txtDireccion.getText(); 
+    String descripcion = txtDescripcion.getText(); 
+    int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
+    
+    // Verificar que los campos estén llenos
+    if (nombre.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || descripcion.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    // Validar el formato y la longitud del teléfono
+    if (!telefono.matches("\\d{8}")) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>El número de teléfono debe contener exactamente 8 dígitos.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+
+        // Verificar si el número de teléfono ya existe, excepto para el registro actual que se está modificando
+        if (existeTelefono(telefono, con, id)) {
+            JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>El número de teléfono ya existe en la base de datos.</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        PreparedStatement ps = con.prepareStatement("UPDATE personal SET nombre=?, telefono=?, direccion=?, descri_de_actividad=? WHERE id=?");
+
+        // Asignar los valores a los parámetros
+        ps.setString(1, nombre);
+        ps.setString(2, telefono);
+        ps.setString(3, direccion);
+        ps.setString(4, descripcion);
+        ps.setInt(5, id);
+
+        ps.executeUpdate();
+
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro modificado correctamente.</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        // Limpiar los campos o realizar otras acciones necesarias
+        limpiar();
+        cargarTabla();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Ha ocurrido un error al modificar el registro:<br>" + e.toString() + "</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -598,7 +629,15 @@ public class B_Personal extends javax.swing.JPanel {
 }
 
     
-    
+    private boolean existeTelefono(String telefono, Connection con, int id) throws SQLException {
+    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM personal WHERE telefono = ? AND id <> ?");
+    ps.setString(1, telefono);
+    ps.setInt(2, id);
+    ResultSet rs = ps.executeQuery();
+    rs.next();
+    int count = rs.getInt(1);
+    return count > 0;
+}
 
 
     
@@ -626,7 +665,7 @@ public class B_Personal extends javax.swing.JPanel {
        ResultSetMetaData rsmd;
        int columnas;
        
-       int[] anchos = {30,50,50,150,150};
+       int[] anchos = {30,50,80,150,150};
        
        for(int i= 0; i < tblPersonal.getColumnCount(); i++){
            

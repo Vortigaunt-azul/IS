@@ -5,12 +5,22 @@
 package TRANSICION;
 
 import DATABASE.Conexion;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +32,8 @@ public class L_Medicamentos extends javax.swing.JPanel {
      */
     public L_Medicamentos() {
         initComponents();
+        
+       
         
         cargarTabla_medicamentos();
         cargarTabla_tblMedicamentos1();
@@ -43,16 +55,13 @@ public class L_Medicamentos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
-        txtMedicoId = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         txtFecha_ingreso = new com.toedter.calendar.JDateChooser();
         txtFecha_vencimiento = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
@@ -61,25 +70,26 @@ public class L_Medicamentos extends javax.swing.JPanel {
         tblMedicamentos1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Descripcion", "Cantidad", "Medico_id", "Ingreso", "Vencimiento"
+                "ID", "Nombre", "Descripcion", "Cantidad", "Ingreso", "Vencimiento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,6 +98,11 @@ public class L_Medicamentos extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMedicamentosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblMedicamentos);
@@ -104,16 +119,11 @@ public class L_Medicamentos extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Cantidad");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Medico_id");
-
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        txtMedicoId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnGuardar.setBackground(new java.awt.Color(0, 102, 255));
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -155,14 +165,6 @@ public class L_Medicamentos extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("PDF");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Vencimiento");
 
         jLabel8.setText("Fecha");
@@ -187,7 +189,6 @@ public class L_Medicamentos extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)))))
@@ -196,50 +197,39 @@ public class L_Medicamentos extends javax.swing.JPanel {
                     .addComponent(txtNombre)
                     .addComponent(txtDescripcion)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMedicoId, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
-                    .addComponent(txtFecha_ingreso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha_ingreso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(txtFecha_vencimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMedicoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha_vencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(txtFecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(txtFecha_vencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,44 +276,57 @@ public class L_Medicamentos extends javax.swing.JPanel {
         jLabel7.setText("Ingresos");
         jLabel7.setPreferredSize(new java.awt.Dimension(193, 64));
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(302, 302, 302))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(78, 78, 78))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(78, 78, 78))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)))
+                .addGap(59, 59, 59))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -340,72 +343,266 @@ public class L_Medicamentos extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
     
-        SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+     
+      
+    SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
 
     String nombre = txtNombre.getText();
     String descripcion = txtDescripcion.getText();
-    int cantidad = Integer.parseInt(txtCantidad.getText());
-    int medicoId = Integer.parseInt(txtMedicoId.getText());
+    String cantidadText = txtCantidad.getText();
     String fechaIngreso = dcn.format(txtFecha_ingreso.getDate());
     String fechaVencimiento = dcn.format(txtFecha_vencimiento.getDate());
 
     // Verificar que los campos estén llenos
-    if (nombre.isEmpty() || descripcion.isEmpty() || cantidad == 0 || medicoId == 0 || fechaIngreso.isEmpty() || fechaVencimiento.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-            "<h2 style='color: #FF0000;'>Error</h2>" +
-            "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
-            "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+    if (nombre.isEmpty() || descripcion.isEmpty() || cantidadText.isEmpty() || fechaIngreso.isEmpty() || fechaVencimiento.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
-try {
-    Connection con = Conexion.getConexion();
-    PreparedStatement ps = con.prepareStatement("INSERT INTO medicamentos(nombre, descripcion, cantidad, medico_id, fecha_ingreso, fecha_vencimiento) VALUES (?, ?, ?, ?, ?, ?)");
 
-    // Asignar los valores a los parámetros
-    ps.setString(1, nombre);
-    ps.setString(2, descripcion);
-    ps.setInt(3, cantidad);
-    ps.setInt(4, medicoId);
-    ps.setString(5, fechaIngreso);
-    ps.setString(6, fechaVencimiento);
+    // Verificar que la cantidad sea un número válido
+    int cantidad;
+    try {
+        cantidad = Integer.parseInt(cantidadText);
+        if (cantidad <= 0) {
+            JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>La cantidad debe ser un número positivo.</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>La cantidad debe ser un número válido.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-    ps.executeUpdate();
+    // Resto del código para guardar los datos en la base de datos...
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement("INSERT INTO medicamentos(nombre, descripcion, cantidad, fecha_ingreso, fecha_vencimiento) VALUES (?, ?, ?, ?, ?)");
 
-    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-            "<h2 style='color: #00FF00;'>Éxito</h2>" +
-            "<p style='color: #808080;'>Registro guardado correctamente.</p>" +
-            "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        // Asignar los valores a los parámetros
+        ps.setString(1, nombre);
+        ps.setString(2, descripcion);
+        ps.setInt(3, cantidad);
+        ps.setString(4, fechaIngreso);
+        ps.setString(5, fechaVencimiento);
 
-    // Limpiar los campos o realizar otras acciones necesarias
-    //limpiar();
-    cargarTabla_medicamentos();
-    cargarTabla_tblMedicamentos1();
-} catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
-}
+        ps.executeUpdate();
+
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                "<p style='color: #808080;'>Registro guardado correctamente.</p>" +
+                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        // Limpiar los campos o realizar otras acciones necesarias
+        limpiar();
+        cargarTabla_medicamentos();
+        cargarTabla_tblMedicamentos1();
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
 
 
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
+       int fila = tblMedicamentos.getSelectedRow();
+    if (tblMedicamentos.getSelectedRow() == -1) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>Seleccione un registro para modificar</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+  int id = getIdDelMedicoSeleccionado();
+    String nombre = txtNombre.getText();
+    String descripcion = txtDescripcion.getText();
+    int cantidad = Integer.parseInt(txtCantidad.getText());
+    
+    
+    SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+    
+    
+    
+    String fecha_ingreso = dcn.format(txtFecha_ingreso.getDate());
+    String fecha_vencimiento = dcn.format(txtFecha_vencimiento.getDate());
+    
+  
+
+    if (nombre.isEmpty() || descripcion.isEmpty() || fecha_ingreso.isEmpty() || fecha_vencimiento.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement("UPDATE medicamentos SET nombre=?, descripcion=?, cantidad=?, fecha_ingreso=?, fecha_vencimiento=? WHERE id=?");
+        ps.setString(1, nombre);
+        ps.setString(2, descripcion);
+        ps.setInt(3, cantidad);  
+        ps.setString(4, fecha_ingreso);
+        ps.setString(5, fecha_vencimiento);
+        ps.setInt(6, id);
+        ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                    "<p style='color: #808080;'>Registro Modificado</p>" +
+                    "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+        
+        cargarTabla_medicamentos();
+        cargarTabla_tblMedicamentos1();
+        
+        
+    } catch(SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+        
+        
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    
+    
+    
+
+    
+    
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-     
-
+int row = tblMedicamentos.getSelectedRow(); // Obtener el índice de la fila seleccionada en la tabla
+    if (row == -1) {
+        JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila.");
+        return;
+    }
+    
+    int id = (int) tblMedicamentos.getValueAt(row, 0); // Obtener el valor del ID en la columna 0
+    
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement ps = con.prepareStatement("DELETE FROM medicamentos WHERE id = ?");
+        ps.setInt(1, id);
+        ps.executeUpdate();
+        
+        JOptionPane.showMessageDialog(null, "Registro eliminado");
+        limpiar();
+        cargarTabla_medicamentos();
+        cargarTabla_tblMedicamentos1();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       // limpiar();
+       limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      //  generarPDF();
+    generarPDF();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tblMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicamentosMouseClicked
+      
+        
+        try {
+    int fila = tblMedicamentos.getSelectedRow();
+    int id = Integer.parseInt(tblMedicamentos.getValueAt(fila, 0).toString());
+    
+    PreparedStatement ps;
+    ResultSet rs;
+    Connection con = Conexion.getConexion();
+
+    ps = con.prepareStatement("SELECT nombre, descripcion, cantidad, fecha_ingreso, fecha_vencimiento FROM medicamentos WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+
+    if (rs.next()) {
+        txtNombre.setText(rs.getString("nombre"));
+        txtDescripcion.setText(rs.getString("descripcion"));
+        txtCantidad.setText(String.valueOf(rs.getInt("cantidad")));
+        txtFecha_ingreso.setDate(rs.getDate("fecha_ingreso"));
+        txtFecha_vencimiento.setDate(rs.getDate("fecha_vencimiento"));
+    }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
+        
+        
+        
+    }//GEN-LAST:event_tblMedicamentosMouseClicked
+
+
+    private void limpiar() {
+    txtNombre.setText("");
+    txtDescripcion.setText("");
+    txtCantidad.setText("");
+    txtFecha_ingreso.setDate(null);
+    txtFecha_vencimiento.setDate(null);
+}
+
+  
+    
+private void generarPDF() {
+ try {
+        // Creamos un documento y lo abrimos
+        Document document = new Document();
+
+        // Pedimos al usuario la ubicación para guardar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+
+        // Si el usuario selecciona una ubicación, guardamos el archivo allí
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            PdfWriter.getInstance(document, new FileOutputStream(archivo + ".pdf"));
+            document.open();
+
+            // Creamos la tabla y le agregamos las columnas
+            PdfPTable table = new PdfPTable(2);
+            table.addCell("Medicamento");
+            table.addCell("Cantidad");
+
+            // Cargamos los datos desde la tabla "tblMedicamentos1"
+            DefaultTableModel modeloTabla = (DefaultTableModel) tblMedicamentos1.getModel();
+            int filas = modeloTabla.getRowCount();
+            for (int i = 0; i < filas; i++) {
+                String medicamento = modeloTabla.getValueAt(i, 0).toString();
+                String cantidad = modeloTabla.getValueAt(i, 1).toString();
+                table.addCell(medicamento);
+                table.addCell(cantidad);
+            }
+
+            // Agregamos la tabla al documento y cerramos el documento
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "PDF generado exitosamente");
+        }
+    } catch (DocumentException | FileNotFoundException ex) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+
+    
+   
+private int getIdDelMedicoSeleccionado() {
+    int filaSeleccionada = tblMedicamentos.getSelectedRow();
+    int id = Integer.parseInt(tblMedicamentos.getValueAt(filaSeleccionada, 0).toString());
+    return id;
+}
 
     
 private void cargarTabla_medicamentos() {
@@ -443,45 +640,69 @@ private void cargarTabla_medicamentos() {
     }
 }
 
+
+
+
+
+
+
 private void cargarTabla_tblMedicamentos1() {
- 
-   
- DefaultTableModel modeloTabla = (DefaultTableModel) tblMedicamentos1.getModel();
+
+    
+    
+    
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblMedicamentos1.getModel();
     modeloTabla.setRowCount(0);
 
     PreparedStatement ps;
     ResultSet rs;
-    ResultSetMetaData rsmd;
-    int columnas;
-
-    int[] anchos = {100, 100}; // Ajusta los anchos de columna según tus necesidades
-
-    for (int i = 0; i < anchos.length; i++) {
-        tblMedicamentos1.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-    }
 
     try {
         Connection con = Conexion.getConexion();
-
         ps = con.prepareStatement("SELECT nombre, SUM(cantidad) AS total_cantidad FROM medicamentos GROUP BY nombre");
-
         rs = ps.executeQuery();
-        rsmd = rs.getMetaData();
-        columnas = rsmd.getColumnCount();
 
         while (rs.next()) {
-            Object[] fila = new Object[columnas];
-            for (int indice = 0; indice < columnas; indice++) {
-                fila[indice] = rs.getObject(indice + 1);
+            String nombre = rs.getString("nombre");
+            int totalCantidad = rs.getInt("total_cantidad");
+
+            // Verificar si el medicamento ya existe en la tabla medicamentos_stock
+            ps = con.prepareStatement("SELECT COUNT(*) AS count FROM medicamentos_stock WHERE nombre = ?");
+            ps.setString(1, nombre);
+            ResultSet countRs = ps.executeQuery();
+            countRs.next();
+            int count = countRs.getInt("count");
+
+            if (count > 0) {
+                // Actualizar la cantidad del medicamento existente
+                ps = con.prepareStatement("UPDATE medicamentos_stock SET cantidad = ? WHERE nombre = ?");
+                ps.setInt(1, totalCantidad);
+                ps.setString(2, nombre);
+                ps.executeUpdate();
+            } else {
+                // Insertar un nuevo registro para el medicamento
+                ps = con.prepareStatement("INSERT INTO medicamentos_stock (nombre, cantidad) VALUES (?, ?)");
+                ps.setString(1, nombre);
+                ps.setInt(2, totalCantidad);
+                ps.executeUpdate();
             }
-            modeloTabla.addRow(fila);
         }
 
+        // Cargar los datos actualizados en la tabla tblMedicamentos1
+        ps = con.prepareStatement("SELECT nombre, cantidad FROM medicamentos_stock");
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nombre = rs.getString("nombre");
+            int cantidad = rs.getInt("cantidad");
+
+            Object[] fila = {nombre, cantidad};
+            modeloTabla.addRow(fila);
+        }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e.toString());
-    }
-
-
+    } 
+    
 }
     
     
@@ -497,7 +718,6 @@ private void cargarTabla_tblMedicamentos1() {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -510,7 +730,6 @@ private void cargarTabla_tblMedicamentos1() {
     private javax.swing.JTextField txtDescripcion;
     private com.toedter.calendar.JDateChooser txtFecha_ingreso;
     private com.toedter.calendar.JDateChooser txtFecha_vencimiento;
-    private javax.swing.JTextField txtMedicoId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

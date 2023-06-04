@@ -59,9 +59,9 @@ public class K_Medico extends javax.swing.JPanel {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMedico = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,14 +125,6 @@ public class K_Medico extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("PDF");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -161,10 +153,6 @@ public class K_Medico extends javax.swing.JPanel {
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)))
                 .addGap(16, 16, 16))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,9 +169,7 @@ public class K_Medico extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +178,7 @@ public class K_Medico extends javax.swing.JPanel {
                 .addGap(18, 18, 18))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 490, 590));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 490, 590));
 
         tblMedico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,7 +203,16 @@ public class K_Medico extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblMedico);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 590, 590));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 590, 550));
+
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 96, 45));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -239,7 +234,7 @@ public class K_Medico extends javax.swing.JPanel {
     
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-       String nombre = txtNombre.getText();
+    String nombre = txtNombre.getText();
     String especialidad = txtEspecialidad.getText();
     String telefono = txtTelefono.getText();
 
@@ -251,17 +246,28 @@ public class K_Medico extends javax.swing.JPanel {
                 "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
-    // Verificar si el médico ya existe
-    if (existeMedico(nombre, especialidad, telefono)) {
+
+    // Validar el formato y la longitud del teléfono
+    if (!telefono.matches("\\d{8}")) {
         JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
                 "<h2 style='color: #FF0000;'>Error</h2>" +
-                "<p style='color: #808080;'>El médico ya existe en la base de datos.</p>" +
+                "<p style='color: #808080;'>El número de teléfono debe contener exactamente 8 dígitos.</p>" +
                 "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
     try {
         Connection con = Conexion.getConexion();
+
+        // Verificar si el número de teléfono ya existe
+        if (existeTelefono(telefono, con)) {
+            JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>El número de teléfono ya existe en la base de datos.</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         PreparedStatement ps = con.prepareStatement("INSERT INTO medicos(nombre, especialidad, telefono) VALUES (?, ?, ?)");
 
         // Asignar los valores a los parámetros
@@ -288,6 +294,17 @@ public class K_Medico extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    
+    private boolean existeTelefono(String telefono, Connection con) throws SQLException {
+    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM medicos WHERE telefono = ?");
+    ps.setString(1, telefono);
+    ResultSet rs = ps.executeQuery();
+    rs.next();
+    int count = rs.getInt(1);
+    return count > 0;
+}
+    
+    
     // Verificar si el médico ya existe en la base de datos
 private boolean existeMedico(String nombre, String especialidad, String telefono) {
     boolean existe = false;
@@ -316,34 +333,61 @@ private boolean existeMedico(String nombre, String especialidad, String telefono
 }
     
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
-        int fila = tblMedico.getSelectedRow();
+ int fila = tblMedico.getSelectedRow();
     if (fila == -1) {
-        //JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
         JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
                 "<h2 style='color: #FF0000;'>Error</h2>" +
                 "<p style='color: #808080;'>Seleccione una fila de la tabla.</p>" +
                 "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
-        String nombre = txtNombre.getText();
-String especialidad = txtEspecialidad.getText();
-String telefono = txtTelefono.getText();
-int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
 
-try{
+    String nombre = txtNombre.getText();
+    String especialidad = txtEspecialidad.getText();
+    String telefono = txtTelefono.getText();
+    int id = getIdDelRegistroQueDeseasActualizar(); // Aquí debes obtener el valor correcto de id
 
-    Connection con = Conexion.getConexion();
-    PreparedStatement ps = con.prepareStatement("UPDATE medicos SET nombre=?, especialidad=?, telefono=? WHERE id=?");
+    // Verificar que los campos estén llenos
+    if (nombre.isEmpty() || especialidad.isEmpty() || telefono.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-    ps.setString(1, nombre);
-    ps.setString(2, especialidad);
-    ps.setString(3, telefono);
-    ps.setInt(4, id);
+    // Validar el formato y la longitud del teléfono
+    if (!telefono.matches("\\d{8}")) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>El número de teléfono debe contener exactamente 8 dígitos.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-    ps.executeUpdate();
+    try {
+        Connection con = Conexion.getConexion();
 
-     JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+        // Verificar si el número de teléfono ya existe
+        if (existeTelefono(telefono, con, id)) {
+            JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                    "<h2 style='color: #FF0000;'>Error</h2>" +
+                    "<p style='color: #808080;'>El número de teléfono ya existe en la base de datos.</p>" +
+                    "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        PreparedStatement ps = con.prepareStatement("UPDATE medicos SET nombre=?, especialidad=?, telefono=? WHERE id=?");
+
+        // Asignar los valores a los parámetros
+        ps.setString(1, nombre);
+        ps.setString(2, especialidad);
+        ps.setString(3, telefono);
+        ps.setInt(4, id);
+
+        ps.executeUpdate();
+
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
                 "<h2 style='color: #00FF00;'>Éxito</h2>" +
                 "<p style='color: #808080;'>Registro modificado correctamente.</p>" +
                 "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -352,13 +396,20 @@ try{
         limpiar();
         cargarTabla();
 
-} catch(SQLException e){
-    JOptionPane.showMessageDialog(null, e.toString());
-}
-
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>Ha ocurrido un error al modificar el registro:<br>" + e.toString() + "</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    
+    
+    
+    
+    
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
      int fila = tblMedico.getSelectedRow();
@@ -478,7 +529,7 @@ private int getIdDelRegistroQueDeseasActualizar() {
     }
     
     private void generarPDF() {
-    try {
+try {
         // Creamos un documento y lo abrimos
         Document document = new Document();
         
@@ -493,7 +544,7 @@ private int getIdDelRegistroQueDeseasActualizar() {
             document.open();
             
             // Creamos la tabla y le agregamos las columnas
-            PdfPTable table = new PdfPTable(3);
+            PdfPTable table = new PdfPTable(4);
             table.addCell("ID");
             table.addCell("Nombre");
             table.addCell("Especialidad");
@@ -507,16 +558,17 @@ private int getIdDelRegistroQueDeseasActualizar() {
 
             try {
                 Connection con = Conexion.getConexion();
-                ps = con.prepareStatement("SELECT id,nombre,especialidad,telefono FROM medicos");
+                ps = con.prepareStatement("SELECT id, nombre, especialidad, telefono FROM medicos");
                 rs = ps.executeQuery();
                 rsmd = rs.getMetaData();
                 columnas = rsmd.getColumnCount();
 
                 while(rs.next()){
                     // Agregamos las filas a la tabla
-                    for(int indice=0; indice<columnas; indice++){
-                        table.addCell(rs.getObject(indice + 1).toString());
-                    }
+                    table.addCell(rs.getObject(1).toString()); // ID
+                    table.addCell(rs.getObject(2).toString()); // Nombre
+                    table.addCell(rs.getObject(3).toString()); // Especialidad
+                    table.addCell(rs.getObject(4).toString()); // Teléfono
                 }
             } catch(SQLException e){
                 JOptionPane.showMessageDialog(null,e.toString());
@@ -535,6 +587,18 @@ private int getIdDelRegistroQueDeseasActualizar() {
     }
 }
 
+    
+   private boolean existeTelefono(String telefono, Connection con, int id) throws SQLException {
+    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM medicos WHERE telefono = ? AND id <> ?");
+    ps.setString(1, telefono);
+    ps.setInt(2, id);
+    ResultSet rs = ps.executeQuery();
+    rs.next();
+    int count = rs.getInt(1);
+    return count > 0;
+} 
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;

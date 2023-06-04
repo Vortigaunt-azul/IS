@@ -66,7 +66,6 @@ public class O_Residentes_Med extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMedicamentos = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -184,20 +183,20 @@ public class O_Residentes_Med extends javax.swing.JPanel {
 
         tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "Nombre", "Descripcion", "Cantidad", "Medico_id", "Ingreso", "Vencimiento"
+                "Nombre", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -222,16 +221,6 @@ public class O_Residentes_Med extends javax.swing.JPanel {
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
-            }
-        });
-
-        btnModificar.setBackground(new java.awt.Color(0, 102, 255));
-        btnModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("Editar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
             }
         });
 
@@ -273,11 +262,9 @@ public class O_Residentes_Med extends javax.swing.JPanel {
                     .addGroup(ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(ContentLayout.createSequentialGroup()
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(36, 36, 36)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(35, 35, 35)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(33, 33, 33)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1)
@@ -289,27 +276,26 @@ public class O_Residentes_Med extends javax.swing.JPanel {
         ContentLayout.setVerticalGroup(
             ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContentLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
+            .addGroup(ContentLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContentLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -331,21 +317,35 @@ public class O_Residentes_Med extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        String nombre = txtNombre.getText();
-    String medicamento = txtMedicamento.getText();
+ 
+        
+        
+        
+    String nombre = txtNombre.getText();
+    String medicamentoNombre = txtMedicamento.getText();
     String cantidad = txtCantidad.getText();
-    
+
     // Verificar que los campos estén llenos
-    if (nombre.isEmpty() || medicamento.isEmpty() || cantidad.isEmpty()) {
+    if (nombre.isEmpty() || medicamentoNombre.isEmpty() || cantidad.isEmpty()) {
         JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
                 "<h2 style='color: #FF0000;'>Error</h2>" +
                 "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
                 "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
+
+    // Verificar si la cantidad es mayor o igual a 0
+    int cantidadInt = Integer.parseInt(cantidad);
+    if (cantidadInt < 0) {
+        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                "<h2 style='color: #FF0000;'>Error</h2>" +
+                "<p style='color: #808080;'>La cantidad debe ser un valor no negativo.</p>" +
+                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
     // Verificar si el residente existe
     if (!existeResidente(nombre)) {
-        //JOptionPane.showMessageDialog(null, "El residente especificado no existe");
         JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
                 "<h2 style='color: #FF0000;'>Error</h2>" +
                 "<p style='color: #808080;'>El residente especificado no existe.</p>" +
@@ -353,91 +353,186 @@ public class O_Residentes_Med extends javax.swing.JPanel {
         return;
     }
 
-    // Verificar si el medicamento existe
-    if (!existeMedicamento(medicamento)) {
-        //JOptionPane.showMessageDialog(null, "El medicamento especificado no existe");
-        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #FF0000;'>Error</h2>" +
-                "<p style='color: #808080;'>El medicamento especificado no existe.</p>" +
-                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    // Verificar si el registro ya existe antes de insertarlo
-    if (existeRegistro(nombre, medicamento)) {
-        //JOptionPane.showMessageDialog(null, "El registro para este residente y medicamento ya existe.");
-        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #FF0000;'>Error</h2>" +
-                "<p style='color: #808080;'>El registro para este residente y medicamento ya existe.</p>" +
-                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
     try {
         Connection con = Conexion.getConexion();
-        PreparedStatement ps = con.prepareStatement("INSERT INTO residentes_medicamentos(residente_id, medicamento_id, cantidad) VALUES (?, ?, ?)");
 
-        // Obtener los IDs correspondientes a partir de los nombres
-        int residenteId = obtenerIdResidente(nombre);
-        int medicamentoId = obtenerIdMedicamento(medicamento);
+        // Verificar si el medicamento existe en stock
+        PreparedStatement psCheckStock = con.prepareStatement("SELECT cantidad FROM medicamentos_stock WHERE nombre = ?");
+        psCheckStock.setString(1, medicamentoNombre);
+        ResultSet rs = psCheckStock.executeQuery();
 
-        // Asignar los valores a los parámetros
-        ps.setInt(1, residenteId);
-        ps.setInt(2, medicamentoId);
-        ps.setString(3, cantidad);
+        if (rs.next()) {
+            int stockActual = rs.getInt("cantidad");
 
-        ps.executeUpdate();
-        
-      PreparedStatement psCheckStock = con.prepareStatement("SELECT cantidad FROM medicamentos WHERE id = ?");
-    psCheckStock.setInt(1, medicamentoId);
-    ResultSet rs = psCheckStock.executeQuery();
+            if (stockActual >= cantidadInt) {
+                // Restar la cantidad ingresada al stock de medicamentos en la tabla medicamentos_stock
+                PreparedStatement psUpdateStock = con.prepareStatement("UPDATE medicamentos_stock SET cantidad = cantidad - ? WHERE nombre = ?");
+                psUpdateStock.setInt(1, cantidadInt);
+                psUpdateStock.setString(2, medicamentoNombre);
+                int rowsUpdated = psUpdateStock.executeUpdate();
 
-    if (rs.next()) {
-    int stockActual = rs.getInt("cantidad");
+                if (rowsUpdated > 0) {
+                    // Actualización del stock exitosa
+                    System.out.println("Cantidad de medicamentos en stock actualizada correctamente.");
+                } else {
+                    // No se pudo realizar la actualización del stock
+                    System.out.println("No se pudo actualizar la cantidad de medicamentos en stock.");
+                    throw new RuntimeException("Error al actualizar la cantidad de medicamentos en stock.");
+                }
 
-    if (stockActual >= Integer.parseInt(cantidad)) {
-        // Hay suficiente medicamento en stock, realizar la actualización
-        PreparedStatement psUpdate = con.prepareStatement("UPDATE medicamentos SET cantidad = cantidad - ? WHERE id = ?");
-        psUpdate.setString(1, cantidad);
-        psUpdate.setInt(2, medicamentoId);
-        int rowsUpdated = psUpdate.executeUpdate();
+                // Continuar con la inserción en residentes_medicamentos
+                PreparedStatement psInsertResidentesMedicamentos = con.prepareStatement("INSERT INTO residentes_medicamentos(residente_id, medicamento_id, cantidad) VALUES (?, (SELECT id FROM medicamentos WHERE nombre = ?), ?)");
 
-        if (rowsUpdated > 0) {
-            // Actualización exitosa
-            System.out.println("Cantidad de medicamentos actualizada correctamente.");
+                // Obtener el ID del residente
+                int residenteId = obtenerIdResidente(nombre);
+
+                // Asignar los valores a los parámetros
+          psInsertResidentesMedicamentos.setInt(1, residenteId);
+psInsertResidentesMedicamentos.setString(2, medicamentoNombre);
+psInsertResidentesMedicamentos.setInt(3, -Math.abs(cantidadInt));  // Utilizar el valor negativo de la cantidad
+
+psInsertResidentesMedicamentos.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                        "<h2 style='color: #00FF00;'>Éxito</h2>" +
+                        "<p style='color: #808080;'>Registro guardado correctamente.</p>" +
+                        "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                // Actualizar las tablas
+                cargarTabla();
+                cargarTabla2();
+                cargarTabla3();
+            } else {
+                // No hay suficiente medicamento en stock
+                JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+                        "<h2 style='color: #FF0000;'>Error</h2>" +
+                        "<p style='color: #808080;'>No hay suficiente medicamento en stock.</p>" +
+                        "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } else {
-            // No se pudo realizar la actualización
-            System.out.println("No se pudo actualizar la cantidad de medicamentos.");
-            throw new RuntimeException("Error al actualizar la cantidad de medicamentos.");
+            // No se encontró el medicamento en stock
+            System.out.println("El medicamento especificado no existe en stock.");
+            throw new RuntimeException("El medicamento especificado no existe en stock.");
         }
-
-        // Continuar con la inserción en residentes_medicamentos
-        // ...
-    } else {
-        // No hay suficiente medicamento en stock
-        System.out.println("No hay suficiente medicamento en stock.");
-        throw new RuntimeException("No hay suficiente medicamento en stock.");
-    }
-} else {
-    // No se encontró el medicamento
-    System.out.println("El medicamento especificado no existe.");
-    throw new RuntimeException("El medicamento especificado no existe.");
-}
-
-
-        //JOptionPane.showMessageDialog(null, "Registro Guardado");
-        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #00FF00;'>Éxito</h2>" +
-                "<p style='color: #808080;'>Registro guardado correctamente.</p>" +
-                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        // Limpiar los campos o realizar otras acciones necesarias
-        limpiar();
-        cargarTabla3();
-        cargarTabla2();
-        cargarTabla();
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e.toString());
     }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        ----------------------------------------------------------------
+//        String nombre = txtNombre.getText();
+//    String medicamentoNombre = txtMedicamento.getText();
+//    String cantidad = txtCantidad.getText();
+//
+//    // Verificar que los campos estén llenos
+//    if (nombre.isEmpty() || medicamentoNombre.isEmpty() || cantidad.isEmpty()) {
+//        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                "<h2 style='color: #FF0000;'>Error</h2>" +
+//                "<p style='color: #808080;'>Por favor, complete todos los campos.</p>" +
+//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//
+//    // Verificar si la cantidad es mayor a 0
+//    int cantidadInt = Integer.parseInt(cantidad);
+//    if (cantidadInt <= 0) {
+//        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                "<h2 style='color: #FF0000;'>Error</h2>" +
+//                "<p style='color: #808080;'>La cantidad debe ser mayor a 0.</p>" +
+//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//
+//    // Verificar si el residente existe
+//    if (!existeResidente(nombre)) {
+//        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                "<h2 style='color: #FF0000;'>Error</h2>" +
+//                "<p style='color: #808080;'>El residente especificado no existe.</p>" +
+//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//
+//    try {
+//        Connection con = Conexion.getConexion();
+//
+//        // Verificar si el medicamento existe en stock
+//        PreparedStatement psCheckStock = con.prepareStatement("SELECT cantidad FROM medicamentos_stock WHERE nombre = ?");
+//        psCheckStock.setString(1, medicamentoNombre);
+//        ResultSet rs = psCheckStock.executeQuery();
+//
+//        if (rs.next()) {
+//            int stockActual = rs.getInt("cantidad");
+//
+//            if (stockActual >= Math.abs(cantidadInt)) {
+//                // Restar la cantidad ingresada al stock de medicamentos en la tabla medicamentos_stock
+//                PreparedStatement psUpdateStock = con.prepareStatement("UPDATE medicamentos_stock SET cantidad = cantidad - ? WHERE nombre = ?");
+//                psUpdateStock.setInt(1, Math.abs(cantidadInt));
+//                psUpdateStock.setString(2, medicamentoNombre);
+//                int rowsUpdated = psUpdateStock.executeUpdate();
+//
+//                if (rowsUpdated > 0) {
+//                    // Actualización del stock exitosa
+//                    System.out.println("Cantidad de medicamentos en stock actualizada correctamente.");
+//                } else {
+//                    // No se pudo realizar la actualización del stock
+//                    System.out.println("No se pudo actualizar la cantidad de medicamentos en stock.");
+//                    throw new RuntimeException("Error al actualizar la cantidad de medicamentos en stock.");
+//                }
+//
+//                // Continuar con la inserción en residentes_medicamentos
+//                PreparedStatement psInsertResidentesMedicamentos = con.prepareStatement("INSERT INTO residentes_medicamentos(residente_id, medicamento_id, cantidad) VALUES (?, (SELECT id FROM medicamentos WHERE nombre = ?), ?)");
+//
+//                // Obtener el ID del residente
+//                int residenteId = obtenerIdResidente(nombre);
+//
+//                // Asignar los valores a los parámetros
+//               psInsertResidentesMedicamentos.setInt(3, -Math.abs(cantidadInt));
+//                psInsertResidentesMedicamentos.setString(2, medicamentoNombre);
+//                psInsertResidentesMedicamentos.setInt(3, Math.abs(cantidadInt));  // Utilizar el valor absoluto de la cantidad
+//
+//                psInsertResidentesMedicamentos.executeUpdate();
+//
+//                JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                        "<h2 style='color: #00FF00;'>Éxito</h2>" +
+//                        "<p style='color: #808080;'>Registro guardado correctamente.</p>" +
+//                        "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+//
+//                // Actualizar las tablas
+//                cargarTabla();
+//                cargarTabla2();
+//                cargarTabla3();
+//            } else {
+//                // No hay suficiente medicamento en stock
+//                JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
+//                        "<h2 style='color: #FF0000;'>Error</h2>" +
+//                        "<p style='color: #808080;'>No hay suficiente medicamento en stock.</p>" +
+//                        "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//        } else {
+//            // No se encontró el medicamento en stock
+//            System.out.println("El medicamento especificado no existe en stock.");
+//            throw new RuntimeException("El medicamento especificado no existe en stock.");
+//        }
+//    } catch (SQLException e) {
+//        JOptionPane.showMessageDialog(null, e.toString());
+//    }
+//        
+//        
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     // Verificar si el residente existe en la base de datos
@@ -519,6 +614,28 @@ private boolean existeRegistro(String nombreResidente, String nombreMedicamento)
     return existe;
 }
     
+private void actualizarCantidadMedicamentoStock(String medicamento, int cantidad) {
+    try {
+        Connection con = Conexion.getConexion();
+        PreparedStatement psUpdateStock = con.prepareStatement("UPDATE medicamentos_stock SET cantidad = cantidad - ? WHERE nombre = ?");
+        psUpdateStock.setInt(1, cantidad);
+        psUpdateStock.setString(2, medicamento);
+        int rowsUpdated = psUpdateStock.executeUpdate();
+
+        if (rowsUpdated > 0) {
+            System.out.println("Cantidad de medicamentos en stock actualizada correctamente.");
+        } else {
+            System.out.println("No se pudo actualizar la cantidad de medicamentos en stock.");
+            throw new RuntimeException("Error al actualizar la cantidad de medicamentos en stock.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+
+
+
+
     private int obtenerIdResidente(String nombre) throws SQLException {
     int idResidente = -1; // Valor predeterminado si no se encuentra el ID
     Connection con = Conexion.getConexion();
@@ -542,28 +659,7 @@ private int obtenerIdMedicamento(String medicamento) throws SQLException {
     }
     return idMedicamento;
 }
-    
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
-       
-       int fila = tblResidentesMed.getSelectedRow();
-    if (fila == -1) {
-        //JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla");
-        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-                "<h2 style='color: #FF0000;'>Error</h2>" +
-                "<p style='color: #808080;'>Seleccione una fila de la tabla.</p>" +
-                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    int id = Integer.parseInt(tblResidentesMed.getValueAt(fila, 0).toString());
-    String nombre = txtNombre.getText();
-    String medicamento = txtMedicamento.getText();
-    String cantidad = txtCantidad.getText();
-
-    modificarRegistro(id, nombre, medicamento, cantidad);
-    }//GEN-LAST:event_btnModificarActionPerformed
-private void modificarRegistro(int id, String nombre, String medicamento, String cantidad) {
+    private void modificarRegistro(int id, String nombre, String medicamento, String cantidad) {
     try {
         Connection con = Conexion.getConexion();
         PreparedStatement ps = con.prepareStatement("UPDATE residentes_medicamentos SET residente_id=?, medicamento_id=?, cantidad=? WHERE id=?");
@@ -693,37 +789,28 @@ private void eliminarRegistro(int id) {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel2MouseMoved
 
+    
+    
+    
     private void tblMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicamentosMouseClicked
-        // TODO add your handling code here:
+    try {
+        int fila = tblMedicamentos.getSelectedRow();
+        String nombreMedicamento = tblMedicamentos.getValueAt(fila, 0).toString();
         
-        try {
-    int fila = tblMedicamentos.getSelectedRow();
-    int id = Integer.parseInt(tblMedicamentos.getValueAt(fila, 0).toString());
-    PreparedStatement ps;
-    ResultSet rs;
-
-    Connection con = Conexion.getConexion();
-
-    ps = con.prepareStatement("SELECT nombre, cantidad FROM medicamentos WHERE id = ?");
-    ps.setInt(1, id);
-    rs = ps.executeQuery();
-
-    if (rs.next()) {
-        String nombreMedicamento = rs.getString("nombre");
-        int cantidadMedicamento = rs.getInt("cantidad");
         txtMedicamento.setText(nombreMedicamento);
-        txtCantidad.setText(String.valueOf(cantidadMedicamento));
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.toString());
     }
-
-} catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString());
-}
-
 
     }//GEN-LAST:event_tblMedicamentosMouseClicked
 
+    
+    
+    
+    
+    
     private void cargarTabla3() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) tblMedicamentos.getModel();
+   DefaultTableModel modeloTabla = (DefaultTableModel) tblMedicamentos.getModel();
     modeloTabla.setRowCount(0);
 
     PreparedStatement ps;
@@ -731,7 +818,7 @@ private void eliminarRegistro(int id) {
     ResultSetMetaData rsmd;
     int columnas;
 
-    int[] anchos = {30, 100, 200, 50, 50, 100, 100};
+    int[] anchos = {100, 100}; // Actualizar los anchos de las columnas según los nuevos campos
 
     for (int i = 0; i < tblMedicamentos.getColumnCount(); i++) {
         tblMedicamentos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
@@ -739,7 +826,7 @@ private void eliminarRegistro(int id) {
 
     try {
         Connection con = Conexion.getConexion();
-        ps = con.prepareStatement("SELECT id, nombre, descripcion, cantidad, medico_id, fecha_ingreso, fecha_vencimiento FROM medicamentos");
+        ps = con.prepareStatement("SELECT nombre, cantidad FROM medicamentos_stock"); // Actualizar la consulta SQL para seleccionar los nuevos campos
         rs = ps.executeQuery();
         rsmd = rs.getMetaData();
         columnas = rsmd.getColumnCount();
@@ -757,6 +844,10 @@ private void eliminarRegistro(int id) {
     }
 }
 
+    
+    
+    
+    
     private void cargarTabla2() {
     DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesHab.getModel();
     modeloTabla.setRowCount(0);
@@ -794,7 +885,7 @@ private void eliminarRegistro(int id) {
 
     
     private void cargarTabla() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesMed.getModel();
+DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesMed.getModel();
     modeloTabla.setRowCount(0);
 
     PreparedStatement ps;
@@ -804,7 +895,7 @@ private void eliminarRegistro(int id) {
 
     int[] anchos = {30, 50, 50, 150};
 
-    for (int i = 0; i < tblResidentesMed.getColumnCount(); i++){
+    for (int i = 0; i < tblResidentesMed.getColumnCount(); i++) {
         tblResidentesMed.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
     }
 
@@ -826,6 +917,10 @@ private void eliminarRegistro(int id) {
                     int medicamentoId = rs.getInt(indice + 1);
                     String nombreMedicamento = obtenerNombreMedicamento(medicamentoId); // Obtener el nombre del medicamento
                     fila[indice] = nombreMedicamento;
+                } else if (indice == 3) { // Columna de cantidad
+                    int cantidad = rs.getInt(indice + 1);
+                    int cantidadPositiva = Math.abs(cantidad); // Convertir a valor absoluto
+                    fila[indice] = String.format("%,d", cantidadPositiva);
                 } else {
                     fila[indice] = rs.getObject(indice + 1);
                 }
@@ -838,6 +933,12 @@ private void eliminarRegistro(int id) {
     }
 }
 
+    
+    
+    
+    
+    
+    
 private String obtenerNombreResidente(int residenteId) throws SQLException {
     String nombreResidente = "";
     Connection con = Conexion.getConexion();
@@ -874,7 +975,6 @@ private void limpiar(){
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

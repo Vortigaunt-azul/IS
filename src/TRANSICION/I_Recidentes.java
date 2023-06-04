@@ -197,44 +197,52 @@ public class I_Recidentes extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpiar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                        .addGap(137, 137, 137)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFecha_de_ingreso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHabitacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(143, 143, 143)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(txtFecha_de_nacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(50, 50, 50))
+                        .addGap(137, 137, 137)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtFecha_de_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFecha_de_nacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(txtGenero)))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLimpiar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                                .addGap(137, 137, 137)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(txtDescripcion))))
+                        .addGap(50, 50, 50))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtFecha_de_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -550,105 +558,6 @@ int fila = tblResidentes.getSelectedRow();
         JOptionPane.showMessageDialog(null, e.toString());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//int fila = tblResidentes.getSelectedRow();
-//if (tblResidentes.getSelectedRow() == -1) {
-//    //JOptionPane.showMessageDialog(null, "Seleccione un registro para modificar.");
-//    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-//                "<h2 style='color: #FF0000;'>Error</h2>" +
-//                "<p style='color: #808080;'>Seleccione un registro para modificar</p>" +
-//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-//    return;
-//}
-//
-//
-//SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
-//
-//String nombre = txtNombre.getText();
-//String fecha_nacimiento = dcn.format(txtFecha_de_nacimiento.getDate()); 
-//String genero = txtGenero.getText();
-//String fecha_ingreso = dcn.format(txtFecha_de_ingreso.getDate());
-//String habitacion_texto = txtHabitacion.getText();
-//String descripcion = txtDescripcion.getText();
-//int id = getIdDelRegistroQueDeseasActualizar();
-//
-//if (nombre.isEmpty() || fecha_nacimiento.isEmpty() || genero.isEmpty() || fecha_ingreso.isEmpty() || habitacion_texto.isEmpty() || descripcion.isEmpty()) {
-//    JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-//                "<h2 style='color: #FF0000;'>Error</h2>" +
-//                "<p style='color: #808080;'>Todos los campos son requeridos. Por favor, llena todos los campos antes de continuar</p>" +
-//                "</body></html>", "Error", JOptionPane.ERROR_MESSAGE);
-//  
-//    return;
-//}
-//
-//int habitacion = Integer.parseInt(habitacion_texto);
-//
-//try {
-//    Connection con = Conexion.getConexion();
-//    PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS num_residentes FROM residentes WHERE habitacion = ?");
-//    ps.setInt(1, habitacion);
-//    ResultSet rs = ps.executeQuery();
-//    int numResidentes = 0;
-//    int capacidadTotal = 0;
-//    if (rs.next()) {
-//        numResidentes = rs.getInt("num_residentes");
-//        PreparedStatement ps2 = con.prepareStatement("SELECT capacidad FROM habitaciones WHERE id = ?");
-//        ps2.setInt(1, habitacion);
-//        ResultSet rs2 = ps2.executeQuery();
-//        if (rs2.next()) {
-//            capacidadTotal = rs2.getInt("capacidad");
-//        }
-//    }
-//    if (numResidentes < capacidadTotal) {
-//        PreparedStatement ps3 = con.prepareStatement("UPDATE residentes SET nombre=?,fecha_nacimiento=?,genero=?,fecha_ingreso=?,habitacion=?,descri_de_actividad=? WHERE id=?");
-//        ps3.setString(1, nombre);
-//        ps3.setString(2, fecha_nacimiento);
-//        ps3.setString(3, genero);
-//        ps3.setString(4, fecha_ingreso);
-//        ps3.setInt(5, habitacion);
-//        ps3.setString(6, descripcion);
-//        ps3.setInt(7, id);
-//        ps3.executeUpdate();
-//        JOptionPane.showMessageDialog(null, "<html><body style='width: 250px; text-align: center;'>" +
-//                "<h2 style='color: #00FF00;'>Éxito</h2>" +
-//                "<p style='color: #808080;'>Registro Modificado</p>" +
-//                "</body></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-//        limpiar();
-//        cargarTabla_dos();
-//    } else {     
-//        JOptionPane optionPane = new JOptionPane("La capacidad máxima de las habitaciones se ha superado.", JOptionPane.WARNING_MESSAGE);
-//        JDialog dialog = optionPane.createDialog("Advertencia");
-//        dialog.setAlwaysOnTop(true);
-//        dialog.setVisible(true);  
-//    }
-//} catch(SQLException e) {
-//    JOptionPane.showMessageDialog(null, e.toString());
-//}
-//
 
     }//GEN-LAST:event_btnModificarActionPerformed
 

@@ -29,6 +29,7 @@ public class Ñ_Reports extends javax.swing.JPanel {
         LoadLendings();
         
         cargarTabla_residentes_actividades();
+        cargarTabla();
     }
     
     private void InitStyles() {
@@ -39,7 +40,7 @@ public class Ñ_Reports extends javax.swing.JPanel {
     private void LoadLendings() {
         try {
            // DAOLendings dao = new DAOLendingsImpl();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblResidentesMed.getModel();
             // Limpiamos tabla
             model.setRowCount(0);
            // dao.listar().forEach((u) -> model.addRow(new Object[]{u.getUser_id(), u.getBook_id(), u.getDate_out(), u.getDate_return()}));
@@ -55,7 +56,7 @@ public class Ñ_Reports extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblResidentesMed = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -72,20 +73,20 @@ public class Ñ_Reports extends javax.swing.JPanel {
         title.setForeground(new java.awt.Color(0, 0, 0));
         title.setText("Reportes");
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblResidentesMed.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        tblResidentesMed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "ID", "jjjjj", "jjjjj"
+                "Codigo", "ID R", "Nobmre de Residente", "Medicamento Asignado ", "Cantidad Asignada"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -96,15 +97,15 @@ public class Ñ_Reports extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        tblResidentesMed.getTableHeader().setReorderingAllowed(false);
+        tblResidentesMed.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTable1InputMethodTextChanged(evt);
+                tblResidentesMedInputMethodTextChanged(evt);
             }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblResidentesMed);
 
         jTable2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,6 +159,11 @@ public class Ñ_Reports extends javax.swing.JPanel {
 
         jButton9.setBackground(new java.awt.Color(255, 51, 51));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/pdf.png"))); // NOI18N
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -220,9 +226,9 @@ public class Ñ_Reports extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable1InputMethodTextChanged
+    private void tblResidentesMedInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tblResidentesMedInputMethodTextChanged
         //nothing
-    }//GEN-LAST:event_jTable1InputMethodTextChanged
+    }//GEN-LAST:event_tblResidentesMedInputMethodTextChanged
 
     private void jTable2InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable2InputMethodTextChanged
         // TODO add your handling code here:
@@ -231,6 +237,10 @@ public class Ñ_Reports extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         generarPDF_residentes_actividades();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+      generarPDF_residentes_medicamentos();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     private void generarPDF_residentes_actividades() {
     try {
@@ -292,10 +302,74 @@ public class Ñ_Reports extends javax.swing.JPanel {
 }
     
     
+    //---------------------
+    
+    
+    private void generarPDF_residentes_medicamentos() {
+    try {
+        // Creamos un documento y lo abrimos
+        Document document = new Document();
+
+        // Pedimos al usuario la ubicación para guardar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+
+        // Si el usuario selecciona una ubicación, guardamos el archivo allí
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            PdfWriter.getInstance(document, new FileOutputStream(archivo + ".pdf"));
+            document.open();
+
+            // Creamos la tabla y le agregamos las columnas
+            PdfPTable table = new PdfPTable(5);
+            table.addCell("ID");
+            table.addCell("Residente ID");
+            table.addCell("Residente");
+            table.addCell("Medicamento");
+            table.addCell("Cantidad");
+
+            // Cargamos los datos desde la base de datos
+            PreparedStatement ps;
+            ResultSet rs;
+            ResultSetMetaData rsmd;
+            int columnas;
+
+            try {
+                Connection con = Conexion.getConexion();
+                ps = con.prepareStatement("SELECT rm.id, rm.residente_id, r.nombre AS residente, m.nombre AS medicamento, rm.cantidad FROM residentes_medicamentos rm INNER JOIN residentes r ON rm.residente_id = r.id INNER JOIN medicamentos m ON rm.medicamento_id = m.id");
+                rs = ps.executeQuery();
+                rsmd = rs.getMetaData();
+                columnas = rsmd.getColumnCount();
+
+                 while (rs.next()) {
+                    // Agregamos las filas a la tabla
+                    for (int indice = 0; indice < columnas; indice++) {
+                        table.addCell(rs.getObject(indice + 1).toString());
+                    }
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+
+            // Agregamos la tabla al documento y cerramos el documento
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "PDF generado exitosamente");
+        }
+
+    } catch (DocumentException | FileNotFoundException ex) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+    }
+}
+    //_____________________
     
     
     
-        private void cargarTabla_residentes_actividades() {
+    
+    
+    
+  private void cargarTabla_residentes_actividades() {
 
 
 
@@ -339,7 +413,46 @@ DefaultTableModel modeloTabla = (DefaultTableModel) jTable2.getModel();
     
     
     
-    
+ private void cargarTabla() {
+ 
+  DefaultTableModel modeloTabla = (DefaultTableModel) tblResidentesMed.getModel();
+    modeloTabla.setRowCount(0);
+
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+
+    int[] anchos = {30, 50, 150, 150, 50};
+
+    for (int i = 0; i < tblResidentesMed.getColumnCount(); i++) {
+        tblResidentesMed.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    }
+
+    try {
+        Connection con = Conexion.getConexion();
+        ps = con.prepareStatement("SELECT rm.id, rm.residente_id, r.nombre AS residente, m.nombre AS medicamento, rm.cantidad FROM residentes_medicamentos rm INNER JOIN residentes r ON rm.residente_id = r.id INNER JOIN medicamentos m ON rm.medicamento_id = m.id");
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                fila[indice] = rs.getObject(indice + 1);
+            }
+            modeloTabla.addRow(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+
+}
+
+
+        
+        
     
     
     
@@ -349,20 +462,14 @@ DefaultTableModel modeloTabla = (DefaultTableModel) jTable2.getModel();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable tblResidentesMed;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
